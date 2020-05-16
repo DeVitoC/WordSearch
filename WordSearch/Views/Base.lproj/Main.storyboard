@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LlM-2v-8Nz">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Word Search View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="WordSearchViewController" customModule="WordSearch" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="WLV-Z1-QsJ">
+                                <rect key="frame" x="20" y="734" width="374" height="78"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="o2F-Rp-f6R">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="48"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SGO-1b-Kn2">
+                                                <rect key="frame" x="0.0" y="0.0" width="37.5" height="48"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <state key="normal" title="A"/>
+                                                <connections>
+                                                    <action selector="letter1Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JX1-sC-MgU"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="euP-OZ-s6o">
+                                                <rect key="frame" x="67.5" y="0.0" width="37" height="48"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <state key="normal" title="A"/>
+                                                <connections>
+                                                    <action selector="letter2Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Nax-HR-28n"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="60F-ku-IOX">
+                                                <rect key="frame" x="134.5" y="0.0" width="37.5" height="48"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <state key="normal" title="A"/>
+                                                <connections>
+                                                    <action selector="letter3Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GgQ-RA-RHg"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pai-C6-uUM">
+                                                <rect key="frame" x="202" y="0.0" width="37.5" height="48"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <state key="normal" title="A"/>
+                                                <connections>
+                                                    <action selector="letter4Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9a8-CP-XfJ"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yvu-Xk-uuR">
+                                                <rect key="frame" x="269.5" y="0.0" width="37" height="48"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <state key="normal" title="A"/>
+                                                <connections>
+                                                    <action selector="letter5Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dg5-ly-Yks"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wog-eU-U91">
+                                                <rect key="frame" x="336.5" y="0.0" width="37.5" height="48"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <state key="normal" title="A"/>
+                                                <connections>
+                                                    <action selector="letter6Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PZB-H7-wrX"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YbR-bx-4i0">
+                                        <rect key="frame" x="0.0" y="48" width="374" height="30"/>
+                                        <state key="normal" title="Check Word"/>
+                                        <connections>
+                                            <action selector="checkWord:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bOl-t7-Iqx"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vOz-Wm-bOu">
+                                <rect key="frame" x="20" y="108" width="374" height="224"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XY8-pn-Cen">
+                                <rect key="frame" x="20" y="352" width="374" height="224"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" lookupSuggestion="YES"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XY8-pn-Cen" secondAttribute="trailing" constant="20" id="03X-aH-waE"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vOz-Wm-bOu" secondAttribute="trailing" constant="20" id="1Vt-qh-Mm4"/>
+                            <constraint firstItem="vOz-Wm-bOu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="1ag-iA-0p2"/>
+                            <constraint firstItem="WLV-Z1-QsJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="2oJ-DZ-1xL"/>
+                            <constraint firstItem="XY8-pn-Cen" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="8Lm-oD-L79"/>
+                            <constraint firstItem="vOz-Wm-bOu" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.25" id="BXF-fx-zb0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="WLV-Z1-QsJ" secondAttribute="trailing" constant="20" id="T5d-tX-e3j"/>
+                            <constraint firstItem="XY8-pn-Cen" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.25" id="eKs-ak-9mM"/>
+                            <constraint firstItem="vOz-Wm-bOu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="m1J-le-aFH"/>
+                            <constraint firstItem="XY8-pn-Cen" firstAttribute="top" secondItem="vOz-Wm-bOu" secondAttribute="bottom" constant="20" id="n9q-Fi-RSR"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="WLV-Z1-QsJ" secondAttribute="bottom" constant="50" id="th8-mz-PpX"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="55O-O6-ejG"/>
+                    <connections>
+                        <outlet property="bonusWordsTextView" destination="XY8-pn-Cen" id="s17-oA-7kw"/>
+                        <outlet property="checkWordButton" destination="YbR-bx-4i0" id="RhU-ne-xSr"/>
+                        <outlet property="letter1Button" destination="SGO-1b-Kn2" id="9Sc-Pt-RxD"/>
+                        <outlet property="letter2Button" destination="euP-OZ-s6o" id="uSN-qg-uOq"/>
+                        <outlet property="letter3Button" destination="60F-ku-IOX" id="PNb-f8-WJQ"/>
+                        <outlet property="letter4Button" destination="pai-C6-uUM" id="Mrq-qb-zwb"/>
+                        <outlet property="letter5Button" destination="yvu-Xk-uuR" id="AO8-L2-wl6"/>
+                        <outlet property="letter6Button" destination="wog-eU-U91" id="SHW-E5-G6v"/>
+                        <outlet property="searchWordsTextView" destination="vOz-Wm-bOu" id="jti-gC-Deb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="872" y="110"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="AOL-mo-GbQ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LlM-2v-8Nz" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cqL-w7-f9T">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="zeM-Sc-urm"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ieI-B0-Gza" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="131.8840579710145" y="110.49107142857143"/>
+        </scene>
+    </scenes>
+</document>
