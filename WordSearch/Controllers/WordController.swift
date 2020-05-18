@@ -128,6 +128,8 @@ class WordController {
     // MARK: - Helper Methods
     
     private func anagrams(maxSize: Int, mainWord: String) -> [String] {
+        // TODO: - Fix issue where method returns words with more letters than original
+        // for instance: "pashas" anagrams includes "aaa"
         var anagrams: [String] = []
         let charSet = CharacterSet(charactersIn: mainWord)
         if maxSize > 3 {
@@ -320,7 +322,7 @@ class WordController {
         return bonusWords
     }
     
-    func generateWordsArray(fromFile file: String) -> [String] {
+    private func generateWordsArray(fromFile file: String) -> [String] {
         // temporary variables and filePath setup
         var wordsArray: [String] = []
         let jsonDecoder = JSONDecoder()
