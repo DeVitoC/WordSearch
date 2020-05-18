@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		E23E22132470633300AA01E6 /* words_dictionary.json in Resources */ = {isa = PBXBuildFile; fileRef = E23E22122470633300AA01E6 /* words_dictionary.json */; };
-		E23E2215247070B200AA01E6 /* LocalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23E2214247070B200AA01E6 /* LocalData.swift */; };
 		E25B847B246C5D8600FA3C49 /* WordSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25B847A246C5D8600FA3C49 /* WordSearchViewController.swift */; };
 		E25B8488246C70E500FA3C49 /* WordSearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25B8487246C70E500FA3C49 /* WordSearchTests.swift */; };
 		E25B8490246C712A00FA3C49 /* WordControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25B848F246C712A00FA3C49 /* WordControllerTest.swift */; };
+		E27B757C2471D8910054BEBB /* fiveLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E27B757B2471D8910054BEBB /* fiveLetterWords.json */; };
 		E280F7A024691A97000CBEA4 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280F79F24691A97000CBEA4 /* MockData.swift */; };
 		E2E3DF962467E98E0049235E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E3DF952467E98E0049235E /* AppDelegate.swift */; };
 		E2E3DF982467E98E0049235E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E3DF972467E98E0049235E /* SceneDelegate.swift */; };
@@ -34,12 +34,12 @@
 
 /* Begin PBXFileReference section */
 		E23E22122470633300AA01E6 /* words_dictionary.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = words_dictionary.json; sourceTree = "<group>"; };
-		E23E2214247070B200AA01E6 /* LocalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalData.swift; sourceTree = "<group>"; };
 		E25B847A246C5D8600FA3C49 /* WordSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSearchViewController.swift; sourceTree = "<group>"; };
 		E25B8485246C70E500FA3C49 /* WordSearchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WordSearchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E25B8487246C70E500FA3C49 /* WordSearchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSearchTests.swift; sourceTree = "<group>"; };
 		E25B8489246C70E500FA3C49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E25B848F246C712A00FA3C49 /* WordControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordControllerTest.swift; sourceTree = "<group>"; };
+		E27B757B2471D8910054BEBB /* fiveLetterWords.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = fiveLetterWords.json; sourceTree = "<group>"; };
 		E280F79F24691A97000CBEA4 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		E2E3DF922467E98E0049235E /* WordSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2E3DF952467E98E0049235E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -119,7 +119,7 @@
 				E2E3DF9E2467E9900049235E /* Assets.xcassets */,
 				E23E22122470633300AA01E6 /* words_dictionary.json */,
 				E2E3DFA32467E9900049235E /* Info.plist */,
-				E23E2214247070B200AA01E6 /* LocalData.swift */,
+				E27B757B2471D8910054BEBB /* fiveLetterWords.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -248,6 +248,7 @@
 				E2E3DFA22467E9900049235E /* LaunchScreen.storyboard in Resources */,
 				E23E22132470633300AA01E6 /* words_dictionary.json in Resources */,
 				E2E3DF9F2467E9900049235E /* Assets.xcassets in Resources */,
+				E27B757C2471D8910054BEBB /* fiveLetterWords.json in Resources */,
 				E2E3DF9D2467E98E0049235E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -274,7 +275,6 @@
 				E2E3DFB12467ED8D0049235E /* WordController.swift in Sources */,
 				E25B847B246C5D8600FA3C49 /* WordSearchViewController.swift in Sources */,
 				E280F7A024691A97000CBEA4 /* MockData.swift in Sources */,
-				E23E2215247070B200AA01E6 /* LocalData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

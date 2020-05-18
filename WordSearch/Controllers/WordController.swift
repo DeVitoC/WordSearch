@@ -11,7 +11,7 @@ import Foundation
 class WordController {
     
     // MARK: - Computed Properties
-    var words: [String] = {
+    lazy var words: [String] = {
         var temp: [String] = []
         let file = "/words_dictionary.json"
         let bundle = Bundle.main.bundlePath
@@ -33,16 +33,17 @@ class WordController {
         }
         return temp
     }()
-    private let threeLetterWords = threeLetterWordsArray
+    //private let threeLetterWords
     
-    private let fourLetterWords = fourLetterWordsArray
+    //private let fourLetterWords
     
     lazy var fiveLetterWords: [String] = {
         var fiveLetters: [String] = []
+        var fiveDict: [String : Int] = [ : ]
         for word in words where word.count == 5 {
-            fiveLetters.append(word)
+            fiveDict[word] = 1
         }
-        print("\(fiveLetters)")
+        print("\(fiveDict)")
         return fiveLetters
     }()
     
@@ -71,16 +72,16 @@ class WordController {
     
     func anagrams(maxSize: Int, mainWord: String) -> [String] {
         var anagrams: [String] = []
-        if maxSize > 3 {
-            for word in threeLetterWords where mainWord.contains(word) {
-                anagrams.append(word)
-            }
-        }
-        if maxSize > 4 {
-            for word in fourLetterWords where mainWord.contains(word) {
-                anagrams.append(word)
-            }
-        }
+//        if maxSize > 3 {
+//            for word in threeLetterWords where mainWord.contains(word) {
+//                anagrams.append(word)
+//            }
+//        }
+//        if maxSize > 4 {
+//            for word in fourLetterWords where mainWord.contains(word) {
+//                anagrams.append(word)
+//            }
+//        }
         if maxSize > 5 {
             for word in fiveLetterWords where mainWord.contains(word) {
                 anagrams.append(word)
