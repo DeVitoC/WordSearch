@@ -126,7 +126,7 @@ class WordController {
     
     // MARK: - Helper Methods
     
-    func anagrams(maxSize: Int, mainWord: String) -> [String] {
+    private func anagrams(maxSize: Int, mainWord: String) -> [String] {
         var anagrams: [String] = []
         let charSet = CharacterSet(charactersIn: mainWord)
         if maxSize > 3 {
@@ -292,7 +292,7 @@ class WordController {
         return anagrams
     }
     
-    func searchWords(anagrams: [String]) -> [String] {
+    private func searchWords(anagrams: [String]) -> [String] {
         var searchwords: [String] = []
         var randomNumber: Int
         var anagrams = anagrams
