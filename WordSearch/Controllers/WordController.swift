@@ -12,22 +12,26 @@ class WordController {
     
     // MARK: - Computed Properties
     lazy var words: [String] = {
+        // temporary variables and filePath setup
         var temp: [String] = []
+        var decodedObject: [String : Int] = [ : ]
+        let jsonDecoder = JSONDecoder()
         let file = "/words_dictionary.json"
         let bundle = Bundle.main.bundlePath
         let path = bundle.appending(file)
+        
+        // get JSON data and decode it
         var jsonData = NSData(contentsOfFile: path)
         
         guard let jsonData2 = jsonData else { return [""]}
         let data = Data(jsonData2)
-        let jsonDecoder = JSONDecoder()
-        var decodedObject: [String : Int] = [ : ]
         do {
             decodedObject = try jsonDecoder.decode([String : Int].self, from: data)
         } catch {
             NSLog("\(error)")
         }
         
+        // convert from decoded dictionary to array
         for (key, value) in decodedObject {
             temp.append(key)
         }
@@ -38,13 +42,38 @@ class WordController {
     //private let fourLetterWords
     
     lazy var fiveLetterWords: [String] = {
+        // temporary variables and filePath setup
         var fiveLetters: [String] = []
-        var fiveDict: [String : Int] = [ : ]
-        for word in words where word.count == 5 {
-            fiveDict[word] = 1
+        let jsonDecoder = JSONDecoder()
+        var decodedDictionary: [String : Int] = [ : ]
+        let file = "/fiveLetterWords.json"
+        let bundle = Bundle.main.bundlePath
+        let path = bundle.appending(file)
+        
+        // get JSON data and decode it
+        guard var jsonData = NSData(contentsOfFile: path) else { return [""] }
+        //guard let jsonData2 = jsonData else { return [""]}
+        do {
+            let data = Data(jsonData)
+            decodedDictionary = try jsonDecoder.decode([String : Int].self, from: data)
+        } catch {
+            NSLog("\(error)")
         }
-        print("\(fiveDict)")
+
+        // convert from decoded dictionary to array
+        for (key, value) in decodedDictionary {
+            fiveLetters.append(key)
+        }
+        
         return fiveLetters
+        //convert from words array to specific length words array.
+//        var fiveDict: [String : Int] = [:]
+//        for word in words where word.count > 22 {
+//            fiveDict[word] = 1
+//        }
+//        for entry in fiveDict {
+//            print("\"\(entry.key)\": \(entry.value),")
+//        }
     }()
     
     lazy var sixLetterWords: [String] = {
