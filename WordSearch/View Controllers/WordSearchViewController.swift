@@ -26,8 +26,7 @@ class WordSearchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let words = wordController.greaterThanTwentyTwoLetterWords
-        print(words.count)
+        print("\(wordController.searchWords(anagrams: wordController.anagrams(maxSize: 6, mainWord: "concern")))")
         
     }
 

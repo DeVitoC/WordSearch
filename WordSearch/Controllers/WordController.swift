@@ -107,8 +107,10 @@ class WordController {
         generateWordsArray(fromFile: "greaterThanTwentyTwo")
     }()
 
+    // MARK: - Other Properties
     var gameWords: [Word] = []
     
+    // MARK: - CRUD Methods
     func createWord(maxSize: Int) -> Word {
         let randomNumber = Int.random(in: 0..<(sixLetterWords.count))
         let anagramWords = anagrams(maxSize: maxSize, mainWord: sixLetterWords[randomNumber])
@@ -122,26 +124,169 @@ class WordController {
         return newWord
     }
     
+    // MARK: - Helper Methods
+    
     func anagrams(maxSize: Int, mainWord: String) -> [String] {
         var anagrams: [String] = []
-//        if maxSize > 3 {
-//            for word in threeLetterWords where mainWord.contains(word) {
-//                anagrams.append(word)
-//            }
-//        }
-//        if maxSize > 4 {
-//            for word in fourLetterWords where mainWord.contains(word) {
-//                anagrams.append(word)
-//            }
-//        }
+        let charSet = CharacterSet(charactersIn: mainWord)
+        if maxSize > 3 {
+            for word in threeLetterWords {
+                let wordSet = CharacterSet(charactersIn: word)
+                if wordSet.isSubset(of: charSet) {
+                    anagrams.append(word)
+                }
+            }
+        }
+        if maxSize > 4 {
+            for word in fourLetterWords {
+                let wordSet = CharacterSet(charactersIn: word)
+                if wordSet.isSubset(of: charSet) {
+                    anagrams.append(word)
+                }
+            }
+        }
         if maxSize > 5 {
-            for word in fiveLetterWords where mainWord.contains(word) {
-                anagrams.append(word)
+            for word in fiveLetterWords {
+                let wordSet = CharacterSet(charactersIn: word)
+                if wordSet.isSubset(of: charSet) {
+                    anagrams.append(word)
+                }
             }
         }
         if maxSize > 6 {
-            for word in sixLetterWords where mainWord.contains(word) {
-                anagrams.append(word)
+            for word in sixLetterWords {
+                let wordSet = CharacterSet(charactersIn: word)
+                if wordSet.isSubset(of: charSet) {
+                    anagrams.append(word)
+                }
+            }
+        }
+        if maxSize > 7 {
+            for word in sevenLetterWords {
+                let wordSet = CharacterSet(charactersIn: word)
+                if wordSet.isSubset(of: charSet) {
+                    anagrams.append(word)
+                }
+            }
+        }
+        if maxSize > 8 {
+            for word in eightLetterWords {
+                let wordSet = CharacterSet(charactersIn: word)
+                if wordSet.isSubset(of: charSet) {
+                    anagrams.append(word)
+                }
+            }
+        }
+        if maxSize > 9 {
+            for word in nineLetterWords {
+                let wordSet = CharacterSet(charactersIn: word)
+                if wordSet.isSubset(of: charSet) {
+                    anagrams.append(word)
+                }
+            }
+        }
+        if maxSize > 10 {
+            for word in tenLetterWords {
+                let wordSet = CharacterSet(charactersIn: word)
+                if wordSet.isSubset(of: charSet) {
+                    anagrams.append(word)
+                }
+            }
+        }
+        if maxSize > 11 {
+            for word in elevenLetterWords {
+                let wordSet = CharacterSet(charactersIn: word)
+                if wordSet.isSubset(of: charSet) {
+                    anagrams.append(word)
+                }
+            }
+        }
+        if maxSize > 12 {
+            for word in twelveLetterWords {
+                let wordSet = CharacterSet(charactersIn: word)
+                if wordSet.isSubset(of: charSet) {
+                    anagrams.append(word)
+                }
+            }
+        }
+        if maxSize > 13 {
+            for word in thirteenLetterWords {
+                let wordSet = CharacterSet(charactersIn: word)
+                if wordSet.isSubset(of: charSet) {
+                    anagrams.append(word)
+                }
+            }
+        }
+        if maxSize > 14 {
+            for word in fourteenLetterWords {
+                let wordSet = CharacterSet(charactersIn: word)
+                if wordSet.isSubset(of: charSet) {
+                    anagrams.append(word)
+                }
+            }
+        }
+        if maxSize > 15 {
+            for word in fifteenLetterWords {
+                let wordSet = CharacterSet(charactersIn: word)
+                if wordSet.isSubset(of: charSet) {
+                    anagrams.append(word)
+                }
+            }
+        }
+        if maxSize > 16 {
+            for word in sixteenLetterWords {
+                let wordSet = CharacterSet(charactersIn: word)
+                if wordSet.isSubset(of: charSet) {
+                    anagrams.append(word)
+                }
+            }
+        }
+        if maxSize > 17 {
+            for word in seventeenLetterWords {
+                let wordSet = CharacterSet(charactersIn: word)
+                if wordSet.isSubset(of: charSet) {
+                    anagrams.append(word)
+                }
+            }
+        }
+        if maxSize > 18 {
+            for word in eighteenLetterWords {
+                let wordSet = CharacterSet(charactersIn: word)
+                if wordSet.isSubset(of: charSet) {
+                    anagrams.append(word)
+                }
+            }
+        }
+        if maxSize > 19 {
+            for word in nineteenLetterWords {
+                let wordSet = CharacterSet(charactersIn: word)
+                if wordSet.isSubset(of: charSet) {
+                    anagrams.append(word)
+                }
+            }
+        }
+        if maxSize > 20 {
+            for word in twentyLetterWords {
+                let wordSet = CharacterSet(charactersIn: word)
+                if wordSet.isSubset(of: charSet) {
+                    anagrams.append(word)
+                }
+            }
+        }
+        if maxSize > 21 {
+            for word in twentyOneLetterWords {
+                let wordSet = CharacterSet(charactersIn: word)
+                if wordSet.isSubset(of: charSet) {
+                    anagrams.append(word)
+                }
+            }
+        }
+        if maxSize > 22 {
+            for word in twentyTwoLetterWords {
+                let wordSet = CharacterSet(charactersIn: word)
+                if wordSet.isSubset(of: charSet) {
+                    anagrams.append(word)
+                }
             }
         }
         return anagrams
@@ -152,14 +297,15 @@ class WordController {
         var randomNumber: Int
         var anagrams = anagrams
         if anagrams.count > 10 {
-            randomNumber = Int.random(in: 6...11)
+            let highNumber = anagrams.count < 15 ? anagrams.count : 14
+            randomNumber = Int.random(in: 8...highNumber)
         } else {
             randomNumber = anagrams.count - 1
         }
         for _ in 0...randomNumber {
-            let rand = Int.random(in: 0...(anagrams.count))
-            searchwords.append(anagrams[rand])
-            anagrams.remove(at: rand)
+            let rand = Int.random(in: 1...(anagrams.count))
+            searchwords.append(anagrams[rand - 1])
+            anagrams.remove(at: rand - 1)
         }
         return searchwords
     }

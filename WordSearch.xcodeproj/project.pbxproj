@@ -123,6 +123,8 @@
 		E2AD5CE62472345400937D3D /* JSON Files */ = {
 			isa = PBXGroup;
 			children = (
+				E23E22122470633300AA01E6 /* allLetterWords.json */,
+				E2AD5CBD247233B700937D3D /* threeLetterWords.json */,
 				E2AD5CBF2472340200937D3D /* fourLetterWords.json */,
 				E27B757B2471D8910054BEBB /* fiveLetterWords.json */,
 				E2AD5CC12472341C00937D3D /* sixLetterWords.json */,
@@ -184,9 +186,7 @@
 				E280F79F24691A97000CBEA4 /* MockData.swift */,
 				E2E3DF972467E98E0049235E /* SceneDelegate.swift */,
 				E2E3DF9E2467E9900049235E /* Assets.xcassets */,
-				E23E22122470633300AA01E6 /* allLetterWords.json */,
 				E2E3DFA32467E9900049235E /* Info.plist */,
-				E2AD5CBD247233B700937D3D /* threeLetterWords.json */,
 				E2AD5CE62472345400937D3D /* JSON Files */,
 			);
 			path = Resources;
