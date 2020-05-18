@@ -110,5 +110,11 @@ class WordSearchViewController: UIViewController {
     }
     @IBAction func checkWord(_ sender: Any) {
     }
-    
+    @IBAction func resetWord(_ sender: Any) {
+        wordInProgress = ""
+        for button in letterButtons {
+            button.isSelected = false
+        }
+    }
+
 }

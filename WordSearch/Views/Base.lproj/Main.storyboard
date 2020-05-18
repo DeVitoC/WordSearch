@@ -71,13 +71,25 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YbR-bx-4i0">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ZOU-JQ-TM6">
                                         <rect key="frame" x="0.0" y="48" width="374" height="30"/>
-                                        <state key="normal" title="Check Word"/>
-                                        <connections>
-                                            <action selector="checkWord:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bOl-t7-Iqx"/>
-                                        </connections>
-                                    </button>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="srF-13-Nhh">
+                                                <rect key="frame" x="0.0" y="0.0" width="187" height="30"/>
+                                                <state key="normal" title="Reset Word"/>
+                                                <connections>
+                                                    <action selector="resetWord:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NZ7-UY-fFn"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YbR-bx-4i0">
+                                                <rect key="frame" x="187" y="0.0" width="187" height="30"/>
+                                                <state key="normal" title="Check Word"/>
+                                                <connections>
+                                                    <action selector="checkWord:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bOl-t7-Iqx"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vOz-Wm-bOu">
