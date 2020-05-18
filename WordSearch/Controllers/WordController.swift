@@ -112,6 +112,7 @@ class WordController {
     
     // MARK: - CRUD Methods
     func createWord(maxSize: Int) -> Word {
+        //let mainWord = sixLetterWords.randomElement()
         let randomNumber = Int.random(in: 0..<(sixLetterWords.count))
         let anagramWords = anagrams(maxSize: maxSize, mainWord: sixLetterWords[randomNumber])
         let searchWordsArray = searchWords(anagrams: anagramWords)
@@ -293,27 +294,27 @@ class WordController {
     }
     
     private func searchWords(anagrams: [String]) -> [String] {
-        var searchwords: [String] = []
-        var randomNumber: Int
-        var anagrams = anagrams
-        if anagrams.count > 10 {
-            let highNumber = anagrams.count < 15 ? anagrams.count : 14
-            randomNumber = Int.random(in: 8...highNumber)
-        } else {
-            randomNumber = anagrams.count - 1
-        }
-        for _ in 0...randomNumber {
-            let rand = Int.random(in: 1...(anagrams.count))
-            searchwords.append(anagrams[rand - 1])
-            anagrams.remove(at: rand - 1)
-        }
-        return searchwords
+    var searchwords: [String] = []
+    var randomNumber: Int
+    var anagrams = anagrams
+    if anagrams.count > 10 {
+        let highNumber = anagrams.count < 15 ? anagrams.count : 14
+        randomNumber = Int.random(in: 8...highNumber)
+    } else {
+        randomNumber = anagrams.count - 1
     }
+    for _ in 0...randomNumber {
+        let rand = Int.random(in: 1...(anagrams.count))
+        searchwords.append(anagrams[rand - 1])
+        anagrams.remove(at: rand - 1)
+    }
+    return searchwords
+}
     
-    func bonusWords(searchWords: [String], anagrams: [String]) -> [String] {
+    private func bonusWords(searchWords: [String], anagrams: [String]) -> [String] {
         var bonusWords: [String] = anagrams
         for word in searchWords {
-            guard let index = searchWords.firstIndex(of: word) else { continue }
+            guard let index = bonusWords.firstIndex(of: word) else { continue }
             bonusWords.remove(at: index)
         }
         return bonusWords
