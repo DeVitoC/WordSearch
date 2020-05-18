@@ -58,6 +58,7 @@ class WordSearchViewController: UIViewController {
             print(wordInProgress)
         }
     }
+
     @IBAction func letter2Tapped(_ sender: Any) {
         if letter2Button.isSelected {
             letter2Button.isSelected = false
@@ -68,6 +69,7 @@ class WordSearchViewController: UIViewController {
             print(wordInProgress)
         }
     }
+
     @IBAction func letter3Tapped(_ sender: Any) {
         if letter3Button.isSelected {
             letter3Button.isSelected = false
@@ -78,6 +80,7 @@ class WordSearchViewController: UIViewController {
             print(wordInProgress)
         }
     }
+
     @IBAction func letter4Tapped(_ sender: Any) {
         if letter4Button.isSelected {
             letter4Button.isSelected = false
@@ -88,6 +91,7 @@ class WordSearchViewController: UIViewController {
             print(wordInProgress)
         }
     }
+
     @IBAction func letter5Tapped(_ sender: Any) {
         if letter5Button.isSelected {
             letter5Button.isSelected = false
@@ -98,6 +102,7 @@ class WordSearchViewController: UIViewController {
             print(wordInProgress)
         }
     }
+
     @IBAction func letter6Tapped(_ sender: Any) {
         if letter6Button.isSelected {
             letter6Button.isSelected = false
@@ -108,8 +113,19 @@ class WordSearchViewController: UIViewController {
             print(wordInProgress)
         }
     }
+
     @IBAction func checkWord(_ sender: Any) {
+        guard let word = word else { return }
+        if word.searchWords.contains(wordInProgress.lowercased()) {
+            print("Success: \(wordInProgress) is in search words")
+        } else if word.bonusWords.contains(wordInProgress.lowercased()) {
+            print("Success: \(wordInProgress) is in bonus words")
+        } else {
+            print("Try again: \(wordInProgress) is not a word")
+        }
+        resetWord(self)
     }
+
     @IBAction func resetWord(_ sender: Any) {
         wordInProgress = ""
         for button in letterButtons {
