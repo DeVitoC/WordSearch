@@ -132,12 +132,21 @@ class WordController {
         // for instance: "pashas" anagrams includes "aaa"
         var anagrams: [String] = []
         let charSet = CharacterSet(charactersIn: mainWord)
+        var letterDict: [Character : Int] = [:]
+        for letter in mainWord {
+            letterDict[letter] = letterDict.keys.contains(letter) ? (letterDict[letter]! + 1) : 1
+        }
+
         if maxSize > 3 {
-            for word in threeLetterWords {
-                let wordSet = CharacterSet(charactersIn: word)
-                if wordSet.isSubset(of: charSet) {
-                    anagrams.append(word)
+            for word in threeLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
+                var threeDict: [Character : Int] = [:]
+                for letter in word {
+                    threeDict[letter] = threeDict.keys.contains(letter) ? (threeDict[letter]! + 1) : 1
+                    guard let three = threeDict[letter], let main = letterDict[letter] else { break }
+                    //(three > main) ? return : continue
+
                 }
+                anagrams.append(word)
             }
         }
         if maxSize > 4 {

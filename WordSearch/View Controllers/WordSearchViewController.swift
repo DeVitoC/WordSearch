@@ -29,7 +29,8 @@ class WordSearchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        word = wordController.createWord(maxSize: 6)
+        word = wordController.createWord(maxSize: 4)
+        print("\(word)")
         updateViews()
     }
 
