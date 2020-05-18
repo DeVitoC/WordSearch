@@ -26,7 +26,8 @@ class WordSearchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let words = wordController.fiveLetterWords
+        let words = wordController.greaterThanTwentyTwoLetterWords
+        print(words.count)
         
     }
 
