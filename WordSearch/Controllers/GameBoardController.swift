@@ -13,9 +13,11 @@ class GameBoardController {
     let wordController = WordController()
 
     // MARK: - CRUD Methods
-    func createGameBoard(level: Int) {
-        let word: Word
+    func createGameBoard(level: Int) -> GameBoard {
         let gameSize = gameSizeForLevel(level: level)
+        let word = wordController.createWord(maxSize: gameSize)
+        let gameBoard = GameBoard(word: word)
+        return gameBoard
     }
 
     // MARK: - Helper Methods
