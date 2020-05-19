@@ -20,6 +20,10 @@ class GameBoardController {
         return gameBoard
     }
 
+    func generateWordMap(gameBoard: GameBoard) -> [[String]] {
+        
+    }
+
     // MARK: - Helper Methods
     func gameSizeForLevel(level: Int) -> Int {
         switch level {
