@@ -79,24 +79,8 @@ class WordController {
         generateWordsArray(fromFile: "eighteen")
     }()
     
-    lazy private var nineteenLetterWords: [String] = {
-        generateWordsArray(fromFile: "nineteen")
-    }()
-    
-    lazy private var twentyLetterWords: [String] = {
-        generateWordsArray(fromFile: "twenty")
-    }()
-    
-    lazy private var twentyOneLetterWords: [String] = {
-        generateWordsArray(fromFile: "twentyOne")
-    }()
-    
-    lazy private var twentyTwoLetterWords: [String] = {
-        generateWordsArray(fromFile: "twentyTwo")
-    }()
-    
-    lazy private var greaterThanTwentyTwoLetterWords: [String] = {
-        generateWordsArray(fromFile: "greaterThanTwentyTwo")
+    lazy private var greaterThanEighteenLetterWords: [String] = {
+        generateWordsArray(fromFile: "greaterThanEighteen")
     }()
 
     // MARK: - Other Properties
@@ -136,16 +120,8 @@ class WordController {
                 mainWord = seventeenLetterWords.randomElement()!
             case 18:
                 mainWord = eighteenLetterWords.randomElement()!
-            case 19:
-                mainWord = nineteenLetterWords.randomElement()!
-            case 20:
-                mainWord = twentyLetterWords.randomElement()!
-            case 21:
-                mainWord = twentyOneLetterWords.randomElement()!
-            case 22:
-                mainWord = twentyTwoLetterWords.randomElement()!
             default:
-                mainWord = greaterThanTwentyTwoLetterWords.randomElement()!
+                mainWord = greaterThanEighteenLetterWords.randomElement()!
         }
         let anagramWords = anagrams(maxSize: maxSize, mainWord: mainWord)
         let searchWordsArray = searchWords(anagrams: anagramWords)
@@ -265,25 +241,7 @@ class WordController {
             }
         }
         if maxSize >= 19 {
-            for word in nineteenLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
-                guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
-                anagrams.append(testWord)
-            }
-        }
-        if maxSize >= 20 {
-            for word in twentyLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
-                guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
-                anagrams.append(testWord)
-            }
-        }
-        if maxSize >= 21 {
-            for word in twentyOneLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
-                guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
-                anagrams.append(testWord)
-            }
-        }
-        if maxSize >= 22 {
-            for word in twentyTwoLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
+            for word in greaterThanEighteenLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
@@ -309,11 +267,6 @@ class WordController {
         var anagrams = anagrams
         let highNumber = anagrams.count < 15 ? anagrams.count : 14
         randomNumber = anagrams.count > 10 ? Int.random(in: 8...highNumber) : anagrams.count - 1
-//        if anagrams.count > 10 {
-//            randomNumber = Int.random(in: 8...highNumber)
-//        } else {
-//            randomNumber = anagrams.count - 1
-//        }
         for _ in 0...randomNumber {
             let rand = Int.random(in: 1...(anagrams.count))
             searchwords.append(anagrams[rand - 1])

@@ -16,22 +16,18 @@
 		E2AD5CBE247233B800937D3D /* threeLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CBD247233B700937D3D /* threeLetterWords.json */; };
 		E2AD5CC02472340200937D3D /* fourLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CBF2472340200937D3D /* fourLetterWords.json */; };
 		E2AD5CC22472341C00937D3D /* sixLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CC12472341C00937D3D /* sixLetterWords.json */; };
-		E2AD5CD42472343200937D3D /* greaterThanTwentyTwoLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CC32472343100937D3D /* greaterThanTwentyTwoLetterWords.json */; };
 		E2AD5CD52472343200937D3D /* twelveLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CC42472343100937D3D /* twelveLetterWords.json */; };
 		E2AD5CD62472343200937D3D /* sixteenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CC52472343100937D3D /* sixteenLetterWords.json */; };
 		E2AD5CD72472343200937D3D /* sevenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CC62472343100937D3D /* sevenLetterWords.json */; };
 		E2AD5CD82472343200937D3D /* tenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CC72472343100937D3D /* tenLetterWords.json */; };
-		E2AD5CD92472343200937D3D /* twentyLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CC82472343100937D3D /* twentyLetterWords.json */; };
 		E2AD5CDA2472343200937D3D /* seventeenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CC92472343100937D3D /* seventeenLetterWords.json */; };
 		E2AD5CDB2472343200937D3D /* eightLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CCA2472343100937D3D /* eightLetterWords.json */; };
 		E2AD5CDC2472343200937D3D /* elevenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CCB2472343100937D3D /* elevenLetterWords.json */; };
-		E2AD5CDD2472343200937D3D /* nineteenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CCC2472343100937D3D /* nineteenLetterWords.json */; };
+		E2AD5CDD2472343200937D3D /* greaterThanEighteenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CCC2472343100937D3D /* greaterThanEighteenLetterWords.json */; };
 		E2AD5CDE2472343200937D3D /* nineLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CCD2472343100937D3D /* nineLetterWords.json */; };
-		E2AD5CDF2472343200937D3D /* twentyTwoLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CCE2472343100937D3D /* twentyTwoLetterWords.json */; };
 		E2AD5CE02472343200937D3D /* thirteenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CCF2472343200937D3D /* thirteenLetterWords.json */; };
 		E2AD5CE12472343200937D3D /* fifteenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CD02472343200937D3D /* fifteenLetterWords.json */; };
 		E2AD5CE22472343200937D3D /* fourteenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CD12472343200937D3D /* fourteenLetterWords.json */; };
-		E2AD5CE32472343200937D3D /* twentyOneLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CD22472343200937D3D /* twentyOneLetterWords.json */; };
 		E2AD5CE42472343200937D3D /* eighteenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CD32472343200937D3D /* eighteenLetterWords.json */; };
 		E2E3DF962467E98E0049235E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E3DF952467E98E0049235E /* AppDelegate.swift */; };
 		E2E3DF982467E98E0049235E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E3DF972467E98E0049235E /* SceneDelegate.swift */; };
@@ -40,6 +36,8 @@
 		E2E3DFA22467E9900049235E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2E3DFA02467E9900049235E /* LaunchScreen.storyboard */; };
 		E2E3DFAF2467EA590049235E /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E3DFAE2467EA590049235E /* Word.swift */; };
 		E2E3DFB12467ED8D0049235E /* WordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E3DFB02467ED8D0049235E /* WordController.swift */; };
+		E2EE235624739288009FFEC3 /* GameBoardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EE235524739288009FFEC3 /* GameBoardController.swift */; };
+		E2EE23582473944F009FFEC3 /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EE23572473944F009FFEC3 /* GameBoard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,22 +62,18 @@
 		E2AD5CBD247233B700937D3D /* threeLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = threeLetterWords.json; sourceTree = "<group>"; };
 		E2AD5CBF2472340200937D3D /* fourLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fourLetterWords.json; sourceTree = "<group>"; };
 		E2AD5CC12472341C00937D3D /* sixLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sixLetterWords.json; sourceTree = "<group>"; };
-		E2AD5CC32472343100937D3D /* greaterThanTwentyTwoLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = greaterThanTwentyTwoLetterWords.json; sourceTree = "<group>"; };
 		E2AD5CC42472343100937D3D /* twelveLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = twelveLetterWords.json; sourceTree = "<group>"; };
 		E2AD5CC52472343100937D3D /* sixteenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sixteenLetterWords.json; sourceTree = "<group>"; };
 		E2AD5CC62472343100937D3D /* sevenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sevenLetterWords.json; sourceTree = "<group>"; };
 		E2AD5CC72472343100937D3D /* tenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tenLetterWords.json; sourceTree = "<group>"; };
-		E2AD5CC82472343100937D3D /* twentyLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = twentyLetterWords.json; sourceTree = "<group>"; };
 		E2AD5CC92472343100937D3D /* seventeenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = seventeenLetterWords.json; sourceTree = "<group>"; };
 		E2AD5CCA2472343100937D3D /* eightLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = eightLetterWords.json; sourceTree = "<group>"; };
 		E2AD5CCB2472343100937D3D /* elevenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = elevenLetterWords.json; sourceTree = "<group>"; };
-		E2AD5CCC2472343100937D3D /* nineteenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nineteenLetterWords.json; sourceTree = "<group>"; };
+		E2AD5CCC2472343100937D3D /* greaterThanEighteenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = greaterThanEighteenLetterWords.json; sourceTree = "<group>"; };
 		E2AD5CCD2472343100937D3D /* nineLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nineLetterWords.json; sourceTree = "<group>"; };
-		E2AD5CCE2472343100937D3D /* twentyTwoLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = twentyTwoLetterWords.json; sourceTree = "<group>"; };
 		E2AD5CCF2472343200937D3D /* thirteenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thirteenLetterWords.json; sourceTree = "<group>"; };
 		E2AD5CD02472343200937D3D /* fifteenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fifteenLetterWords.json; sourceTree = "<group>"; };
 		E2AD5CD12472343200937D3D /* fourteenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fourteenLetterWords.json; sourceTree = "<group>"; };
-		E2AD5CD22472343200937D3D /* twentyOneLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = twentyOneLetterWords.json; sourceTree = "<group>"; };
 		E2AD5CD32472343200937D3D /* eighteenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = eighteenLetterWords.json; sourceTree = "<group>"; };
 		E2E3DF922467E98E0049235E /* WordSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2E3DF952467E98E0049235E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +84,8 @@
 		E2E3DFA32467E9900049235E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2E3DFAE2467EA590049235E /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		E2E3DFB02467ED8D0049235E /* WordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordController.swift; sourceTree = "<group>"; };
+		E2EE235524739288009FFEC3 /* GameBoardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardController.swift; sourceTree = "<group>"; };
+		E2EE23572473944F009FFEC3 /* GameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,18 +129,14 @@
 				E2AD5CCB2472343100937D3D /* elevenLetterWords.json */,
 				E2AD5CD02472343200937D3D /* fifteenLetterWords.json */,
 				E2AD5CD12472343200937D3D /* fourteenLetterWords.json */,
-				E2AD5CC32472343100937D3D /* greaterThanTwentyTwoLetterWords.json */,
 				E2AD5CCD2472343100937D3D /* nineLetterWords.json */,
-				E2AD5CCC2472343100937D3D /* nineteenLetterWords.json */,
+				E2AD5CCC2472343100937D3D /* greaterThanEighteenLetterWords.json */,
 				E2AD5CC62472343100937D3D /* sevenLetterWords.json */,
 				E2AD5CC92472343100937D3D /* seventeenLetterWords.json */,
 				E2AD5CC52472343100937D3D /* sixteenLetterWords.json */,
 				E2AD5CC72472343100937D3D /* tenLetterWords.json */,
 				E2AD5CCF2472343200937D3D /* thirteenLetterWords.json */,
 				E2AD5CC42472343100937D3D /* twelveLetterWords.json */,
-				E2AD5CC82472343100937D3D /* twentyLetterWords.json */,
-				E2AD5CD22472343200937D3D /* twentyOneLetterWords.json */,
-				E2AD5CCE2472343100937D3D /* twentyTwoLetterWords.json */,
 			);
 			name = "JSON Files";
 			sourceTree = "<group>";
@@ -205,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				E2E3DFB02467ED8D0049235E /* WordController.swift */,
+				E2EE235524739288009FFEC3 /* GameBoardController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -221,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				E2E3DFAE2467EA590049235E /* Word.swift */,
+				E2EE23572473944F009FFEC3 /* GameBoard.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -322,18 +316,14 @@
 				E2AD5CE42472343200937D3D /* eighteenLetterWords.json in Resources */,
 				E2AD5CE22472343200937D3D /* fourteenLetterWords.json in Resources */,
 				E2AD5CE02472343200937D3D /* thirteenLetterWords.json in Resources */,
-				E2AD5CDF2472343200937D3D /* twentyTwoLetterWords.json in Resources */,
 				E2AD5CBE247233B800937D3D /* threeLetterWords.json in Resources */,
 				E2AD5CDE2472343200937D3D /* nineLetterWords.json in Resources */,
-				E2AD5CD92472343200937D3D /* twentyLetterWords.json in Resources */,
 				E2AD5CD62472343200937D3D /* sixteenLetterWords.json in Resources */,
-				E2AD5CE32472343200937D3D /* twentyOneLetterWords.json in Resources */,
 				E2E3DF9F2467E9900049235E /* Assets.xcassets in Resources */,
-				E2AD5CD42472343200937D3D /* greaterThanTwentyTwoLetterWords.json in Resources */,
 				E2AD5CD52472343200937D3D /* twelveLetterWords.json in Resources */,
 				E27B757C2471D8910054BEBB /* fiveLetterWords.json in Resources */,
 				E2AD5CD72472343200937D3D /* sevenLetterWords.json in Resources */,
-				E2AD5CDD2472343200937D3D /* nineteenLetterWords.json in Resources */,
+				E2AD5CDD2472343200937D3D /* greaterThanEighteenLetterWords.json in Resources */,
 				E2AD5CD82472343200937D3D /* tenLetterWords.json in Resources */,
 				E2AD5CDB2472343200937D3D /* eightLetterWords.json in Resources */,
 				E2AD5CC22472341C00937D3D /* sixLetterWords.json in Resources */,
@@ -361,8 +351,10 @@
 				E2E3DF982467E98E0049235E /* SceneDelegate.swift in Sources */,
 				E2E3DFAF2467EA590049235E /* Word.swift in Sources */,
 				E2E3DFB12467ED8D0049235E /* WordController.swift in Sources */,
+				E2EE23582473944F009FFEC3 /* GameBoard.swift in Sources */,
 				E25B847B246C5D8600FA3C49 /* WordSearchViewController.swift in Sources */,
 				E280F7A024691A97000CBEA4 /* MockData.swift in Sources */,
+				E2EE235624739288009FFEC3 /* GameBoardController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
