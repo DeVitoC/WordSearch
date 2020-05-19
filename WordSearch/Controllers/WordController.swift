@@ -25,14 +25,6 @@ class WordController {
 
     lazy private var fiveLetterWords: [String] = {
         generateWordsArray(fromFile: "five")
-        //convert from words array to specific length words array.
-        //        var fiveDict: [String : Int] = [:]
-        //        for word in words where word.count > 22 {
-        //            fiveDict[word] = 1
-        //        }
-        //        for entry in fiveDict {
-        //            print("\"\(entry.key)\": \(entry.value),")
-        //        }
     }()
 
     lazy private var sixLetterWords: [String] = {
@@ -112,145 +104,185 @@ class WordController {
     
     // MARK: - CRUD Methods
     func createWord(maxSize: Int) -> Word {
-        //let mainWord = sixLetterWords.randomElement()
-        let randomNumber = Int.random(in: 0..<(sixLetterWords.count))
-        let anagramWords = anagrams(maxSize: maxSize, mainWord: sixLetterWords[randomNumber])
+        let mainWord: String
+        switch maxSize {
+            case 4:
+                mainWord = fourLetterWords.randomElement()!
+            case 5:
+                mainWord = fiveLetterWords.randomElement()!
+            case 6:
+                mainWord = sixLetterWords.randomElement()!
+            case 7:
+                mainWord = sevenLetterWords.randomElement()!
+            case 8:
+                mainWord = eightLetterWords.randomElement()!
+            case 9:
+                mainWord = nineLetterWords.randomElement()!
+            case 10:
+                mainWord = tenLetterWords.randomElement()!
+            case 11:
+                mainWord = elevenLetterWords.randomElement()!
+            case 12:
+                mainWord = twelveLetterWords.randomElement()!
+            case 13:
+                mainWord = thirteenLetterWords.randomElement()!
+            case 14:
+                mainWord = fourteenLetterWords.randomElement()!
+            case 15:
+                mainWord = fifteenLetterWords.randomElement()!
+            case 16:
+                mainWord = sixteenLetterWords.randomElement()!
+            case 17:
+                mainWord = seventeenLetterWords.randomElement()!
+            case 18:
+                mainWord = eighteenLetterWords.randomElement()!
+            case 19:
+                mainWord = nineteenLetterWords.randomElement()!
+            case 20:
+                mainWord = twentyLetterWords.randomElement()!
+            case 21:
+                mainWord = twentyOneLetterWords.randomElement()!
+            case 22:
+                mainWord = twentyTwoLetterWords.randomElement()!
+            default:
+                mainWord = greaterThanTwentyTwoLetterWords.randomElement()!
+        }
+        let anagramWords = anagrams(maxSize: maxSize, mainWord: mainWord)
         let searchWordsArray = searchWords(anagrams: anagramWords)
         let bonusWordsArray = bonusWords(searchWords: searchWordsArray, anagrams: anagramWords)
-        let newWord = Word(mainWord: sixLetterWords[randomNumber],
+        let newWord = Word(mainWord: mainWord,
                            anagrams: anagramWords,
                            searchWords: searchWordsArray,
                            bonusWords: bonusWordsArray)
         gameWords.append(newWord)
+        print("mainword: \(newWord.mainWord), searchwords: \(newWord.searchWords.count), bonuswords: \(newWord.bonusWords.count)")
         return newWord
     }
     
     // MARK: - Helper Methods
     
     private func anagrams(maxSize: Int, mainWord: String) -> [String] {
-        // TODO: - Fix issue where method returns words with more letters than original
-        // for instance: "pashas" anagrams includes "aaa"
         var letterDict: [Character : Int] = [:]
         for letter in mainWord {
             letterDict[letter] = letterDict.keys.contains(letter) ? (letterDict[letter]! + 1) : 1
         }
         var anagrams: [String] = []
         let charSet = CharacterSet(charactersIn: mainWord)
-        if maxSize > 3 {
+        if maxSize >= 3 {
             for word in threeLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
-        if maxSize > 4 {
+        if maxSize >= 4 {
             for word in fourLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
-        if maxSize > 5 {
+        if maxSize >= 5 {
             for word in fiveLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
-        if maxSize > 6 {
+        if maxSize >= 6 {
             for word in sixLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
-        if maxSize > 7 {
+        if maxSize >= 7 {
             for word in sevenLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
-        if maxSize > 8 {
+        if maxSize >= 8 {
             for word in eightLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
-        if maxSize > 9 {
+        if maxSize >= 9 {
             for word in nineLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
-        if maxSize > 10 {
+        if maxSize >= 10 {
             for word in tenLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
-        if maxSize > 11 {
+        if maxSize >= 11 {
             for word in elevenLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
-        if maxSize > 12 {
+        if maxSize >= 12 {
             for word in twelveLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
-        if maxSize > 13 {
+        if maxSize >= 13 {
             for word in thirteenLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
-        if maxSize > 14 {
+        if maxSize >= 14 {
             for word in fourteenLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
-        if maxSize > 15 {
+        if maxSize >= 15 {
             for word in fifteenLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
-        if maxSize > 16 {
+        if maxSize >= 16 {
             for word in sixteenLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
-        if maxSize > 17 {
+        if maxSize >= 17 {
             for word in seventeenLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
-        if maxSize > 18 {
+        if maxSize >= 18 {
             for word in eighteenLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
-        if maxSize > 19 {
+        if maxSize >= 19 {
             for word in nineteenLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
-        if maxSize > 20 {
+        if maxSize >= 20 {
             for word in twentyLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
-        if maxSize > 21 {
+        if maxSize >= 21 {
             for word in twentyOneLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
-        if maxSize > 22 {
+        if maxSize >= 22 {
             for word in twentyTwoLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
@@ -275,12 +307,13 @@ class WordController {
         var searchwords: [String] = []
         var randomNumber: Int
         var anagrams = anagrams
-        if anagrams.count > 10 {
-            let highNumber = anagrams.count < 15 ? anagrams.count : 14
-            randomNumber = Int.random(in: 8...highNumber)
-        } else {
-            randomNumber = anagrams.count - 1
-        }
+        let highNumber = anagrams.count < 15 ? anagrams.count : 14
+        randomNumber = anagrams.count > 10 ? Int.random(in: 8...highNumber) : anagrams.count - 1
+//        if anagrams.count > 10 {
+//            randomNumber = Int.random(in: 8...highNumber)
+//        } else {
+//            randomNumber = anagrams.count - 1
+//        }
         for _ in 0...randomNumber {
             let rand = Int.random(in: 1...(anagrams.count))
             searchwords.append(anagrams[rand - 1])
