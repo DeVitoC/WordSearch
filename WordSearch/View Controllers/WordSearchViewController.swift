@@ -12,6 +12,7 @@ class WordSearchViewController: UIViewController {
     
     // MARK: - Properties
     let wordController = WordController()
+    let gameBoardController = GameBoardController()
     private var word: Word?
     private lazy var letterButtons: [UIButton] = [letter1Button, letter2Button, letter3Button, letter4Button, letter5Button, letter6Button]
     private var wordInProgress: String = ""
@@ -31,6 +32,8 @@ class WordSearchViewController: UIViewController {
         super.viewDidLoad()
         word = wordController.createWord(maxSize: 6)
         updateViews()
+        let gameboard = gameBoardController.createGameBoard(level: 1)
+        let wordMap = gameBoardController.generateWordMap(gameBoard: gameboard)
     }
 
     private func updateViews() {

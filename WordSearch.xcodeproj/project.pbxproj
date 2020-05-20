@@ -29,6 +29,7 @@
 		E2AD5CE12472343200937D3D /* fifteenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CD02472343200937D3D /* fifteenLetterWords.json */; };
 		E2AD5CE22472343200937D3D /* fourteenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CD12472343200937D3D /* fourteenLetterWords.json */; };
 		E2AD5CE42472343200937D3D /* eighteenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CD32472343200937D3D /* eighteenLetterWords.json */; };
+		E2DA2C022474F13B0042E695 /* CharacterSet+Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DA2C012474F13B0042E695 /* CharacterSet+Sequence.swift */; };
 		E2E3DF962467E98E0049235E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E3DF952467E98E0049235E /* AppDelegate.swift */; };
 		E2E3DF982467E98E0049235E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E3DF972467E98E0049235E /* SceneDelegate.swift */; };
 		E2E3DF9D2467E98E0049235E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2E3DF9B2467E98E0049235E /* Main.storyboard */; };
@@ -75,6 +76,7 @@
 		E2AD5CD02472343200937D3D /* fifteenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fifteenLetterWords.json; sourceTree = "<group>"; };
 		E2AD5CD12472343200937D3D /* fourteenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fourteenLetterWords.json; sourceTree = "<group>"; };
 		E2AD5CD32472343200937D3D /* eighteenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = eighteenLetterWords.json; sourceTree = "<group>"; };
+		E2DA2C012474F13B0042E695 /* CharacterSet+Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterSet+Sequence.swift"; sourceTree = "<group>"; };
 		E2E3DF922467E98E0049235E /* WordSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2E3DF952467E98E0049235E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E2E3DF972467E98E0049235E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				E2E3DF9E2467E9900049235E /* Assets.xcassets */,
 				E2E3DFA32467E9900049235E /* Info.plist */,
 				E2AD5CE62472345400937D3D /* JSON Files */,
+				E2DA2C012474F13B0042E695 /* CharacterSet+Sequence.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				E25B847B246C5D8600FA3C49 /* WordSearchViewController.swift in Sources */,
 				E280F7A024691A97000CBEA4 /* MockData.swift in Sources */,
 				E2EE235624739288009FFEC3 /* GameBoardController.swift in Sources */,
+				E2DA2C022474F13B0042E695 /* CharacterSet+Sequence.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
