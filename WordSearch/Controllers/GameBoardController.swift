@@ -40,46 +40,57 @@ class GameBoardController {
             let array: [Character] = Array(word)
             searchWords.append(array)
         }
-
+        searchWords.remove(at: 0)
         // if axis is true, word is horizontal, otherwise it's vertical
         var axis: Bool = Bool.random()
 
-        // the x and y values of the first letter of the first word to use for generating wordMap
-        let xVal = Int.random(in: 0...gameBoard.word.mainWord.count)
-        let yVal = Int.random(in: 0...gameBoard.word.mainWord.count)
 
         // set first word in wordMap based on direction indicated by axis
         // remove word from temporary searchWords array and toggle axis to alternating direction
-        if axis {
-            for charNumber in 0..<searchWords[searchWords.count - 1].count {
-                wordMap[yVal][xVal + charNumber] = searchWords[searchWords.count - 1][charNumber]
+        if let searchWord = searchWords.last {
+            // the x and y values of the first letter of the first word to use for generating wordMap
+            let xVal = Int.random(in: 0...gameBoard.word.mainWord.count)
+            let yVal = Int.random(in: 0...gameBoard.word.mainWord.count)
+            for charNumber in 0..<searchWord.count {
+                if axis {
+                    wordMap[yVal][xVal + charNumber] = searchWords[searchWords.count - 1][charNumber]
+                } else {
+                    wordMap[yVal + charNumber][xVal] = searchWords[searchWords.count - 1][charNumber]
+                }
             }
-            searchWords.remove(at: searchWords.count - 1)
-            axis.toggle()
-        } else {
-            for charNumber in 0..<searchWords[searchWords.count - 1].count {
-                wordMap[yVal + charNumber][xVal] = searchWords[searchWords.count - 1][charNumber]
-            }
-            searchWords.remove(at: searchWords.count - 1)
-            axis.toggle()
         }
+        searchWords.remove(at: searchWords.count - 1)
+        axis.toggle()
+
 
         // add additional words to wordMap
-        for word in searchWords {
+        while 0 < searchWords.count {
+            let word = searchWords[searchWords.count - 1]
             // randomly choose which letter to intersect and create array of tuples to store possible intersection points
             let intersectingChar = Int.random(in: 0..<word.count)
             var possibleIntersectionPoints: [(Int, Int)] = []
 
             // find possible intersection points and store in possibleIntersectionPoints array
-            for y in 0..<wordMap.count {
+            possiblePoint: for y in 0..<wordMap.count {
                 for x in 0..<wordMap.count {
-                    if wordMap[y][x] == word[intersectingChar]
-                        && axis
+                    if wordMap[y][x] != word[intersectingChar] { continue }
+                    if !axis
+                        && y == 0
+                        && wordMap[y + 1][x] == nil {
+                        possibleIntersectionPoints.append((y, x))
+                        continue
+                    } else if axis
+                        && x == 0
+                        && wordMap[y][x + 1] == nil {
+                        possibleIntersectionPoints.append((y, x))
+                        continue
+                    }
+                    if x == 0 || y == 0 { continue possiblePoint }
+                    if !axis
                         && wordMap[y - 1][x] == nil
                         && wordMap[y + 1][x] == nil {
                         possibleIntersectionPoints.append((y, x))
-                    } else if wordMap[y][x] == word[intersectingChar]
-                        && !axis
+                    } else if axis
                         && wordMap[y][x - 1] == nil
                         && wordMap[y][x + 1] == nil {
                         possibleIntersectionPoints.append((y, x))
@@ -89,16 +100,36 @@ class GameBoardController {
 
             // iterates through word to attempt to place characters in wordMap
             // probably should be placed in a throwing method
-            for character in 0..<word.count {
-                if character == intersectingChar {
+            intersectionPointLoop: for point in possibleIntersectionPoints {
+                if (point.1 < intersectingChar && axis)
+                    || (point.0 < intersectingChar && !axis)
+                    || (wordMap.count - point.1 - 1 < word.count - intersectingChar && axis)
+                    || (wordMap.count - point.0 - 1 < word.count - intersectingChar && !axis) {
                     continue
-                } else if axis {
-                    // TODO: - Work on this logic for attempting to place a char. probably need to test if nil so we don't overwrite an existing character
-                    wordMap[possibleIntersectionPoints[0].0][possibleIntersectionPoints[0].1 - intersectingChar + character] = word[character]
-                } else {
-
                 }
+                if axis {
+                    for num in (point.1 - intersectingChar)...(point.1 + word.count - 1 - intersectingChar) {
+                        if point.1 != num && (wordMap[point.0][num] != nil) { continue intersectionPointLoop }
+                    }
+                    for character in 0..<word.count {
+                        let x = point.1 - intersectingChar + character
+                        wordMap[point.0][x] = word[character]
+                    }
+                } else if !axis {
+                    for num in (point.0 - intersectingChar)...(point.0 + word.count - 1 - intersectingChar) {
+                        if point.0 != num && (wordMap[num][point.1] != nil) { continue intersectionPointLoop }
+                    }
+                    for character in 0..<word.count {
+                        let y = point.0 - intersectingChar + character
+                        wordMap[y][point.1] = word[character]
+                    }
+                }
+                axis.toggle()
+                searchWords.remove(at: searchWords.count - 1)
             }
+        }
+        for row in wordMap {
+            print("\(String(describing: row[0])), \(String(describing: row[1])), \(String(describing: row[2])), \(String(describing: row[3])), \(String(describing: row[4])), \(String(describing: row[5])), \(String(describing: row[6])), \(String(describing: row[7])), \(String(describing: row[8]))\n")
         }
         return wordMap
     }

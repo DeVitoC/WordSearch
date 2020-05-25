@@ -268,6 +268,7 @@ class WordController {
         let highNumber = anagrams.count < 15 ? anagrams.count : 14
         randomNumber = anagrams.count > 10 ? Int.random(in: 8...highNumber) : anagrams.count - 1
         for _ in 0...randomNumber {
+            if anagrams.count == 0 { break }
             let rand = Int.random(in: 1...(anagrams.count))
             searchwords.append(anagrams[rand - 1])
             anagrams.remove(at: rand - 1)
