@@ -29,6 +29,7 @@ class WordSearchViewController: UIViewController {
     }
     var gameBoardMapStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     var buttonsStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    var activeAreaStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     
     // MARK: - IBOutlets
     @IBOutlet weak var checkWordButton: UIButton!
@@ -44,11 +45,8 @@ class WordSearchViewController: UIViewController {
     }
 
     private func updateViews() {
-        guard let word = word else { return }
         generateGameBoardMap()
-        generateButtons()
-        let mainWordChars: [Character] = Array(word.mainWord)
-        print("\(mainWordChars)")
+        generateActivePlayButtons()
     }
 
     // MARK: - Set Up Methods
@@ -91,6 +89,39 @@ class WordSearchViewController: UIViewController {
         }
     }
 
+    /// Generates the Active Play area with the letter, reset, and check word UIButtons
+    private func generateActivePlayButtons() {
+        // Create activeAreaStackView with constraints
+        self.view.addSubview(activeAreaStackView)
+        activeAreaStackView.translatesAutoresizingMaskIntoConstraints = false
+        activeAreaStackView.axis = .vertical
+        activeAreaStackView.alignment = .fill
+        activeAreaStackView.distribution = .fillEqually
+        NSLayoutConstraint.activate([
+            activeAreaStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40),
+            activeAreaStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            activeAreaStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            activeAreaStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.08)
+        ])
+
+        // create and add letter buttons to Active Play area UIStackView
+        generateButtons()
+        activeAreaStackView.addArrangedSubview(buttonsStackView)
+
+        // create and add UIStackView for reset and check word UIButtons
+        let controlButtonsStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        controlButtonsStackView.translatesAutoresizingMaskIntoConstraints = false
+        controlButtonsStackView.axis = .horizontal
+        controlButtonsStackView.alignment = .center
+        controlButtonsStackView.distribution = .fillEqually
+        activeAreaStackView.addArrangedSubview(controlButtonsStackView)
+
+        // add reset and check word UIButtons to controlButtonsStackView
+        controlButtonsStackView.addArrangedSubview(generateResetButton())
+        controlButtonsStackView.addArrangedSubview(generateCheckWordButton())
+
+    }
+
     /// Generates a row of UIButtons to display the characters in use for game play
     private func generateButtons() {
         guard let word = word else { return }
@@ -102,12 +133,6 @@ class WordSearchViewController: UIViewController {
         buttonsStackView.axis = .horizontal
         buttonsStackView.distribution = .fillEqually
         buttonsStackView.alignment = .fill
-        NSLayoutConstraint.activate([
-            buttonsStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40),
-            buttonsStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            buttonsStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            buttonsStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.08)
-        ])
 
         // Generates a button for each character in the main word
         for char in 0..<mainWord.count {
@@ -119,6 +144,26 @@ class WordSearchViewController: UIViewController {
             button.addTarget(self, action: #selector(letterButtonTapped(_:)), for: .touchUpInside)
             buttonsStackView.addArrangedSubview(button)
         }
+    }
+
+    private func generateResetButton() -> UIButton {
+        let resetButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
+        resetButton.translatesAutoresizingMaskIntoConstraints = false
+        resetButton.backgroundColor = .systemBlue
+        resetButton.setTitleColor(.black, for: .normal)
+        resetButton.setTitle("Reset Word", for: .normal)
+        resetButton.addTarget(self, action: #selector(resetWord(_:)), for: .touchUpInside)
+        return resetButton
+    }
+
+    private func generateCheckWordButton() -> UIButton {
+        let checkButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
+        checkButton.translatesAutoresizingMaskIntoConstraints = false
+        checkButton.backgroundColor = .systemTeal
+        checkButton.setTitleColor(.black, for: .normal)
+        checkButton.setTitle("Check Word", for: .normal)
+        checkButton.addTarget(self, action: #selector(checkWord(_:)), for: .touchUpInside)
+        return checkButton
     }
 
     // MARK: - Action Methods
@@ -135,8 +180,14 @@ class WordSearchViewController: UIViewController {
         }
     }
 
-    // MARK: - IBActions
-    @IBAction func checkWord(_ sender: Any) {
+    @objc func resetWord(_ sender: UIButton) {
+        wordInProgress = ""
+        for button in letterButtons {
+            button.isSelected = false
+        }
+    }
+
+    @objc func checkWord(_ sender: UIButton) {
         guard let word = word else { return }
         if word.searchWords.contains(wordInProgress.lowercased()) {
             print("Success: \(wordInProgress) is in search words")
@@ -145,13 +196,6 @@ class WordSearchViewController: UIViewController {
         } else {
             print("Try again: \(wordInProgress) is not a word")
         }
-        resetWord(self)
-    }
-
-    @IBAction func resetWord(_ sender: Any) {
-        wordInProgress = ""
-        for button in letterButtons {
-            button.isSelected = false
-        }
+        resetWord(sender)
     }
 }
