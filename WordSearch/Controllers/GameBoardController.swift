@@ -122,8 +122,8 @@ class GameBoardController {
                 } else if !axis {
                     for num in (point.0 - intersectingChar)...(point.0 + word.count - 1 - intersectingChar) {
                         if point.0 != num && (wordMap[num][point.1] != nil)
-                            || (point.1 != num && wordMap[point.0 - 1][num] != nil)
-                            || (point.1 != num && wordMap[point.0 + 1][num] != nil)  {
+                            || (point.1 != num && point.0 >= 1 && wordMap[point.0 - 1][num] != nil)
+                            || (point.1 != num && point.0 >= 1 && wordMap[point.0 + 1][num] != nil)  {
                             continue intersectionPointLoop
                         }
                     }
