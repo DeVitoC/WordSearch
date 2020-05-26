@@ -27,7 +27,8 @@ class WordSearchViewController: UIViewController {
             updateViews()
         }
     }
-    var stackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    var gameBoardMapStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    var buttonsStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     
     // MARK: - IBOutlets
     @IBOutlet weak var letter1Button: UIButton!
@@ -37,9 +38,11 @@ class WordSearchViewController: UIViewController {
     @IBOutlet weak var letter5Button: UIButton!
     @IBOutlet weak var letter6Button: UIButton!
     @IBOutlet weak var checkWordButton: UIButton!
+    @IBOutlet var buttons: UIStackView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        buttons.isHidden = true
         gameBoard = gameBoardController.createGameBoard(level: 201)
         if let gameBoard = gameBoard {
             wordMap = gameBoardController.generateWordMap(gameBoard: gameBoard)
@@ -49,6 +52,7 @@ class WordSearchViewController: UIViewController {
     private func updateViews() {
         guard let word = word else { return }
         generateGameBoardMap()
+        generateButtons()
         let mainWordChars: [Character] = Array(word.mainWord)
         print("\(mainWordChars)")
         letter1Button.setTitle("\(mainWordChars[0].uppercased())", for: .normal)
@@ -61,42 +65,87 @@ class WordSearchViewController: UIViewController {
 
     }
 
+    // MARK: - Set Up Methods
     /// Generates a grid of UILabels inside stacked UIStackViews for a map of 2 times the length of the primary word plus 1
     private func generateGameBoardMap() {
         guard let word = word else { return }
 
-        // Set up main UIStackView - "stackView"
-        self.view.addSubview(stackView)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.distribution = .fillEqually
-        stackView.alignment = .fill
+        // Set up main UIStackView - "gameBoardMapStackView"
+        self.view.addSubview(gameBoardMapStackView)
+        gameBoardMapStackView.translatesAutoresizingMaskIntoConstraints = false
+        gameBoardMapStackView.axis = .vertical
+        gameBoardMapStackView.distribution = .fillEqually
+        gameBoardMapStackView.alignment = .fill
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: view.topAnchor),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            stackView.heightAnchor.constraint(equalTo: view.widthAnchor),
+            gameBoardMapStackView.topAnchor.constraint(equalTo: view.topAnchor),
+            gameBoardMapStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            gameBoardMapStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            gameBoardMapStackView.heightAnchor.constraint(equalTo: view.widthAnchor),
         ])
 
-        // Add stacks of UIStackViews - "stackView.arrangedSubViews[] as UIStackView"
+        // Add stacks of UIStackViews - "gameBoardMapStackView.arrangedSubViews[] as UIStackView"
         for _ in 0...word.mainWord.count * 2 {
             let subStack = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 25))
-            stackView.addArrangedSubview(subStack)
+            gameBoardMapStackView.addArrangedSubview(subStack)
             subStack.axis = .horizontal
             subStack.distribution = .fillEqually
             subStack.alignment = .fill
         }
 
         // Add row of twice the main word's length plus 1 labels in sub-stackviews -
-        // "(stackView.arrangedSubViews[] as UIStackView).arrangedSubViews[] as UIStackView"
+        // "(gameBoardMapStackView.arrangedSubViews[] as UIStackView).arrangedSubViews[] as UIStackView"
         for y in 0...word.mainWord.count * 2 {
             for _ in 0...word.mainWord.count * 2 {
                 let label = UILabel(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
                 label.translatesAutoresizingMaskIntoConstraints = false
                 label.textAlignment = .center
                 label.text = "-"
-                (stackView.arrangedSubviews[y] as! UIStackView).addArrangedSubview(label)
+                (gameBoardMapStackView.arrangedSubviews[y] as! UIStackView).addArrangedSubview(label)
             }
+        }
+    }
+
+    /// Generates a row of UIButtons to display the characters in use for game play
+    private func generateButtons() {
+        guard let word = word else { return }
+        let mainWord: [Character] = Array(word.mainWord)
+
+        // Sets up button UIStackView
+        self.view.addSubview(buttonsStackView)
+        buttonsStackView.translatesAutoresizingMaskIntoConstraints = false
+        buttonsStackView.axis = .horizontal
+        buttonsStackView.distribution = .fillEqually
+        buttonsStackView.alignment = .fill
+        NSLayoutConstraint.activate([
+            buttonsStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40),
+            buttonsStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            buttonsStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            buttonsStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.08)
+        ])
+
+        // Generates a button for each character in the main word
+        for char in 0..<mainWord.count {
+            let button = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.backgroundColor = .systemRed
+            button.setTitleColor(.black, for: .normal)
+            button.setTitle("\(mainWord[char].uppercased())", for: .normal)
+            button.addTarget(self, action: #selector(letterButtonTapped(_:)), for: .touchUpInside)
+            buttonsStackView.addArrangedSubview(button)
+        }
+    }
+
+    // MARK: - Action Methods
+    @objc func letterButtonTapped(_ sender: UIButton) {
+        guard let character = sender.titleLabel?.text else { return }
+        print(character)
+        if sender.isSelected {
+            sender.isSelected = false
+        } else {
+            sender.isSelected = true
+            guard let letter = sender.titleLabel?.text else { return }
+            wordInProgress.append(letter)
+            print(wordInProgress)
         }
     }
 
@@ -185,5 +234,4 @@ class WordSearchViewController: UIViewController {
             button.isSelected = false
         }
     }
-
 }

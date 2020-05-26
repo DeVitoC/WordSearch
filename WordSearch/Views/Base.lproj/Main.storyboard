@@ -103,6 +103,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="55O-O6-ejG"/>
                     <connections>
+                        <outlet property="buttons" destination="WLV-Z1-QsJ" id="c0h-BR-lSv"/>
                         <outlet property="checkWordButton" destination="YbR-bx-4i0" id="RhU-ne-xSr"/>
                         <outlet property="letter1Button" destination="SGO-1b-Kn2" id="9Sc-Pt-RxD"/>
                         <outlet property="letter2Button" destination="euP-OZ-s6o" id="uSN-qg-uOq"/>
