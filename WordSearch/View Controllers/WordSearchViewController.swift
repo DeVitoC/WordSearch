@@ -33,11 +33,9 @@ class WordSearchViewController: UIViewController {
     
     // MARK: - IBOutlets
     @IBOutlet weak var checkWordButton: UIButton!
-    @IBOutlet var buttons: UIStackView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        buttons.isHidden = true
         gameBoard = gameBoardController.createGameBoard(level: 201)
         if let gameBoard = gameBoard {
             wordMap = gameBoardController.generateWordMap(gameBoard: gameBoard)
@@ -87,6 +85,19 @@ class WordSearchViewController: UIViewController {
                 (gameBoardMapStackView.arrangedSubviews[y] as! UIStackView).addArrangedSubview(label)
             }
         }
+        populateGameBoardMap()
+    }
+
+    /// Populates Game Board Map with values from wordMap
+    private func populateGameBoardMap() {
+        for y in 0..<gameBoardMapStackView.arrangedSubviews.count {
+            guard let stack = gameBoardMapStackView.arrangedSubviews[y] as? UIStackView else { continue }
+            for x in 0..<stack.arrangedSubviews.count {
+                guard let label = stack.arrangedSubviews[x] as? UILabel else { continue }
+                let char: String = String(wordMap[y][x] ?? " ")
+                label.text = char
+            }
+        }
     }
 
     /// Generates the Active Play area with the letter, reset, and check word UIButtons
@@ -97,6 +108,7 @@ class WordSearchViewController: UIViewController {
         activeAreaStackView.axis = .vertical
         activeAreaStackView.alignment = .fill
         activeAreaStackView.distribution = .fillEqually
+        activeAreaStackView.spacing = 10
         NSLayoutConstraint.activate([
             activeAreaStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40),
             activeAreaStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -114,6 +126,7 @@ class WordSearchViewController: UIViewController {
         controlButtonsStackView.axis = .horizontal
         controlButtonsStackView.alignment = .center
         controlButtonsStackView.distribution = .fillEqually
+        controlButtonsStackView.spacing = 10
         activeAreaStackView.addArrangedSubview(controlButtonsStackView)
 
         // add reset and check word UIButtons to controlButtonsStackView
@@ -143,9 +156,11 @@ class WordSearchViewController: UIViewController {
             button.setTitle("\(mainWord[char].uppercased())", for: .normal)
             button.addTarget(self, action: #selector(letterButtonTapped(_:)), for: .touchUpInside)
             buttonsStackView.addArrangedSubview(button)
+            letterButtons.append(button)
         }
     }
 
+    /// Generates a reset UIButton to set the in progress word to an emptry string
     private func generateResetButton() -> UIButton {
         let resetButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
         resetButton.translatesAutoresizingMaskIntoConstraints = false
@@ -156,6 +171,7 @@ class WordSearchViewController: UIViewController {
         return resetButton
     }
 
+    /// Generates a check word UIButton to check the word against the list of acceptable words
     private func generateCheckWordButton() -> UIButton {
         let checkButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
         checkButton.translatesAutoresizingMaskIntoConstraints = false
@@ -167,9 +183,9 @@ class WordSearchViewController: UIViewController {
     }
 
     // MARK: - Action Methods
+    /// Defines the action taken when a letter button is tapped
     @objc func letterButtonTapped(_ sender: UIButton) {
         guard let character = sender.titleLabel?.text else { return }
-        print(character)
         if sender.isSelected {
             sender.isSelected = false
         } else {
@@ -180,6 +196,7 @@ class WordSearchViewController: UIViewController {
         }
     }
 
+    /// Defines the action taken when the reset button is tapped
     @objc func resetWord(_ sender: UIButton) {
         wordInProgress = ""
         for button in letterButtons {
@@ -187,6 +204,7 @@ class WordSearchViewController: UIViewController {
         }
     }
 
+    /// Defines the action taken when the check word button is tapped
     @objc func checkWord(_ sender: UIButton) {
         guard let word = word else { return }
         if word.searchWords.contains(wordInProgress.lowercased()) {
