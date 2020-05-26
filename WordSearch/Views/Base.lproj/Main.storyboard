@@ -26,10 +26,10 @@
         <!--Navigation Controller-->
         <scene sceneID="AOL-mo-GbQ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LlM-2v-8Nz" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="LlM-2v-8Nz" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cqL-w7-f9T">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

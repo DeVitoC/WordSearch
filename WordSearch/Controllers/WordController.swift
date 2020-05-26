@@ -11,9 +11,9 @@ import Foundation
 class WordController {
     
     // MARK: - Computed Properties
-    lazy private var words: [String] = {
-        generateWordsArray(fromFile: "all")
-    }()
+//    lazy private var words: [String] = {
+//        generateWordsArray(fromFile: "all")
+//    }()
 
     lazy private var threeLetterWords: [String] = {
         generateWordsArray(fromFile: "three")

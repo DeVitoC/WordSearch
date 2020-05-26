@@ -11,12 +11,10 @@ import UIKit
 class WordSearchViewController: UIViewController {
     
     // MARK: - Properties
-    let wordController = WordController()
     let gameBoardController = GameBoardController()
     private var word: Word?
     private lazy var letterButtons: [UIButton] = []
     private var wordInProgress: String = ""
-    private var wordMapLabels: [[UILabel]] = []
     private var gameBoard: GameBoard? {
         didSet {
             word = gameBoard?.word
@@ -30,9 +28,6 @@ class WordSearchViewController: UIViewController {
     var gameBoardMapStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     var buttonsStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     var activeAreaStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-    
-    // MARK: - IBOutlets
-    @IBOutlet weak var checkWordButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +54,7 @@ class WordSearchViewController: UIViewController {
         gameBoardMapStackView.distribution = .fillEqually
         gameBoardMapStackView.alignment = .fill
         NSLayoutConstraint.activate([
-            gameBoardMapStackView.topAnchor.constraint(equalTo: view.topAnchor),
+            gameBoardMapStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             gameBoardMapStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             gameBoardMapStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             gameBoardMapStackView.heightAnchor.constraint(equalTo: view.widthAnchor),
