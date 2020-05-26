@@ -14,45 +14,10 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="WLV-Z1-QsJ">
-                                <rect key="frame" x="20" y="782" width="374" height="30"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ZOU-JQ-TM6">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="30"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="srF-13-Nhh">
-                                                <rect key="frame" x="0.0" y="0.0" width="187" height="30"/>
-                                                <state key="normal" title="Reset Word"/>
-                                                <connections>
-                                                    <action selector="resetWord:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NZ7-UY-fFn"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YbR-bx-4i0">
-                                                <rect key="frame" x="187" y="0.0" width="187" height="30"/>
-                                                <state key="normal" title="Check Word"/>
-                                                <connections>
-                                                    <action selector="checkWord:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bOl-t7-Iqx"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                            </stackView>
-                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="WLV-Z1-QsJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="2oJ-DZ-1xL"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="WLV-Z1-QsJ" secondAttribute="trailing" constant="20" id="T5d-tX-e3j"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="WLV-Z1-QsJ" secondAttribute="bottom" constant="50" id="th8-mz-PpX"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="55O-O6-ejG"/>
-                    <connections>
-                        <outlet property="buttons" destination="WLV-Z1-QsJ" id="c0h-BR-lSv"/>
-                        <outlet property="checkWordButton" destination="YbR-bx-4i0" id="RhU-ne-xSr"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
