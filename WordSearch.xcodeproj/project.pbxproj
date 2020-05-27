@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E22F5779247EDB8700F1C0A5 /* LetterButtonsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F5778247EDB8700F1C0A5 /* LetterButtonsLayout.swift */; };
 		E23E22132470633300AA01E6 /* allLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E23E22122470633300AA01E6 /* allLetterWords.json */; };
 		E25B847B246C5D8600FA3C49 /* WordSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25B847A246C5D8600FA3C49 /* WordSearchViewController.swift */; };
 		E25B8488246C70E500FA3C49 /* WordSearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25B8487246C70E500FA3C49 /* WordSearchTests.swift */; };
@@ -52,6 +53,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E22F5778247EDB8700F1C0A5 /* LetterButtonsLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterButtonsLayout.swift; sourceTree = "<group>"; };
 		E23E22122470633300AA01E6 /* allLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = allLetterWords.json; sourceTree = "<group>"; };
 		E25B847A246C5D8600FA3C49 /* WordSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSearchViewController.swift; sourceTree = "<group>"; };
 		E25B8485246C70E500FA3C49 /* WordSearchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WordSearchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,6 +194,7 @@
 			children = (
 				E2E3DF9B2467E98E0049235E /* Main.storyboard */,
 				E2E3DFA02467E9900049235E /* LaunchScreen.storyboard */,
+				E22F5778247EDB8700F1C0A5 /* LetterButtonsLayout.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -357,6 +360,7 @@
 				E2EE23582473944F009FFEC3 /* GameBoard.swift in Sources */,
 				E25B847B246C5D8600FA3C49 /* WordSearchViewController.swift in Sources */,
 				E280F7A024691A97000CBEA4 /* MockData.swift in Sources */,
+				E22F5779247EDB8700F1C0A5 /* LetterButtonsLayout.swift in Sources */,
 				E2EE235624739288009FFEC3 /* GameBoardController.swift in Sources */,
 				E2DA2C022474F13B0042E695 /* CharacterSet+Sequence.swift in Sources */,
 			);

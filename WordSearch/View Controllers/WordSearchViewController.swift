@@ -13,6 +13,10 @@ class WordSearchViewController: UIViewController {
     // MARK: - Properties
     let gameBoardController = GameBoardController()
     private var word: Word?
+    lazy var mainWord: [Character] = {
+        guard let word = word else { return [] }
+        return Array(word.mainWord)
+    }()
     private lazy var letterButtons: [UIButton] = []
     private var wordInProgress: String = ""
     private var gameBoard: GameBoard? {
@@ -25,12 +29,15 @@ class WordSearchViewController: UIViewController {
             updateViews()
         }
     }
-    var gameBoardMapStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-    var buttonsStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-    var activeAreaStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    lazy var gameBoardMapStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    lazy var buttonsStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    lazy var buttonsCollectionView = UICollectionView(frame: CGRect(center: .zero, size: CGSize(width: view.frame.width * 0.6, height: view.frame.width * 0.6)), collectionViewLayout: LetterButtonsLayout())
+    lazy var activeAreaStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        buttonsCollectionView.dataSource = self
+        buttonsCollectionView.delegate = self
         gameBoard = gameBoardController.createGameBoard(level: 201)
         if let gameBoard = gameBoard {
             wordMap = gameBoardController.generateWordMap(gameBoard: gameBoard)
@@ -113,7 +120,7 @@ class WordSearchViewController: UIViewController {
 
         // create and add letter buttons to Active Play area UIStackView
         generateButtons()
-        activeAreaStackView.addArrangedSubview(buttonsStackView)
+        //activeAreaStackView.addArrangedSubview(buttonsCollectionView)
 
         // create and add UIStackView for reset and check word UIButtons
         let controlButtonsStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
@@ -132,27 +139,39 @@ class WordSearchViewController: UIViewController {
 
     /// Generates a row of UIButtons to display the characters in use for game play
     private func generateButtons() {
-        guard let word = word else { return }
-        let mainWord: [Character] = Array(word.mainWord)
+        self.view.addSubview(buttonsCollectionView)
+        buttonsCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        buttonsCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "LetterCell")
+        buttonsCollectionView.backgroundColor = .clear
+        NSLayoutConstraint.activate([
+            buttonsCollectionView.topAnchor.constraint(equalTo: gameBoardMapStackView.bottomAnchor, constant: 0),
+            buttonsCollectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            buttonsCollectionView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+            buttonsCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5)
+        ])
+        
 
-        // Sets up button UIStackView
-        self.view.addSubview(buttonsStackView)
-        buttonsStackView.translatesAutoresizingMaskIntoConstraints = false
-        buttonsStackView.axis = .horizontal
-        buttonsStackView.distribution = .fillEqually
-        buttonsStackView.alignment = .fill
-
-        // Generates a button for each character in the main word
-        for char in 0..<mainWord.count {
-            let button = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-            button.translatesAutoresizingMaskIntoConstraints = false
-            button.backgroundColor = .systemRed
-            button.setTitleColor(.black, for: .normal)
-            button.setTitle("\(mainWord[char].uppercased())", for: .normal)
-            button.addTarget(self, action: #selector(letterButtonTapped(_:)), for: .touchUpInside)
-            buttonsStackView.addArrangedSubview(button)
-            letterButtons.append(button)
-        }
+//        guard let word = word else { return }
+//        let mainWord: [Character] = Array(word.mainWord)
+//
+//        // Sets up button UIStackView
+//        self.view.addSubview(buttonsStackView)
+//        buttonsStackView.translatesAutoresizingMaskIntoConstraints = false
+//        buttonsStackView.axis = .horizontal
+//        buttonsStackView.distribution = .fillEqually
+//        buttonsStackView.alignment = .fill
+//
+//        // Generates a button for each character in the main word
+//        for char in 0..<mainWord.count {
+//            let button = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+//            button.translatesAutoresizingMaskIntoConstraints = false
+//            button.backgroundColor = .systemRed
+//            button.setTitleColor(.black, for: .normal)
+//            button.setTitle("\(mainWord[char].uppercased())", for: .normal)
+//            button.addTarget(self, action: #selector(letterButtonTapped(_:)), for: .touchUpInside)
+//            buttonsStackView.addArrangedSubview(button)
+//            letterButtons.append(button)
+//        }
     }
 
     /// Generates a reset UIButton to set the in progress word to an emptry string
@@ -180,7 +199,7 @@ class WordSearchViewController: UIViewController {
     // MARK: - Action Methods
     /// Defines the action taken when a letter button is tapped
     @objc func letterButtonTapped(_ sender: UIButton) {
-        guard let character = sender.titleLabel?.text else { return }
+        //guard let character = sender.titleLabel?.text else { return }
         if sender.isSelected {
             sender.isSelected = false
         } else {
@@ -210,5 +229,30 @@ class WordSearchViewController: UIViewController {
             print("Try again: \(wordInProgress) is not a word")
         }
         resetWord(sender)
+    }
+}
+
+extension WordSearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        1
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        mainWord.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LetterCell", for: indexPath)
+        //let cell = UICollectionViewCell()
+
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .systemRed
+        button.setTitleColor(.black, for: .normal)
+        let char = String(mainWord[indexPath.item])
+        button.setTitle(char.capitalized, for: .normal)
+        button.addTarget(self, action: #selector(letterButtonTapped(_:)), for: .touchUpInside)
+        cell.addSubview(button)
+        return cell
     }
 }
