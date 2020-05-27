@@ -137,7 +137,7 @@ class WordSearchViewController: UIViewController {
 
     }
 
-    /// Generates a row of UIButtons to display the characters in use for game play
+    /// Generates a circle CollectionView of UIButtons to display the characters in use for game play
     private func generateButtons() {
         self.view.addSubview(buttonsCollectionView)
         buttonsCollectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -149,29 +149,6 @@ class WordSearchViewController: UIViewController {
             buttonsCollectionView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
             buttonsCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5)
         ])
-        
-
-//        guard let word = word else { return }
-//        let mainWord: [Character] = Array(word.mainWord)
-//
-//        // Sets up button UIStackView
-//        self.view.addSubview(buttonsStackView)
-//        buttonsStackView.translatesAutoresizingMaskIntoConstraints = false
-//        buttonsStackView.axis = .horizontal
-//        buttonsStackView.distribution = .fillEqually
-//        buttonsStackView.alignment = .fill
-//
-//        // Generates a button for each character in the main word
-//        for char in 0..<mainWord.count {
-//            let button = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-//            button.translatesAutoresizingMaskIntoConstraints = false
-//            button.backgroundColor = .systemRed
-//            button.setTitleColor(.black, for: .normal)
-//            button.setTitle("\(mainWord[char].uppercased())", for: .normal)
-//            button.addTarget(self, action: #selector(letterButtonTapped(_:)), for: .touchUpInside)
-//            buttonsStackView.addArrangedSubview(button)
-//            letterButtons.append(button)
-//        }
     }
 
     /// Generates a reset UIButton to set the in progress word to an emptry string
