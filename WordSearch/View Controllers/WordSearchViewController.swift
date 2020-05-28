@@ -33,9 +33,11 @@ class WordSearchViewController: UIViewController {
     lazy var buttonsStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     lazy var buttonsCollectionView = UICollectionView(frame: CGRect(center: .zero, size: CGSize(width: view.frame.width * 0.6, height: view.frame.width * 0.6)), collectionViewLayout: LetterButtonsLayout())
     lazy var activeAreaStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    var inProgressLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.setBackground()
         buttonsCollectionView.dataSource = self
         buttonsCollectionView.delegate = self
         gameBoard = gameBoardController.createGameBoard(level: 201)
@@ -64,7 +66,7 @@ class WordSearchViewController: UIViewController {
             gameBoardMapStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             gameBoardMapStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             gameBoardMapStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            gameBoardMapStackView.heightAnchor.constraint(equalTo: view.widthAnchor),
+            gameBoardMapStackView.heightAnchor.constraint(equalTo: gameBoardMapStackView.widthAnchor),
         ])
 
         // Add stacks of UIStackViews - "gameBoardMapStackView.arrangedSubViews[] as UIStackView"
@@ -120,7 +122,17 @@ class WordSearchViewController: UIViewController {
 
         // create and add letter buttons to Active Play area UIStackView
         generateButtons()
-        //activeAreaStackView.addArrangedSubview(buttonsCollectionView)
+
+        // create and add in progress word UILabel
+        //inProgressLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        inProgressLabel.translatesAutoresizingMaskIntoConstraints = false
+        inProgressLabel.textAlignment = .center
+        inProgressLabel.font = .boldSystemFont(ofSize: 24)
+        inProgressLabel.text = ""
+        inProgressLabel.textColor = .systemBlue
+        //if let inProgressLabel = inProgressLabel {
+            activeAreaStackView.addArrangedSubview(inProgressLabel)
+        //}
 
         // create and add UIStackView for reset and check word UIButtons
         let controlButtonsStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
@@ -178,17 +190,24 @@ class WordSearchViewController: UIViewController {
     @objc func letterButtonTapped(_ sender: UIButton) {
         if sender.isSelected {
             sender.isSelected = false
+            let index = String.Index(utf16Offset: wordInProgress.count - 1, in: wordInProgress)
+            wordInProgress.remove(at: index)
+            var wordLabelText = inProgressLabel.text
+            wordLabelText?.remove(at: index)
+            inProgressLabel.text = wordLabelText
         } else {
             sender.isSelected = true
-            guard let letter = sender.titleLabel?.text else { return }
+            guard let letter = sender.titleLabel?.text,
+                let inProgressText = inProgressLabel.text else { return }
             wordInProgress.append(letter)
-            print(wordInProgress)
+            inProgressLabel.text = "\(inProgressText)\(letter)"
         }
     }
 
     /// Defines the action taken when the reset button is tapped
     @objc func resetWord(_ sender: UIButton) {
         wordInProgress = ""
+        inProgressLabel.text = ""
         for button in letterButtons {
             button.isSelected = false
         }
@@ -224,6 +243,7 @@ extension WordSearchViewController: UICollectionViewDelegate, UICollectionViewDa
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .systemRed
         button.setTitleColor(.black, for: .normal)
+        
         let char = String(mainWord[indexPath.item])
         button.setTitle(char.capitalized, for: .normal)
         button.addTarget(self, action: #selector(letterButtonTapped(_:)), for: .touchUpInside)

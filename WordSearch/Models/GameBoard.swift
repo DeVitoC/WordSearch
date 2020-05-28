@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// GameBoard model with all the data for play and display for a level
 struct GameBoard {
     var word: Word
     var foundWords: [String]

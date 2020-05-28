@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// 1
 class LetterButtonsLayout: UICollectionViewLayout {
     weak var delegate: LetterButtonsDelegate?
     private var layoutCircleFrame = CGRect.zero
