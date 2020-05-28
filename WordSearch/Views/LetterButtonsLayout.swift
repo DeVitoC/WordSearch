@@ -45,17 +45,6 @@ class LetterButtonsLayout: UICollectionViewLayout {
                     })
                 default:
                     fatalError("Unhandled section")
-                //                    let itemCount = collectionView.numberOfItems(inSection: section)
-                //                    cache2 = (0..<itemCount).map({ (index) -> UICollectionViewLayoutAttributes in
-                //                        let angleStep: CGFloat = 2.0 * CGFloat.pi / CGFloat(itemCount)
-                //                        var position = layoutCircleFrame.center
-                //                        position.x += layoutCircleFrame.size.innerRadius * cos(angleStep * CGFloat(index))
-                //                        position.y += layoutCircleFrame.size.innerRadius * sin(angleStep * CGFloat(index))
-                //                        let indexPath = IndexPath(item: index, section: section)
-                //                        let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
-                //                        attributes.frame = CGRect(center: position, size: itemSize)
-                //                        return attributes
-                //                    })
             }
         }
     }

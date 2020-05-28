@@ -62,8 +62,8 @@ class WordSearchViewController: UIViewController {
         gameBoardMapStackView.alignment = .fill
         NSLayoutConstraint.activate([
             gameBoardMapStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            gameBoardMapStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            gameBoardMapStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            gameBoardMapStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            gameBoardMapStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             gameBoardMapStackView.heightAnchor.constraint(equalTo: view.widthAnchor),
         ])
 
@@ -176,7 +176,6 @@ class WordSearchViewController: UIViewController {
     // MARK: - Action Methods
     /// Defines the action taken when a letter button is tapped
     @objc func letterButtonTapped(_ sender: UIButton) {
-        //guard let character = sender.titleLabel?.text else { return }
         if sender.isSelected {
             sender.isSelected = false
         } else {
@@ -209,6 +208,7 @@ class WordSearchViewController: UIViewController {
     }
 }
 
+// Extension to set up Collection View Delegate and Data Source.
 extension WordSearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         1
@@ -220,8 +220,6 @@ extension WordSearchViewController: UICollectionViewDelegate, UICollectionViewDa
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LetterCell", for: indexPath)
-        //let cell = UICollectionViewCell()
-
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .systemRed

@@ -9,81 +9,8 @@
 import Foundation
 
 class WordController {
-    
-    // MARK: - Computed Properties
-//    lazy private var words: [String] = {
-//        generateWordsArray(fromFile: "all")
-//    }()
 
-    lazy private var threeLetterWords: [String] = {
-        generateWordsArray(fromFile: "three")
-    }()
-
-    lazy private var fourLetterWords: [String] = {
-        generateWordsArray(fromFile: "four")
-    }()
-
-    lazy private var fiveLetterWords: [String] = {
-        generateWordsArray(fromFile: "five")
-    }()
-
-    lazy private var sixLetterWords: [String] = {
-        generateWordsArray(fromFile: "six")
-    }()
-
-    lazy private var sevenLetterWords: [String] = {
-        generateWordsArray(fromFile: "seven")
-    }()
-
-    lazy private var eightLetterWords: [String] = {
-        generateWordsArray(fromFile: "eight")
-    }()
-
-    lazy private var nineLetterWords: [String] = {
-        generateWordsArray(fromFile: "nine")
-    }()
-    
-    lazy private var tenLetterWords: [String] = {
-        generateWordsArray(fromFile: "ten")
-    }()
-    
-    lazy private var elevenLetterWords: [String] = {
-        generateWordsArray(fromFile: "eleven")
-    }()
-    
-    lazy private var twelveLetterWords: [String] = {
-        generateWordsArray(fromFile: "twelve")
-    }()
-    
-    lazy private var thirteenLetterWords: [String] = {
-        generateWordsArray(fromFile: "thirteen")
-    }()
-    
-    lazy private var fourteenLetterWords: [String] = {
-        generateWordsArray(fromFile: "fourteen")
-    }()
-    
-    lazy private var fifteenLetterWords: [String] = {
-        generateWordsArray(fromFile: "fifteen")
-    }()
-    
-    lazy private var sixteenLetterWords: [String] = {
-        generateWordsArray(fromFile: "sixteen")
-    }()
-    
-    lazy private var seventeenLetterWords: [String] = {
-        generateWordsArray(fromFile: "seventeen")
-    }()
-    
-    lazy private var eighteenLetterWords: [String] = {
-        generateWordsArray(fromFile: "eighteen")
-    }()
-    
-    lazy private var greaterThanEighteenLetterWords: [String] = {
-        generateWordsArray(fromFile: "greaterThanEighteen")
-    }()
-
-    // MARK: - Other Properties
+    // MARK: - Properties
     var gameWords: [Word] = []
     
     // MARK: - CRUD Methods
@@ -91,37 +18,53 @@ class WordController {
         let mainWord: String
         switch maxSize {
             case 4:
-                mainWord = fourLetterWords.randomElement()!
+                let randomWord = generateWordsArray(fromFile: "four").randomElement()
+                mainWord = randomWord != nil ? randomWord! : " "
             case 5:
-                mainWord = fiveLetterWords.randomElement()!
+                let randomWord = generateWordsArray(fromFile: "five").randomElement()
+                mainWord = randomWord != nil ? randomWord! : " "
             case 6:
-                mainWord = sixLetterWords.randomElement()!
+                let randomWord = generateWordsArray(fromFile: "six").randomElement()
+                mainWord = randomWord != nil ? randomWord! : " "
             case 7:
-                mainWord = sevenLetterWords.randomElement()!
+                let randomWord = generateWordsArray(fromFile: "seven").randomElement()
+                mainWord = randomWord != nil ? randomWord! : " "
             case 8:
-                mainWord = eightLetterWords.randomElement()!
+                let randomWord = generateWordsArray(fromFile: "eight").randomElement()
+                mainWord = randomWord != nil ? randomWord! : " "
             case 9:
-                mainWord = nineLetterWords.randomElement()!
+                let randomWord = generateWordsArray(fromFile: "nine").randomElement()
+                mainWord = randomWord != nil ? randomWord! : " "
             case 10:
-                mainWord = tenLetterWords.randomElement()!
+                let randomWord = generateWordsArray(fromFile: "ten").randomElement()
+                mainWord = randomWord != nil ? randomWord! : " "
             case 11:
-                mainWord = elevenLetterWords.randomElement()!
+                let randomWord = generateWordsArray(fromFile: "eleven").randomElement()
+                mainWord = randomWord != nil ? randomWord! : " "
             case 12:
-                mainWord = twelveLetterWords.randomElement()!
+                let randomWord = generateWordsArray(fromFile: "twelve").randomElement()
+                mainWord = randomWord != nil ? randomWord! : " "
             case 13:
-                mainWord = thirteenLetterWords.randomElement()!
+                let randomWord = generateWordsArray(fromFile: "thirteen").randomElement()
+                mainWord = randomWord != nil ? randomWord! : " "
             case 14:
-                mainWord = fourteenLetterWords.randomElement()!
+                let randomWord = generateWordsArray(fromFile: "fourteen").randomElement()
+                mainWord = randomWord != nil ? randomWord! : " "
             case 15:
-                mainWord = fifteenLetterWords.randomElement()!
+                let randomWord = generateWordsArray(fromFile: "fifteen").randomElement()
+                mainWord = randomWord != nil ? randomWord! : " "
             case 16:
-                mainWord = sixteenLetterWords.randomElement()!
+                let randomWord = generateWordsArray(fromFile: "sixteen").randomElement()
+                mainWord = randomWord != nil ? randomWord! : " "
             case 17:
-                mainWord = seventeenLetterWords.randomElement()!
+                let randomWord = generateWordsArray(fromFile: "seventeen").randomElement()
+                mainWord = randomWord != nil ? randomWord! : " "
             case 18:
-                mainWord = eighteenLetterWords.randomElement()!
+                let randomWord = generateWordsArray(fromFile: "eighteen").randomElement()
+                mainWord = randomWord != nil ? randomWord! : " "
             default:
-                mainWord = greaterThanEighteenLetterWords.randomElement()!
+                let randomWord = generateWordsArray(fromFile: "greaterThanEighteen").randomElement()
+                mainWord = randomWord != nil ? randomWord! : " "
         }
         let anagramWords = anagrams(maxSize: maxSize, mainWord: mainWord)
         let searchWordsArray = searchWords(anagrams: anagramWords)
@@ -145,102 +88,119 @@ class WordController {
         var anagrams: [String] = []
         let charSet = CharacterSet(charactersIn: mainWord)
         if maxSize >= 3 {
+            let threeLetterWords = generateWordsArray(fromFile: "three")
             for word in threeLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
         if maxSize >= 4 {
+            let fourLetterWords = generateWordsArray(fromFile: "four")
             for word in fourLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
         if maxSize >= 5 {
+            let fiveLetterWords = generateWordsArray(fromFile: "five")
             for word in fiveLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
         if maxSize >= 6 {
+            let sixLetterWords = generateWordsArray(fromFile: "six")
             for word in sixLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
         if maxSize >= 7 {
+            let sevenLetterWords = generateWordsArray(fromFile: "seven")
             for word in sevenLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
         if maxSize >= 8 {
+            let eightLetterWords = generateWordsArray(fromFile: "eight")
             for word in eightLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
         if maxSize >= 9 {
+            let nineLetterWords = generateWordsArray(fromFile: "nine")
             for word in nineLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
         if maxSize >= 10 {
+            let tenLetterWords = generateWordsArray(fromFile: "ten")
             for word in tenLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
         if maxSize >= 11 {
+            let elevenLetterWords = generateWordsArray(fromFile: "eleven")
             for word in elevenLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
         if maxSize >= 12 {
+            let twelveLetterWords = generateWordsArray(fromFile: "twelve")
             for word in twelveLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
         if maxSize >= 13 {
+            let thirteenLetterWords = generateWordsArray(fromFile: "thirteen")
             for word in thirteenLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
         if maxSize >= 14 {
+            let fourteenLetterWords = generateWordsArray(fromFile: "fourteen")
             for word in fourteenLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
         if maxSize >= 15 {
+            let fifteenLetterWords = generateWordsArray(fromFile: "fifteen")
             for word in fifteenLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
         if maxSize >= 16 {
+            let sixteenLetterWords = generateWordsArray(fromFile: "sixteen")
             for word in sixteenLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
         if maxSize >= 17 {
+            let seventeenLetterWords = generateWordsArray(fromFile: "seventeen")
             for word in seventeenLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
         if maxSize >= 18 {
+            let eighteenLetterWords = generateWordsArray(fromFile: "eighteen")
             for word in eighteenLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)
             }
         }
         if maxSize >= 19 {
+            let greaterThanEighteenLetterWords = generateWordsArray(fromFile: "greaterThanEighteen")
             for word in greaterThanEighteenLetterWords where CharacterSet(charactersIn: word).isSubset(of: charSet) {
                 guard let testWord = testAnagramWord(word: word, letterDict: letterDict) else { continue }
                 anagrams.append(testWord)

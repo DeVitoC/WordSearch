@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// A model for all the words used in a  game
 struct Word: Codable, Equatable {
     //var theme: String // TODO: - implement themes
     var mainWord: String
