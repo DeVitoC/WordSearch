@@ -17,7 +17,6 @@ class WordSearchViewController: UIViewController {
         guard let word = word else { return [] }
         return Array(word.mainWord)
     }()
-    private lazy var letterButtons: [UIButton] = []
     private var wordInProgress: String = ""
     private var gameBoard: GameBoard? {
         didSet {
@@ -195,7 +194,7 @@ class WordSearchViewController: UIViewController {
             var wordLabelText = inProgressLabel.text
             wordLabelText?.remove(at: index)
             inProgressLabel.text = wordLabelText
-            // TODO: - finish logic 
+            // TODO: - finish logic
         } else {
             sender.isSelected = true
             guard let letter = sender.titleLabel?.text,
@@ -209,8 +208,10 @@ class WordSearchViewController: UIViewController {
     @objc func resetWord(_ sender: UIButton) {
         wordInProgress = ""
         inProgressLabel.text = ""
-        for button in letterButtons {
-            button.isSelected = false
+        for num in 0...5 {
+            if let button = buttonsCollectionView.cellForItem(at: IndexPath(item: num, section: 0))?.subviews[1] as? UIButton {
+                button.isSelected = false
+            }
         }
     }
 
