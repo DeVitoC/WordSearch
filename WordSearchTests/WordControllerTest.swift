@@ -7,11 +7,18 @@
 //
 
 import XCTest
+@testable import WordSearch
 
 class WordControllerTest: XCTestCase {
 
-    func testExample() {
-        
+    let wordController = WordController()
+
+    func testCreateWord() {
+        let word = wordController.createWord(maxSize: 6)
+        XCTAssert(word.anagrams.count > 0)
+        XCTAssert(word.bonusWords.count > 0)
+        XCTAssert(word.mainWord.count == 6)
+        XCTAssert(word.searchWords.count > 0)
     }
 
 }

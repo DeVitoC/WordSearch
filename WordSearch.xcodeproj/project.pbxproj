@@ -10,6 +10,7 @@
 		E22F5779247EDB8700F1C0A5 /* LetterButtonsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F5778247EDB8700F1C0A5 /* LetterButtonsLayout.swift */; };
 		E22F577B247F64BE00F1C0A5 /* setBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F577A247F64BE00F1C0A5 /* setBackground.swift */; };
 		E22F577D247F655800F1C0A5 /* dave-sBga13mu80c-unsplash.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E22F577C247F655800F1C0A5 /* dave-sBga13mu80c-unsplash.jpg */; };
+		E22F577F2480487800F1C0A5 /* GameBoardControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F577E2480487800F1C0A5 /* GameBoardControllerTests.swift */; };
 		E23E22132470633300AA01E6 /* allLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E23E22122470633300AA01E6 /* allLetterWords.json */; };
 		E25B847B246C5D8600FA3C49 /* WordSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25B847A246C5D8600FA3C49 /* WordSearchViewController.swift */; };
 		E25B8488246C70E500FA3C49 /* WordSearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25B8487246C70E500FA3C49 /* WordSearchTests.swift */; };
@@ -58,6 +59,7 @@
 		E22F5778247EDB8700F1C0A5 /* LetterButtonsLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterButtonsLayout.swift; sourceTree = "<group>"; };
 		E22F577A247F64BE00F1C0A5 /* setBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setBackground.swift; sourceTree = "<group>"; };
 		E22F577C247F655800F1C0A5 /* dave-sBga13mu80c-unsplash.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "dave-sBga13mu80c-unsplash.jpg"; sourceTree = "<group>"; };
+		E22F577E2480487800F1C0A5 /* GameBoardControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardControllerTests.swift; sourceTree = "<group>"; };
 		E23E22122470633300AA01E6 /* allLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = allLetterWords.json; sourceTree = "<group>"; };
 		E25B847A246C5D8600FA3C49 /* WordSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSearchViewController.swift; sourceTree = "<group>"; };
 		E25B8485246C70E500FA3C49 /* WordSearchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WordSearchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,6 +122,7 @@
 				E25B8487246C70E500FA3C49 /* WordSearchTests.swift */,
 				E25B8489246C70E500FA3C49 /* Info.plist */,
 				E25B848F246C712A00FA3C49 /* WordControllerTest.swift */,
+				E22F577E2480487800F1C0A5 /* GameBoardControllerTests.swift */,
 			);
 			path = WordSearchTests;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E22F577F2480487800F1C0A5 /* GameBoardControllerTests.swift in Sources */,
 				E25B8488246C70E500FA3C49 /* WordSearchTests.swift in Sources */,
 				E25B8490246C712A00FA3C49 /* WordControllerTest.swift in Sources */,
 			);

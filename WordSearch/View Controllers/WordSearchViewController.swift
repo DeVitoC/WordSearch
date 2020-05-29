@@ -195,6 +195,7 @@ class WordSearchViewController: UIViewController {
             var wordLabelText = inProgressLabel.text
             wordLabelText?.remove(at: index)
             inProgressLabel.text = wordLabelText
+            // TODO: - finish logic 
         } else {
             sender.isSelected = true
             guard let letter = sender.titleLabel?.text,
