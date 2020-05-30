@@ -32,85 +32,28 @@ class GameBoardController {
         // if axis is true, word is horizontal, otherwise it's vertical
         var axis: Bool = Bool.random()
 
-        // set first word in wordMap based on direction indicated by axis
-        // remove word from temporary searchWords array and toggle axis to alternating direction
-        wordMap = setFirstWordInWordMape(mainWord: gameBoard.word.mainWord, axis: axis, wordMap: wordMap)
+        // set first word in wordMap based on direction indicated by axis and then toggle axis
+        wordMap = setFirstWordInWordMap(mainWord: gameBoard.word.mainWord, axis: axis, wordMap: wordMap)
         axis.toggle()
 
-        // add additional words to wordMap
+        // iterate through searchWords to add additional words to wordMap 
         while 1 <= searchWords.count {
             let word = searchWords[searchWords.count - 1]
             searchWords.remove(at: searchWords.count - 1)
-            let intersectingChar = Int.random(in: 0..<word.count)
 
-            var possibleIntersectionPoints = generateIntersectionPoints(word: word, wordMap: wordMap, axis: axis)
             // randomly choose which letter to intersect and create array of tuples to store possible intersection points
-//            var possibleIntersectionPoints: [(Int, Int)] = []
-
-            // find possible intersection points and store in possibleIntersectionPoints array
-//            possiblePoint: for y in 0..<wordMap.count {
-//                for x in 0..<wordMap.count {
-//                    if wordMap[y][x] != word[intersectingChar] { continue }
-//                    if !axis
-//                        && y == 0
-//                        && wordMap[y + 1][x] == nil {
-//                        possibleIntersectionPoints.append((y, x))
-//                        continue
-//                    } else if axis
-//                        && x == 0
-//                        && wordMap[y][x + 1] == nil {
-//                        possibleIntersectionPoints.append((y, x))
-//                        continue
-//                    }
-//                    if x == 0 || y == 0 { continue possiblePoint }
-//                    if !axis
-//                        && wordMap[y - 1][x] == nil
-//                        && wordMap[y + 1][x] == nil {
-//                        possibleIntersectionPoints.append((y, x))
-//                    } else if axis
-//                        && wordMap[y][x - 1] == nil
-//                        && wordMap[y][x + 1] == nil {
-//                        possibleIntersectionPoints.append((y, x))
-//                    }
-//                }
-//            }
+            let intersectingChar = Int.random(in: 0..<word.count)
+            var possibleIntersectionPoints = generateIntersectionPoints(wordMap: wordMap, axis: axis, intersectingChar: word[intersectingChar])
 
             // iterates through word to attempt to place characters in wordMap
             // probably should be placed in a throwing method
-            intersectionPointLoop: for _ in 0..<possibleIntersectionPoints.count {
+            for _ in 0..<possibleIntersectionPoints.count {
                 let point = possibleIntersectionPoints[possibleIntersectionPoints.count - 1]
                 possibleIntersectionPoints.remove(at: possibleIntersectionPoints.count - 1)
-                if (point.1 < intersectingChar && axis)
-                    || (point.0 < intersectingChar && !axis)
-                    || (wordMap.count - point.1 - 1 < word.count - intersectingChar && axis)
-                    || (wordMap.count - point.0 - 1 < word.count - intersectingChar && !axis) {
+                guard let tempWordMap = addWordsToWordMap(point: point, intersectingChar: intersectingChar, axis: axis, wordMap: wordMap, word: word) else {
                     continue
                 }
-                if axis {
-                    for num in (point.1 - intersectingChar)...(point.1 + word.count - 1 - intersectingChar) {
-                        if (point.1 != num && (wordMap[point.0][num] != nil))
-                            || (point.1 != num && wordMap[point.0 - 1][num] != nil)
-                            || (point.1 != num && wordMap[point.0 + 1][num] != nil) {
-                            continue intersectionPointLoop
-                        }
-                    }
-                    for character in 0..<word.count {
-                        let x = point.1 - intersectingChar + character
-                        wordMap[point.0][x] = word[character]
-                    }
-                } else if !axis {
-                    for num in (point.0 - intersectingChar)...(point.0 + word.count - 1 - intersectingChar) {
-                        if point.0 != num && (wordMap[num][point.1] != nil)
-                            || (point.1 != num && point.0 >= 1 && wordMap[point.0 - 1][num] != nil)
-                            || (point.1 != num && point.0 >= 1 && wordMap[point.0 + 1][num] != nil)  {
-                            continue intersectionPointLoop
-                        }
-                    }
-                    for character in 0..<word.count {
-                        let y = point.0 - intersectingChar + character
-                        wordMap[y][point.1] = word[character]
-                    }
-                }
+                wordMap = tempWordMap
                 axis.toggle()
             }
         }
@@ -183,12 +126,14 @@ class GameBoardController {
         return searchWordsChar
     }
 
-    func setFirstWordInWordMape(mainWord: String, axis: Bool, wordMap: [[Character?]]) -> [[Character?]] {
+    func setFirstWordInWordMap(mainWord: String, axis: Bool, wordMap: [[Character?]]) -> [[Character?]] {
         let mainWord: [Character] = Array.init(mainWord)
         var wordMap = wordMap
         // the x and y values of the first letter of the first word to use for generating wordMap
         let xVal = Int.random(in: 0...mainWord.count)
         let yVal = Int.random(in: 0...mainWord.count)
+
+        // set first word into wordMap starting at (xVal, yVal)
         for charNumber in 0..<mainWord.count {
             if axis {
                 wordMap[yVal][xVal + charNumber] = mainWord[charNumber]
@@ -200,15 +145,13 @@ class GameBoardController {
         return wordMap
     }
 
-    func generateIntersectionPoints(word: [Character], wordMap: [[Character?]], axis: Bool) -> [(Int, Int)] {
-        // randomly choose which letter to intersect and create array of tuples to store possible intersection points
-        let intersectingChar = Int.random(in: 0..<word.count)
+    func generateIntersectionPoints(wordMap: [[Character?]], axis: Bool, intersectingChar: Character) -> [(Int, Int)] {
+        // create array of tuples to store possible intersection points
         var possibleIntersectionPoints: [(Int, Int)] = []
 
         // find possible intersection points and store in possibleIntersectionPoints array
         possiblePoint: for y in 0..<wordMap.count {
-            for x in 0..<wordMap.count {
-                if wordMap[y][x] != word[intersectingChar] { continue }
+            for x in 0..<wordMap.count where wordMap[y][x] == intersectingChar {
                 if !axis
                     && y == 0
                     && wordMap[y + 1][x] == nil {
@@ -220,7 +163,9 @@ class GameBoardController {
                     possibleIntersectionPoints.append((y, x))
                     continue
                 }
+
                 if x == 0 || y == 0 { continue possiblePoint }
+
                 if !axis
                     && wordMap[y - 1][x] == nil
                     && wordMap[y + 1][x] == nil {
@@ -235,8 +180,39 @@ class GameBoardController {
         return possibleIntersectionPoints
     }
 
-    func getPossibleIntersectionPoints(intersectionChar: Int) -> [(Int, Int)] {
-
-        return []
+    func addWordsToWordMap(point: (Int, Int), intersectingChar: Int, axis: Bool, wordMap: [[Character?]], word: [Character]) -> [[Character?]]?{
+        var wordMap = wordMap
+        if (point.1 < intersectingChar && axis)
+            || (point.0 < intersectingChar && !axis)
+            || (wordMap.count - point.1 - 1 < word.count - intersectingChar && axis)
+            || (wordMap.count - point.0 - 1 < word.count - intersectingChar && !axis) {
+            return nil
+        }
+        if axis {
+            for num in (point.1 - intersectingChar)...(point.1 + word.count - 1 - intersectingChar) {
+                if (point.1 != num && (wordMap[point.0][num] != nil))
+                    || (point.1 != num && wordMap[point.0 - 1][num] != nil)
+                    || (point.1 != num && wordMap[point.0 + 1][num] != nil) {
+                    return nil
+                }
+            }
+            for character in 0..<word.count {
+                let x = point.1 - intersectingChar + character
+                wordMap[point.0][x] = word[character]
+            }
+        } else if !axis {
+            for num in (point.0 - intersectingChar)...(point.0 + word.count - 1 - intersectingChar) {
+                if point.0 != num && (wordMap[num][point.1] != nil)
+                    || (point.1 != num && point.0 >= 1 && wordMap[point.0 - 1][num] != nil)
+                    || (point.1 != num && point.0 >= 1 && wordMap[point.0 + 1][num] != nil)  {
+                    return nil
+                }
+            }
+            for character in 0..<word.count {
+                let y = point.0 - intersectingChar + character
+                wordMap[y][point.1] = word[character]
+            }
+        }
+        return wordMap
     }
 }
