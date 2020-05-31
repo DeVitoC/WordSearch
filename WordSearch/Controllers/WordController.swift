@@ -11,7 +11,8 @@ import Foundation
 class WordController {
 
     // MARK: - Properties
-    var gameWords: [Word] = []
+    //var gameWords: [Word] = []
+    var word: Word?
     
     // MARK: - CRUD Methods
     func createWord(maxSize: Int) -> Word {
@@ -67,18 +68,28 @@ class WordController {
                 mainWord = randomWord != nil ? randomWord! : " "
         }
         let anagramWords = anagrams(maxSize: maxSize, mainWord: mainWord)
-        let searchWordsArray = searchWords(anagrams: anagramWords)
-        let bonusWordsArray = bonusWords(searchWords: searchWordsArray, anagrams: anagramWords)
+        //let searchWordsArray = searchWords(anagrams: anagramWords)
+        let searchWordsArray: [String] = []
+        let bonusWordsArray = anagramWords
+        //let bonusWordsArray = bonusWords(searchWords: searchWordsArray, anagrams: anagramWords)
         let newWord = Word(mainWord: mainWord,
                            anagrams: anagramWords,
                            searchWords: searchWordsArray,
                            bonusWords: bonusWordsArray)
-        gameWords.append(newWord)
+        //gameWords.append(newWord)
+        word = newWord
         print("mainword: \(newWord.mainWord), searchwords: \(newWord.searchWords.count), bonuswords: \(newWord.bonusWords.count)")
         return newWord
     }
+
+    func addSearchWord(searchWord: String) {
+        guard let index = word?.bonusWords.firstIndex(of: searchWord) else { return }
+        word?.searchWords.append(searchWord)
+        word?.bonusWords.remove(at: index)
+
+    }
     
-    // MARK: - Helper Methods
+    // MARK: - Private Helper Methods
     
     private func anagrams(maxSize: Int, mainWord: String) -> [String] {
         var letterDict: [Character : Int] = [:]
@@ -236,14 +247,14 @@ class WordController {
         return searchwords
     }
 
-    private func bonusWords(searchWords: [String], anagrams: [String]) -> [String] {
-        var bonusWords: [String] = anagrams
-        for word in searchWords {
-            guard let index = bonusWords.firstIndex(of: word) else { continue }
-            bonusWords.remove(at: index)
-        }
-        return bonusWords
-    }
+//    private func bonusWords(searchWords: [String], anagrams: [String]) -> [String] {
+//        var bonusWords: [String] = anagrams
+//        for word in searchWords {
+//            guard let index = bonusWords.firstIndex(of: word) else { continue }
+//            bonusWords.remove(at: index)
+//        }
+//        return bonusWords
+//    }
 
     private func generateWordsArray(fromFile file: String) -> [String] {
         // temporary variables and filePath setup

@@ -9,7 +9,7 @@
 import Foundation
 
 /// GameBoard model with all the data for play and display for a level
-struct GameBoard {
+class GameBoard {
     var word: Word
     var foundWords: [String]
     var remainingWords: [String]

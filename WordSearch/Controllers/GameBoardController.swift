@@ -27,7 +27,7 @@ class GameBoardController {
         var wordMap: [[Character?]] = populateWordMapWithNil(size: gameBoard.word.mainWord.count)
 
         // create and populate an array of arrays of the characters from the search words
-        var searchWords: [[Character]] = createSearchWordsCharacterArray(searchWords: gameBoard.word.searchWords)
+        let searchWords: [[Character]] = createSearchWordsCharacterArray(searchWords: gameBoard.word.anagrams)
 
         // if axis is true, word is horizontal, otherwise it's vertical
         var axis: Bool = Bool.random()
@@ -37,16 +37,15 @@ class GameBoardController {
         axis.toggle()
 
         // iterate through searchWords to add additional words to wordMap 
-        while 1 <= searchWords.count {
-            let word = searchWords[searchWords.count - 1]
-            searchWords.remove(at: searchWords.count - 1)
+        for word in searchWords  {
+            //let word = searchWords[searchWords.count - 1]
+            //searchWords.remove(at: searchWords.count - 1)
 
             // randomly choose which letter to intersect and create array of tuples to store possible intersection points
             let intersectingChar = Int.random(in: 0..<word.count)
             var possibleIntersectionPoints = generateIntersectionPoints(wordMap: wordMap, axis: axis, intersectingChar: word[intersectingChar])
 
             // iterates through word to attempt to place characters in wordMap
-            // probably should be placed in a throwing method
             for _ in 0..<possibleIntersectionPoints.count {
                 let point = possibleIntersectionPoints[possibleIntersectionPoints.count - 1]
                 possibleIntersectionPoints.remove(at: possibleIntersectionPoints.count - 1)
@@ -55,10 +54,13 @@ class GameBoardController {
                 }
                 wordMap = tempWordMap
                 axis.toggle()
+                let joinedWord = String(word)
+                wordController.addSearchWord(searchWord: joinedWord)
+                break
             }
-        }
-        for row in wordMap {
-            print("\(row[0] ?? "."), \(row[1] ?? "."), \(row[2] ?? "."), \(row[3] ?? "."), \(row[4] ?? "."), \(row[5] ?? "."), \(row[6] ?? "."), \(row[7] ?? "."), \(row[8] ?? ".")\n")
+            if checkWordMapIsFull(wordMap: wordMap, mainWord: gameBoard.word.mainWord) {
+                break
+            }
         }
         return wordMap
     }
@@ -214,5 +216,19 @@ class GameBoardController {
             }
         }
         return wordMap
+    }
+
+    func checkWordMapIsFull(wordMap: [[Character?]], mainWord: String) -> Bool {
+        var numberOfLettersInWordMap: Int = 0
+        let widthOfWordMap = mainWord.count * 2 + 1
+        let numberOfSpacesInWordMap = widthOfWordMap * widthOfWordMap
+        for y in 0..<widthOfWordMap {
+            for x in 0..<widthOfWordMap {
+                if wordMap[y][x] != nil {
+                    numberOfLettersInWordMap += 1
+                }
+            }
+        }
+        return numberOfLettersInWordMap > numberOfSpacesInWordMap/4
     }
 }
