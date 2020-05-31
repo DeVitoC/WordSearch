@@ -84,9 +84,12 @@ class WordController {
 
     func addSearchWord(searchWord: String) {
         guard let index = word?.bonusWords.firstIndex(of: searchWord) else { return }
-        word?.searchWords.append(searchWord)
-        word?.bonusWords.remove(at: index)
-
+        if let isInSearchWords = word?.searchWords.contains(searchWord), !isInSearchWords {
+            word?.searchWords.append(searchWord)
+        }
+        if let isInBonusWords = word?.bonusWords.contains(searchWord), isInBonusWords {
+            word?.bonusWords.remove(at: index)
+        }
     }
     
     // MARK: - Private Helper Methods

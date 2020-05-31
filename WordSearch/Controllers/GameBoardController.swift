@@ -143,7 +143,7 @@ class GameBoardController {
                 wordMap[yVal + charNumber][xVal] = mainWord[charNumber]
             }
         }
-
+        wordController.addSearchWord(searchWord: String(mainWord))
         return wordMap
     }
 
