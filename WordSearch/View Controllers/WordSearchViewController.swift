@@ -12,17 +12,20 @@ class WordSearchViewController: UIViewController {
     
     // MARK: - Properties
     let gameBoardController = GameBoardController()
-    private var word: Word?
+    private var word: Word {
+        guard let word = gameBoardController.wordController.word else { fatalError() }
+        return word
+    }
     lazy var mainWord: [Character] = {
-        guard let word = word else { return [] }
+        //guard let word = word else { return [] }
         return Array(word.mainWord)
     }()
     private var wordInProgress: String = ""
-    private var gameBoard: GameBoard? {
-        didSet {
-            word = gameBoard?.word
-        }
-    }
+    private var gameBoard: GameBoard? //{
+//        didSet {
+//            word = gameBoard?.word
+//        }
+//    }
     private var wordMap: [[Character?]] = [] {
         didSet {
             updateViews()
@@ -43,6 +46,7 @@ class WordSearchViewController: UIViewController {
         if let gameBoard = gameBoard {
             wordMap = gameBoardController.generateWordMap(gameBoard: gameBoard)
         }
+        print("mainword: \(word.mainWord), searchwords: \(word.searchWords.count), bonuswords: \(word.bonusWords.count)")
     }
 
     private func updateViews() {
@@ -53,7 +57,7 @@ class WordSearchViewController: UIViewController {
     // MARK: - Set Up Methods
     /// Generates a grid of UILabels inside stacked UIStackViews for a map of 2 times the length of the primary word plus 1
     private func generateGameBoardMap() {
-        guard let word = word else { return }
+        //guard let word = word else { return }
 
         // Set up main UIStackView - "gameBoardMapStackView"
         self.view.addSubview(gameBoardMapStackView)
@@ -217,7 +221,7 @@ class WordSearchViewController: UIViewController {
 
     /// Defines the action taken when the check word button is tapped
     @objc func checkWord(_ sender: UIButton) {
-        guard let word = word else { return }
+        //guard let word = word else { return }
         if word.searchWords.contains(wordInProgress.lowercased()) {
             print("Success: \(wordInProgress) is in search words")
         } else if word.bonusWords.contains(wordInProgress.lowercased()) {
