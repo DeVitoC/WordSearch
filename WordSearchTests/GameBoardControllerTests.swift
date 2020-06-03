@@ -65,14 +65,15 @@ class GameBoardControllerTests: XCTestCase {
     }
 
     func testCreateGameboard() {
-        let gameBoard = gameBoardController.createGameBoard(level: 201)
-        XCTAssert(gameBoard.foundWords.count == 0)
-        XCTAssert(gameBoard.remainingWords.count > 0)
-        XCTAssert(gameBoard.word.mainWord.count == 6)
-        XCTAssert(gameBoard.remainingWords.contains(gameBoard.word.mainWord))
-        XCTAssert(gameBoard.word.anagrams.count > 0)
-        guard let word = gameBoardController.wordController.word else { XCTFail(); fatalError() }
-        XCTAssert(word.searchWords.count > 0)
-        XCTAssert(gameBoard.word.bonusWords.count > 0)
+        for _ in 0...10 {
+            let gameBoard = gameBoardController.createGameBoard(level: 201)
+            XCTAssert(gameBoard.foundWords.count == 0)
+            XCTAssert(gameBoard.remainingWords.count > 0)
+            XCTAssert(gameBoard.word.mainWord.count == 6)
+            XCTAssert(gameBoard.remainingWords.contains(gameBoard.word.mainWord))
+            XCTAssert(gameBoard.word.anagrams.count > 0)
+            XCTAssert(gameBoard.word.searchWords.count == 0)
+            XCTAssert(gameBoard.word.bonusWords.count > 0)
+        }
     }
 }
