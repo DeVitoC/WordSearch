@@ -11,11 +11,13 @@ import Foundation
 class GameBoardController {
     // MARK: - Properties
     let wordController = WordController()
+    var word: Word?
 
     // MARK: - CRUD Methods
     func createGameBoard(level: Int) -> GameBoard {
         let gameSize = gameSizeForLevel(level: level)
-        let word = wordController.createWord(maxSize: gameSize)
+        word = wordController.createWord(maxSize: gameSize)
+        guard let word = word else { fatalError() }
         let gameBoard = GameBoard(word: word)
         return gameBoard
     }
@@ -55,7 +57,7 @@ class GameBoardController {
                 wordMap = tempWordMap
                 axis.toggle()
                 let joinedWord = String(word)
-                wordController.addSearchWord(searchWord: joinedWord)
+                addSearchWord(searchWord: joinedWord)
                 break
             }
             if checkWordMapIsFull(wordMap: wordMap, mainWord: gameBoard.word.mainWord) {
@@ -132,8 +134,8 @@ class GameBoardController {
         let mainWord: [Character] = Array.init(mainWord)
         var wordMap = wordMap
         // the x and y values of the first letter of the first word to use for generating wordMap
-        let xVal = Int.random(in: 0...mainWord.count)
-        let yVal = Int.random(in: 0...mainWord.count)
+        let xVal = Int.random(in: 0...(axis ? mainWord.count : mainWord.count*2))
+        let yVal = Int.random(in: 0...(!axis ? mainWord.count : mainWord.count*2))
 
         // set first word into wordMap starting at (xVal, yVal)
         for charNumber in 0..<mainWord.count {
@@ -143,8 +145,28 @@ class GameBoardController {
                 wordMap[yVal + charNumber][xVal] = mainWord[charNumber]
             }
         }
-        wordController.addSearchWord(searchWord: String(mainWord))
+
+
+//        var searchWord = String(mainWord)
+//        guard let index = word?.bonusWords.firstIndex(of: searchWord) else { fatalError() }
+//        if let isInSearchWords = word?.searchWords.contains(searchWord), !isInSearchWords {
+//            word?.searchWords.append(searchWord)
+//        }
+//        if let isInBonusWords = word?.bonusWords.contains(searchWord), isInBonusWords {
+//            word?.bonusWords.remove(at: index)
+//        }
+        addSearchWord(searchWord: String(mainWord))
         return wordMap
+    }
+
+    func addSearchWord(searchWord: String) {
+        guard let index = word?.bonusWords.firstIndex(of: searchWord) else { return }
+        if let isInSearchWords = word?.searchWords.contains(searchWord), !isInSearchWords {
+            word?.searchWords.append(searchWord)
+        }
+        if let isInBonusWords = word?.bonusWords.contains(searchWord), isInBonusWords {
+            word?.bonusWords.remove(at: index)
+        }
     }
 
     func generateIntersectionPoints(wordMap: [[Character?]], axis: Bool, intersectingChar: Character) -> [(Int, Int)] {
@@ -170,11 +192,11 @@ class GameBoardController {
 
                 if !axis
                     && wordMap[y - 1][x] == nil
-                    && wordMap[y + 1][x] == nil {
+                    && wordMap[(y >= (wordMap.count - 1) ? y - 1 : y + 1)][x] == nil {
                     possibleIntersectionPoints.append((y, x))
                 } else if axis
                     && wordMap[y][x - 1] == nil
-                    && wordMap[y][x + 1] == nil {
+                    && wordMap[y][(x >= (wordMap.count - 1) ? x - 1 : x + 1)] == nil {
                     possibleIntersectionPoints.append((y, x))
                 }
             }

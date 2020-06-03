@@ -49,7 +49,7 @@ class GameBoardControllerTests: XCTestCase {
     }
 
     func testGenerateWordmap() {
-        let gameBoard = GameBoard(word: Word(mainWord: "fallow", anagrams: ["loaf", "allow", "foal", "fall", "wall", "wolf", "flow", "flaw", "awl", "low", "law", "fowl", ], searchWords: ["loaf", "allow", "foal", "fall", "wall", "wolf", "flow", "flaw", "awl", "low", "law"], bonusWords: ["fowl"]))
+        let gameBoard = GameBoard(word: Word(mainWord: "fallow", anagrams: ["loaf", "allow", "foal", "fall", "wall", "wolf", "flow", "flaw", "awl", "low", "law", "fowl", ], searchWords: [], bonusWords: ["fowl", "loaf", "allow", "foal", "fall", "wall", "wolf", "flow", "flaw", "awl", "low", "law"]))
         let wordMap = gameBoardController.generateWordMap(gameBoard: gameBoard)
         var numberOfLettersInWordMap: Int = 0
         let widthOfWordMap = gameBoard.word.mainWord.count * 2 + 1
@@ -71,7 +71,8 @@ class GameBoardControllerTests: XCTestCase {
         XCTAssert(gameBoard.word.mainWord.count == 6)
         XCTAssert(gameBoard.remainingWords.contains(gameBoard.word.mainWord))
         XCTAssert(gameBoard.word.anagrams.count > 0)
-        XCTAssert(gameBoard.word.searchWords.count > 0)
+        guard let word = gameBoardController.wordController.word else { XCTFail(); fatalError() }
+        XCTAssert(word.searchWords.count > 0)
         XCTAssert(gameBoard.word.bonusWords.count > 0)
     }
 }
