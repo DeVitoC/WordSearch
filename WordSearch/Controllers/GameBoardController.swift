@@ -28,18 +28,19 @@ class GameBoardController {
         // Populate wordMap with nil as a starter
         var wordMap: [[Character?]] = populateWordMapWithNil(size: gameBoard.word.mainWord.count)
 
-        // create and populate an array of arrays of the characters from the search words
-        let searchWords: [[Character]] = createSearchWordsCharacterArray(searchWords: gameBoard.word.anagrams)
-
         // if axis is true, word is horizontal, otherwise it's vertical
         var axis: Bool = Bool.random()
 
         // set first word in wordMap based on direction indicated by axis and then toggle axis
         wordMap = setFirstWordInWordMap(mainWord: gameBoard.word.mainWord, axis: axis, wordMap: wordMap)
+        addSearchWord(searchWord: gameBoard.word.mainWord)
         axis.toggle()
 
         for _ in 0...5 {
-            wordMap = getWordsToAddToMap(searchWords: searchWords, wordMap: wordMap, axis: axis, gameBoard: gameBoard)
+            // create and populate an array of arrays of the characters from the search words
+            var searchWords: [[Character]] = createSearchWordsCharacterArray(searchWords: gameBoard.word.bonusWords)
+
+            (wordMap, axis, searchWords) = getWordsToAddToMap(searchWords: searchWords, wordMap: wordMap, axis: axis, gameBoard: gameBoard)
             if checkWordMapIsFull(wordMap: wordMap, mainWord: gameBoard.word.mainWord) {
                 break
             }
@@ -140,10 +141,13 @@ class GameBoardController {
         }
     }
 
-    func getWordsToAddToMap(searchWords: [[Character]], wordMap: [[Character?]], axis: Bool, gameBoard: GameBoard) -> [[Character?]] {
+    func getWordsToAddToMap(searchWords: [[Character]], wordMap: [[Character?]], axis: Bool, gameBoard: GameBoard) -> ([[Character?]], Bool, [[Character]]) {
         var wordMap = wordMap
         var axis = axis
-        for word in searchWords  {
+        var searchWordsVar = searchWords
+        for _ in 0..<searchWords.count  {
+            searchWordsVar.shuffle()
+            guard let word = searchWordsVar.popLast() else { fatalError() }
             // randomly choose which letters to intersect and create array of tuples to store possible intersection points
             let intersectingChars: [Int] = generateIntersectingChars(word: word)
             let possibleIntersectionPoints = generateIntersectionPoints(wordMap: wordMap, axis: axis, intersectingChars: intersectingChars, word: word)
@@ -170,7 +174,7 @@ class GameBoardController {
             }
         }
 
-        return wordMap
+        return (wordMap, axis, searchWords)
     }
 
     func generateIntersectingChars(word: [Character]) -> [Int] {
