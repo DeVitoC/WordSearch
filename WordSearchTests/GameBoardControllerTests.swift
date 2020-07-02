@@ -51,7 +51,7 @@ class GameBoardControllerTests: XCTestCase {
     func testGenerateWordmap() {
         for _ in 0...10 {
             let gameBoard = GameBoard(word: Word(mainWord: "fallow", anagrams: ["loaf", "allow", "foal", "fall", "wall", "wolf", "flow", "flaw", "awl", "low", "law", "fowl", ], searchWords: [], bonusWords: ["fowl", "loaf", "allow", "foal", "fall", "wall", "wolf", "flow", "flaw", "awl", "low", "law"]))
-            let wordMap = gameBoardController.generateWordMap(gameBoard: gameBoard)
+            let wordMap = gameBoardController.createWordMap(gameBoard: gameBoard)
             var numberOfLettersInWordMap: Int = 0
             let widthOfWordMap = gameBoard.word.mainWord.count * 2 + 1
             let numberOfSpacesInWordMap = widthOfWordMap * widthOfWordMap

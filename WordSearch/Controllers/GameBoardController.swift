@@ -10,46 +10,45 @@ import Foundation
 
 class GameBoardController {
     // MARK: - Properties
-    let wordController = WordController()
-    var word: Word?
+    let wordController = WordController() // An object of the WordController class to create a Word object
+    var word: Word? // An optional to assign the created Word object to. Assigned in createGameBoard method.
 
     // MARK: - CRUD Methods
+
+    // Checked - looks good
     func createGameBoard(level: Int) -> GameBoard {
-        let gameSize = gameSizeForLevel(level: level)
-        word = wordController.createWord(maxSize: gameSize)
-        guard let word = word else { fatalError() }
-        let gameBoard = GameBoard(word: word)
+        let gameSize = gameSizeForLevel(level: level) // Determine size of word based on level
+        word = wordController.createWord(maxSize: gameSize) // Create Word object based on gameSize
+        guard let word = word else { fatalError() } // Unwrap word
+        let gameBoard = GameBoard(word: word) // Create a GameBoard object with the Word object
         return gameBoard
     }
 
-    // TODO: - Possibly move this method to another class if method gets too complicated.
-    // TODO: - Definitely refactor into smaller chunks of code if possible.
-    func generateWordMap(gameBoard: GameBoard) -> [[Character?]] {
-        // Populate wordMap with nil as a starter
-        var wordMap: [[Character?]] = populateWordMapWithNil(size: gameBoard.word.mainWord.count)
+    func createWordMap(gameBoard: GameBoard) -> [[Character?]] {
+        var wordMap: [[Character?]] = populateWordMapWithNil(size: gameBoard.word.mainWord.count) // Populate wordMap with nil
+        var axis: Bool = Bool.random() // if axis is true, word is horizontal, otherwise it's vertical
 
-        // if axis is true, word is horizontal, otherwise it's vertical
-        var axis: Bool = Bool.random()
+        wordMap = setFirstWordInWordMap(mainWord: gameBoard.word.mainWord, axis: axis, wordMap: wordMap) // Set mainword as first word in wordmap
+        addSearchWord(searchWord: gameBoard.word.mainWord) // Add mainword to searchWords and remove from bonusWords
+        axis.toggle() // Alternates axis after first word is set in word map
 
-        // set first word in wordMap based on direction indicated by axis and then toggle axis
-        wordMap = setFirstWordInWordMap(mainWord: gameBoard.word.mainWord, axis: axis, wordMap: wordMap)
-        addSearchWord(searchWord: gameBoard.word.mainWord)
-        axis.toggle()
-
-        for _ in 0...5 {
+        for _ in 0...5 { // Iterates 6 times through to attempt to create a full gameBoard
             // create and populate an array of arrays of the characters from the search words
             var searchWords: [[Character]] = createSearchWordsCharacterArray(searchWords: gameBoard.word.bonusWords)
 
             (wordMap, axis, searchWords) = getWordsToAddToMap(searchWords: searchWords, wordMap: wordMap, axis: axis, gameBoard: gameBoard)
             if checkWordMapIsFull(wordMap: wordMap, mainWord: gameBoard.word.mainWord) {
-                break
+                break // If checkWordMapIsFull returns true (i.e. wordMap has enough words) break loop and return wordmap
             }
         }
         return wordMap
     }
 
     // MARK: - Helper Methods
+
+    // Checked - looks good
     func gameSizeForLevel(level: Int) -> Int {
+        // Return a max word size based on level
         switch level {
             case 1...100:
                 return 4
@@ -86,6 +85,7 @@ class GameBoardController {
         }
     }
 
+    // Checked - looks good
     func populateWordMapWithNil(size: Int) -> [[Character?]] {
         var wordMap: [[Character?]] = [[]]
         for array in 0...size * 2 {
@@ -100,6 +100,7 @@ class GameBoardController {
         return wordMap
     }
 
+    // Checked - looks good
     func createSearchWordsCharacterArray(searchWords: [String]) -> [[Character]] {
         var searchWordsChar: [[Character]] = [[]]
         for word in searchWords {
@@ -111,12 +112,14 @@ class GameBoardController {
         return searchWordsChar
     }
 
+    // Checked - looks good
     func setFirstWordInWordMap(mainWord: String, axis: Bool, wordMap: [[Character?]]) -> [[Character?]] {
         let mainWord: [Character] = Array.init(mainWord)
         var wordMap = wordMap
+        let mapSize = wordMap.count
         // the x and y values of the first letter of the first word to use for generating wordMap
-        let xVal = Int.random(in: 2...(axis ? mainWord.count : mainWord.count*2))
-        let yVal = Int.random(in: 2...(!axis ? mainWord.count : mainWord.count*2))
+        let xVal = Int.random(in: mapSize/5...(axis ? mainWord.count : (mainWord.count*2 - mapSize/5)))
+        let yVal = Int.random(in: mapSize/5...(!axis ? mainWord.count : (mainWord.count*2 - mapSize/5)))
 
         // set first word into wordMap starting at (xVal, yVal)
         for charNumber in 0..<mainWord.count {
@@ -131,6 +134,7 @@ class GameBoardController {
         return wordMap
     }
 
+    // Checked - looks good
     func addSearchWord(searchWord: String) {
         guard let index = word?.bonusWords.firstIndex(of: searchWord) else { return }
         if let isInSearchWords = word?.searchWords.contains(searchWord), !isInSearchWords {
@@ -141,42 +145,41 @@ class GameBoardController {
         }
     }
 
+    // Checked - looks good
     func getWordsToAddToMap(searchWords: [[Character]], wordMap: [[Character?]], axis: Bool, gameBoard: GameBoard) -> ([[Character?]], Bool, [[Character]]) {
         var wordMap = wordMap
         var axis = axis
         var searchWordsVar = searchWords
-        for _ in 0..<searchWords.count  {
-            searchWordsVar.shuffle()
-            guard let word = searchWordsVar.popLast() else { fatalError() }
+        words: for _ in 0..<searchWords.count  { // Iterate through as many words are there are in searchWords
+            searchWordsVar.shuffle() // Shuffle words to randomize the order words are checked
+            guard let word = searchWordsVar.popLast() else { fatalError() } // Remove a word from searchWordsVar to try to add to wordMap
             // randomly choose which letters to intersect and create array of tuples to store possible intersection points
-            let intersectingChars: [Int] = generateIntersectingChars(word: word)
-            let possibleIntersectionPoints = generateIntersectionPoints(wordMap: wordMap, axis: axis, intersectingChars: intersectingChars, word: word)
+            let intersectingChars: [Int] = generateIntersectingChars(word: word) // Generate 3 chars from the word to use as possible anchors
+            let possibleIntersectionPoints = generateIntersectionPoints(wordMap: wordMap, axis: axis, intersectingChars: intersectingChars, word: word) // generates a list of possible points on the wordMap where word might intersect - needs to be examined again
 
             // iterates through word to attempt to place characters in wordMap
-            for (charValue, points) in possibleIntersectionPoints {
-                var points = points
-                for _ in 0..<points.count {
-                    let point = points[points.count - 1]
-                    points.remove(at: points.count - 1)
-                    guard checkWordFits(point: point, intersectingChar: charValue, axis: axis, wordMap: wordMap, word: word),
-                        let tempWordMap = addWordsToWordMap(point: point, intersectingChar: charValue, axis: axis, wordMap: wordMap, word: word) else {
-                            continue
+            possiblePointsLoop: for (charValue, points) in possibleIntersectionPoints { // Iterate through the possible intersection points to test if word will fit, seperate
+                var points = points // assign constant points to a var
+                for _ in 0..<points.count { // iterate through points
+                    let point = points[points.count - 1] // set point to the last point in the set
+                    points.remove(at: points.count - 1) // remove last point from set
+                    if checkWordFits(point: point, intersectingChar: charValue, axis: axis, wordMap: wordMap, word: word) { // check if the word fits at the intersection point
+                        wordMap = addWordsToWordMap(point: point, intersectingChar: charValue, axis: axis, wordMap: wordMap, word: word) // if word fits, add to word map
+                        axis.toggle() // toggle axis - possibly add both directions to intersection point and eliminate this
+                        let joinedWord = String(word)
+                        addSearchWord(searchWord: joinedWord)
+                        if checkWordMapIsFull(wordMap: wordMap, mainWord: gameBoard.word.mainWord) { // if word is added, check if it fills wordmap criteria
+                            break words
+                        }
+                        break possiblePointsLoop // if word fits, stop checking points and continue to next word
                     }
-                    wordMap = tempWordMap
-                    axis.toggle()
-                    let joinedWord = String(word)
-                    addSearchWord(searchWord: joinedWord)
-                    break
-                }
-                if checkWordMapIsFull(wordMap: wordMap, mainWord: gameBoard.word.mainWord) {
-                    break
                 }
             }
         }
-
         return (wordMap, axis, searchWords)
     }
 
+    // Checked - looks good
     func generateIntersectingChars(word: [Character]) -> [Int] {
         var intersectingChars: [Int] = []
         var tempRandomNumberArray: [Int] = []
@@ -231,7 +234,7 @@ class GameBoardController {
                            intersectingChar: Int,
                            axis: Bool,
                            wordMap: [[Character?]],
-                           word: [Character]) -> [[Character?]]?{
+                           word: [Character]) -> [[Character?]]{
 
         var wordMap = wordMap
         let rangeStart = axis ? (point.1 - intersectingChar) : (point.0 - intersectingChar)
@@ -244,40 +247,10 @@ class GameBoardController {
                 wordMap[rangeStart + y][point.1] = word[y]
             }
         }
-//        if (point.1 < intersectingChar && axis)
-//            || (point.0 < intersectingChar && !axis)
-//            || (wordMap.count - point.1 - 1 < word.count - intersectingChar && axis)
-//            || (wordMap.count - point.0 - 1 < word.count - intersectingChar && !axis) {
-//            return nil
-//        }
-//        if axis {
-//            for num in (point.1 - intersectingChar)...(point.1 + word.count - 1 - intersectingChar) {
-//                if (point.1 != num && (wordMap[point.0][num] != nil))
-//                    || (point.1 != num && wordMap[point.0 - 1][num] != nil)
-//                    || (point.1 != num && wordMap[point.0 + 1][num] != nil) {
-//                    return nil
-//                }
-//            }
-//            for character in 0..<word.count {
-//                let x = point.1 - intersectingChar + character
-//                wordMap[point.0][x] = word[character]
-//            }
-//        } else if !axis {
-//            for num in (point.0 - intersectingChar)...(point.0 + word.count - 1 - intersectingChar) {
-//                if point.0 != num && (wordMap[num][point.1] != nil)
-//                    || (point.1 != num && point.0 >= 1 && wordMap[point.0 - 1][num] != nil)
-//                    || (point.1 != num && point.0 >= 1 && wordMap[point.0 + 1][num] != nil)  {
-//                    return nil
-//                }
-//            }
-//            for character in 0..<word.count {
-//                let y = point.0 - intersectingChar + character
-//                wordMap[y][point.1] = word[character]
-//            }
-//        }
         return wordMap
     }
 
+    // Checked - looks good
     func checkWordMapIsFull(wordMap: [[Character?]],
                             mainWord: String) -> Bool {
         var numberOfLettersInWordMap: Int = 0
@@ -290,8 +263,9 @@ class GameBoardController {
                 }
             }
         }
-        return numberOfLettersInWordMap > numberOfSpacesInWordMap/4
+        return numberOfLettersInWordMap > numberOfSpacesInWordMap/5
     }
+
 
     func checkWordFits(point: (Int, Int),
                              intersectingChar: Int,

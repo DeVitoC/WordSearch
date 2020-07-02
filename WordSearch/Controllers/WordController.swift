@@ -256,7 +256,6 @@ class WordController {
         for (key, _) in decodedDictionary {
             wordsArray.append(key)
         }
-
         return wordsArray
     }
 }

@@ -40,7 +40,7 @@ class WordSearchViewController: UIViewController {
         buttonsCollectionView.delegate = self
         gameBoard = gameBoardController.createGameBoard(level: 201)
         if let gameBoard = gameBoard {
-            wordMap = gameBoardController.generateWordMap(gameBoard: gameBoard)
+            wordMap = gameBoardController.createWordMap(gameBoard: gameBoard)
         }
         print("mainword: \(word.mainWord), searchwords: \(word.searchWords.count), bonuswords: \(word.bonusWords.count)")
     }

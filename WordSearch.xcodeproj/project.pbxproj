@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E219BD3624ADC128007E8F2C /* GameBoardControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219BD3524ADC128007E8F2C /* GameBoardControllerTest.swift */; };
+		E219BD3824ADC635007E8F2C /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219BD3724ADC635007E8F2C /* Graph.swift */; };
 		E22F5779247EDB8700F1C0A5 /* LetterButtonsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F5778247EDB8700F1C0A5 /* LetterButtonsLayout.swift */; };
 		E22F577B247F64BE00F1C0A5 /* setBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F577A247F64BE00F1C0A5 /* setBackground.swift */; };
 		E22F577D247F655800F1C0A5 /* dave-sBga13mu80c-unsplash.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E22F577C247F655800F1C0A5 /* dave-sBga13mu80c-unsplash.jpg */; };
@@ -56,6 +58,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E219BD3524ADC128007E8F2C /* GameBoardControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardControllerTest.swift; sourceTree = "<group>"; };
+		E219BD3724ADC635007E8F2C /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		E22F5778247EDB8700F1C0A5 /* LetterButtonsLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterButtonsLayout.swift; sourceTree = "<group>"; };
 		E22F577A247F64BE00F1C0A5 /* setBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setBackground.swift; sourceTree = "<group>"; };
 		E22F577C247F655800F1C0A5 /* dave-sBga13mu80c-unsplash.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "dave-sBga13mu80c-unsplash.jpg"; sourceTree = "<group>"; };
@@ -213,6 +217,7 @@
 			children = (
 				E2E3DFB02467ED8D0049235E /* WordController.swift */,
 				E2EE235524739288009FFEC3 /* GameBoardController.swift */,
+				E219BD3524ADC128007E8F2C /* GameBoardControllerTest.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -230,6 +235,7 @@
 			children = (
 				E2E3DFAE2467EA590049235E /* Word.swift */,
 				E2EE23572473944F009FFEC3 /* GameBoard.swift */,
+				E219BD3724ADC635007E8F2C /* Graph.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -365,11 +371,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2E3DF962467E98E0049235E /* AppDelegate.swift in Sources */,
+				E219BD3824ADC635007E8F2C /* Graph.swift in Sources */,
 				E2E3DF982467E98E0049235E /* SceneDelegate.swift in Sources */,
 				E2E3DFAF2467EA590049235E /* Word.swift in Sources */,
 				E2E3DFB12467ED8D0049235E /* WordController.swift in Sources */,
 				E2EE23582473944F009FFEC3 /* GameBoard.swift in Sources */,
 				E25B847B246C5D8600FA3C49 /* WordSearchViewController.swift in Sources */,
+				E219BD3624ADC128007E8F2C /* GameBoardControllerTest.swift in Sources */,
 				E280F7A024691A97000CBEA4 /* MockData.swift in Sources */,
 				E22F5779247EDB8700F1C0A5 /* LetterButtonsLayout.swift in Sources */,
 				E2EE235624739288009FFEC3 /* GameBoardController.swift in Sources */,
