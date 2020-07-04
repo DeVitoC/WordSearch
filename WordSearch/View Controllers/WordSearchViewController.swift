@@ -12,6 +12,7 @@ class WordSearchViewController: UIViewController {
     
     // MARK: - Properties
     let gameBoardController = GameBoardController()
+    let gameBoardControllerTest = GameBoardControllerTest()
     private var word: Word {
         guard let word = gameBoardController.word else { fatalError() }
         return word
@@ -91,12 +92,14 @@ class WordSearchViewController: UIViewController {
 
     /// Populates Game Board Map with values from wordMap
     private func populateGameBoardMap() {
+//        guard let wordMap = wordMap else { return }
         for y in 0..<gameBoardMapStackView.arrangedSubviews.count {
             guard let stack = gameBoardMapStackView.arrangedSubviews[y] as? UIStackView else { continue }
             for x in 0..<stack.arrangedSubviews.count {
+                // TODO: - calculate position in 2d array based on position in wordMap
                 guard let label = stack.arrangedSubviews[x] as? UILabel else { continue }
-                let char: String = String(wordMap[y][x] ?? " ")
-                label.text = char
+//                let char: String = String(wordMap.getValue(coordinate: Coordinate(x: 0, y: 0)))
+//                label.text = char
             }
         }
     }

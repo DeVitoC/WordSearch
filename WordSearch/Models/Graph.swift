@@ -8,21 +8,33 @@
 
 import Foundation
 
-class Graph {
+class LetterMap {
     var head: Node
     var tail: Node
     var length: Int
     var side: Int
+    var values: [Character : [(Int, Int)]]
+    var minX: Int
+    var minY: Int
+    var maxX: Int
+    var maxY: Int
 
     init(node: Node, side: Int) {
         self.head = node
         self.tail = node
         self.length = 1
         self.side = side
+        self.values = [node.value : [(1, 1)]]
+        self.minX = 1
+        self.minY = 1
+        self.maxX = 1
+        self.maxY = 1
     }
 
     func addToTail(value: Character) {
-        let node = Node()
+        let xNode = length % side == 0 ? 1 : tail.x + 1
+        let yNode = length % side == 0 ? tail.y + 1 : tail.y
+        let node = Node(value: value, x: <#T##Int#>, y: <#T##Int#>)
         node.value = value
 
         if length % side != 0 {
@@ -49,6 +61,22 @@ class Graph {
         length += 1
     }
 
+    func add(node: Node, before: Node) {
+
+    }
+
+    func add(node: Node, after: Node) {
+
+    }
+
+    func add(node: Node, above: Node) {
+
+    }
+
+    func add(node: Node, below: Node) {
+
+    }
+
     func getVelue(x: Int, y: Int) {
         if x > side || y > side { fatalError("No node at that position") }
         var searchNode: Node = head
@@ -62,14 +90,22 @@ class Graph {
 }
 
 class Node {
-    var value: Character = "0"
+    var value: Character
     var n: Node?
     var s: Node?
     var e: Node?
     var w: Node?
+    let x: Int
+    let y: Int
+
+    init(value: Character = "0", x: Int, y: Int) {
+        self.value = value
+        self.x = x
+        self.y = y
+    }
 }
 
-extension Graph: Sequence, IteratorProtocol {
+extension LetterMap: Sequence, IteratorProtocol {
     var count: Int {
         length
     }

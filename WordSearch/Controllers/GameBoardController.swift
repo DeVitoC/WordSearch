@@ -45,8 +45,6 @@ class GameBoardController {
     }
 
     // MARK: - Helper Methods
-
-    // Checked - looks good
     func gameSizeForLevel(level: Int) -> Int {
         // Return a max word size based on level
         switch level {
@@ -85,7 +83,6 @@ class GameBoardController {
         }
     }
 
-    // Checked - looks good
     func populateWordMapWithNil(size: Int) -> [[Character?]] {
         var wordMap: [[Character?]] = [[]]
         for array in 0...size * 2 {
@@ -100,7 +97,6 @@ class GameBoardController {
         return wordMap
     }
 
-    // Checked - looks good
     func createSearchWordsCharacterArray(searchWords: [String]) -> [[Character]] {
         var searchWordsChar: [[Character]] = [[]]
         for word in searchWords {
@@ -112,7 +108,6 @@ class GameBoardController {
         return searchWordsChar
     }
 
-    // Checked - looks good
     func setFirstWordInWordMap(mainWord: String, axis: Bool, wordMap: [[Character?]]) -> [[Character?]] {
         let mainWord: [Character] = Array.init(mainWord)
         var wordMap = wordMap
@@ -134,7 +129,6 @@ class GameBoardController {
         return wordMap
     }
 
-    // Checked - looks good
     func addSearchWord(searchWord: String) {
         guard let index = word?.bonusWords.firstIndex(of: searchWord) else { return }
         if let isInSearchWords = word?.searchWords.contains(searchWord), !isInSearchWords {
@@ -145,7 +139,6 @@ class GameBoardController {
         }
     }
 
-    // Checked - looks good
     func getWordsToAddToMap(searchWords: [[Character]], wordMap: [[Character?]], axis: Bool, gameBoard: GameBoard) -> ([[Character?]], Bool, [[Character]]) {
         var wordMap = wordMap
         var axis = axis

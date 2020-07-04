@@ -22,8 +22,19 @@ class GameBoardControllerTest {
         return gameBoard
     }
 
-    func createWordMap(gameBoard: GameBoard) {
-        var wordMap: Graph
+    func createWordMap(gameBoard: GameBoard) -> LetterMap {
+        var wordMap: LetterMap
+
+        wordMap = setFirstWordInWordMap(mainWord: gameBoard.word.mainWord)
+        addSearchWord(searchWord: gameBoard.word.mainWord)
+
+        // If needed this is where I would add a for loop to check all words several times
+        let searchWords: [[Character]] = createSearchWordsArray(searchWords: gameBoard.word.bonusWords)
+        // Check each word in searchWords
+        addWordsToMapIfFit(searchWords: searchWords, wordMap: wordMap, gameBoard: gameBoard)
+        // Check if map is full
+
+        return wordMap
     }
 
     // Mark: - Helper Methods
@@ -62,6 +73,56 @@ class GameBoardControllerTest {
                 return 18
             default:
                 return 19
+        }
+    }
+
+    func setFirstWordInWordMap(mainWord: String) -> LetterMap {
+        let mainWord: [Character] = .init(mainWord)
+        let axis: Bool = Bool.random()
+        let direction: Direction = axis ? .after : .below
+        let wordMap = LetterMap(word: mainWord, direction: direction)
+
+        return wordMap
+    }
+
+    func addSearchWord(searchWord: String) {
+        guard let index = word?.bonusWords.firstIndex(of: searchWord) else { return }
+        if let isInSearchWords = word?.searchWords.contains(searchWord), !isInSearchWords {
+            word?.searchWords.append(searchWord)
+        }
+        if let isInBonusWords = word?.bonusWords.contains(searchWord), isInBonusWords {
+            word?.bonusWords.remove(at: index)
+        }
+    }
+
+    func createSearchWordsArray(searchWords: [String]) -> [[Character]] {
+        var searchWordsChar: [[Character]] = [[]]
+        for word in searchWords {
+            let array: [Character] = Array(word)
+            searchWordsChar.append(array)
+        }
+        searchWordsChar.remove(at: 0)
+
+        return searchWordsChar
+    }
+
+    func addWordsToMapIfFit(searchWords: [[Character]], wordMap: LetterMap, gameBoard: GameBoard) {
+        //var wordMap = wordMap
+        var searchWordsVar = searchWords
+        var searchWordsCount = 1
+        for _ in 0..<searchWords.count {
+            searchWordsVar.shuffle()
+            guard let word = searchWordsVar.popLast() else {
+                fatalError()
+            }
+            let didAddWord = wordMap.addWordIfFits(word: word)
+            if didAddWord {
+                addSearchWord(searchWord: String(word))
+                searchWordsCount += 1
+            }
+            if searchWordsCount > (word.count * 2) {
+                return
+            }
         }
     }
 }
