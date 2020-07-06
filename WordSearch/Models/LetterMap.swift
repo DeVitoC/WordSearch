@@ -12,6 +12,7 @@ class LetterMap {
     var head: Node
     var lastNodeAdded: Node
     var size: Int
+    var numWords: Int
     var values: [Character : [Node: Coordinate]]
     var coordinateRange: CoordinateRange
 
@@ -20,6 +21,7 @@ class LetterMap {
         self.head = firstNode
         self.lastNodeAdded = firstNode
         self.size = 1
+        self.numWords = 1
         self.values = [firstNode.value : [firstNode : .zero]]
         self.coordinateRange = .zero
         addFirstWord(word: Array(word[1..<word.count]), direction: direction)
@@ -85,19 +87,22 @@ class LetterMap {
                             continue
                         }
                     }
-                    for i in 0..<word.count - char {
-                        let direction: Direction = axis == .horizontal ? .after : .below
-                        if direction == .after, getValue(coordinate: Coordinate(x: lastNodeAdded.coord.x - 1, y: lastNodeAdded.coord.y)) != "0" {
-                            continue
-                        } else if direction == .below, getValue(coordinate: Coordinate(x: lastNodeAdded.coord.x, y: lastNodeAdded.coord.y + 1)) != "0" {
-                            continue
+                    if char != word.count - 1 {
+                        for i in (char + 1)..<word.count {
+                            let direction: Direction = axis == .horizontal ? .after : .below
+                            if direction == .after, getValue(coordinate: Coordinate(x: lastNodeAdded.coord.x + 1, y: lastNodeAdded.coord.y)) != "0" {
+                                continue
+                            } else if direction == .below, getValue(coordinate: Coordinate(x: lastNodeAdded.coord.x, y: lastNodeAdded.coord.y - 1)) != "0" {
+                                continue
+                            }
+                            let newNode = add(value: word[i], direction: direction, relativeTo: lastNodeAdded)
+                            lastNodeAdded = newNode
+                            values[newNode.value]?[newNode] = newNode.coord
+                            coordinateRange.expandIfOutside(coord: newNode.coord)
+                            
                         }
-                        let newNode = add(value: word[char - i], direction: direction, relativeTo: lastNodeAdded)
-                        lastNodeAdded = newNode
-                        values[newNode.value]?[newNode] = newNode.coord
-                        coordinateRange.expandIfOutside(coord: newNode.coord)
-                        continue
                     }
+                    numWords += 1
                     return true
                 }
             }

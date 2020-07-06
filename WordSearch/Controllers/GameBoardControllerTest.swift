@@ -110,17 +110,23 @@ class GameBoardControllerTest {
         //var wordMap = wordMap
         var searchWordsVar = searchWords
         var searchWordsCount = 1
-        for _ in 0..<searchWords.count {
+        for i in 1...(gameBoard.word.mainWord.count - 3) {
             searchWordsVar.shuffle()
-            guard let word = searchWordsVar.popLast() else {
-                fatalError()
+            var searchArray: [[Character]] = []
+            for word in searchWordsVar where word.count == (gameBoard.word.mainWord.count - i) {
+                searchArray.append(word)
             }
-            let didAddWord = wordMap.addWordIfFits(word: word)
-            if didAddWord {
-                addSearchWord(searchWord: String(word))
-                searchWordsCount += 1
+            for _ in 0..<searchArray.count {
+                guard let currentWord = searchArray.popLast() else {
+                    fatalError()
+                }
+                let didAddWord = wordMap.addWordIfFits(word: currentWord)
+                if didAddWord {
+                    addSearchWord(searchWord: String(currentWord))
+                    searchWordsCount += 1
+                }
             }
-            if searchWordsCount > (word.count * 2) {
+            if searchWordsCount > (gameBoard.word.mainWord.count * 2) {
                 return
             }
         }
