@@ -44,7 +44,7 @@ class GameBoardControllerTestTests: XCTestCase {
         }
     }
 
-    func testGameSizeForLevel() throws {
+    func testGameSizeForLevel() {
         guard let gameBoardController = gameBoardController else { fatalError() }
         var levelSize = gameBoardController.gameSizeForLevel(level: 1)
         XCTAssertEqual(levelSize, 4)
@@ -80,7 +80,41 @@ class GameBoardControllerTestTests: XCTestCase {
         XCTAssertEqual(levelSize, 19)
     }
 
+    func testAddSearchWord() {
+        let word = (gameBoard?.word.bonusWords.randomElement())!
+        gameBoardController?.addSearchWord(searchWord: word)
+        guard let bonusWords = gameBoard?.word.bonusWords.contains(word),
+            let searchWords = gameBoard?.word.searchWords.contains(word) else { return }
+        XCTAssertFalse(bonusWords)
+        XCTAssert(searchWords)
+    }
 
+    func testAddWordsToMapIfFit() {
+        for _ in 0...10 {
+            let gameBoard = GameBoard(word: Word(mainWord: "fallow", anagrams: ["loaf", "allow", "foal", "fall", "wall", "wolf", "flow", "flaw", "awl", "low", "law", "fowl", ], searchWords: [], bonusWords: ["fowl", "loaf", "allow", "foal", "fall", "wall", "wolf", "flow", "flaw", "awl", "low", "law"]))
+            let wordMap = LetterMap(word: ["f", "a", "l", "l", "o", "w"], direction: .after)
+            var searchWords: [[Character]] = []
+            for word in gameBoard.word.bonusWords {
+                let searchWord: [Character] = Array(word)
+                searchWords.append(searchWord)
+            }
+
+            gameBoardController?.addWordsToMapIfFit(searchWords: searchWords, wordMap: wordMap, mainWordSize: gameBoard.word.mainWord.count)
+            NSLog("WordMap size: \(wordMap.size)")
+//            for (key, value) in wordMap.values {
+//                for (_, coord) in value {
+//                    NSLog("\(key): \(coord)")
+//                }
+//            }
+            let numWords = wordMap.numWords
+            NSLog("\(numWords)")
+            XCTAssert(wordMap.values["f"]!.count <= 8)
+            XCTAssert(wordMap.values["a"]!.count <= 9)
+            XCTAssert(wordMap.values["l"]!.count <= 17)
+            XCTAssert(wordMap.values["o"]!.count <= 8)
+            XCTAssert(wordMap.values["w"]!.count <= 10)
+        }
+    }
 
 
 }

@@ -11,10 +11,10 @@ import UIKit
 class WordSearchViewController: UIViewController {
     
     // MARK: - Properties
-    let gameBoardController = GameBoardController()
+//    let gameBoardController = GameBoardController()
     let gameBoardControllerTest = GameBoardControllerTest()
     private var word: Word {
-        guard let word = gameBoardController.word else { fatalError() }
+        guard let word = gameBoardControllerTest.word else { fatalError() }
         return word
     }
     lazy var mainWord: [Character] = {
@@ -23,11 +23,12 @@ class WordSearchViewController: UIViewController {
     private var wordInProgress: String = ""
     private var gameBoard: GameBoard?
 
-    private var wordMap: [[Character?]] = [] {
-        didSet {
-            updateViews()
-        }
-    }
+//    private var wordMap: [[Character?]] = [] {
+//        didSet {
+//            updateViews()
+//        }
+//    }
+    private var letterMap: LetterMap?
     lazy var gameBoardMapStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     lazy var buttonsStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     lazy var buttonsCollectionView = UICollectionView(frame: CGRect(center: .zero, size: CGSize(width: view.frame.width * 0.6, height: view.frame.width * 0.6)), collectionViewLayout: LetterButtonsLayout())
@@ -39,10 +40,11 @@ class WordSearchViewController: UIViewController {
         view.setBackground()
         buttonsCollectionView.dataSource = self
         buttonsCollectionView.delegate = self
-        gameBoard = gameBoardController.createGameBoard(level: 201)
+        gameBoard = gameBoardControllerTest.createGameBoard(level: 201)
         if let gameBoard = gameBoard {
-            wordMap = gameBoardController.createWordMap(gameBoard: gameBoard)
+            letterMap = gameBoardControllerTest.createWordMap(gameBoard: gameBoard)
         }
+        updateViews()
         print("mainword: \(word.mainWord), searchwords: \(word.searchWords.count), bonuswords: \(word.bonusWords.count)")
     }
 
@@ -52,8 +54,11 @@ class WordSearchViewController: UIViewController {
     }
 
     // MARK: - Set Up Methods
-    /// Generates a grid of UILabels inside stacked UIStackViews for a map of 2 times the length of the primary word plus 1
+    /// Generates a grid of UILabels inside stacked UIStackViews for a map of the height and width of the letterMap plus 2
     private func generateGameBoardMap() {
+        guard let letterMap = letterMap else { fatalError() }
+        let mapRows = 1 + letterMap.coordinateRange.high.y - letterMap.coordinateRange.low.y
+        let mapCols = 1 + letterMap.coordinateRange.high.x - letterMap.coordinateRange.low.y
         // Set up main UIStackView - "gameBoardMapStackView"
         self.view.addSubview(gameBoardMapStackView)
         gameBoardMapStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -68,7 +73,7 @@ class WordSearchViewController: UIViewController {
         ])
 
         // Add stacks of UIStackViews - "gameBoardMapStackView.arrangedSubViews[] as UIStackView"
-        for _ in 0...word.mainWord.count * 2 {
+        for _ in 0..<mapRows + 2 {
             let subStack = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 25))
             gameBoardMapStackView.addArrangedSubview(subStack)
             subStack.axis = .horizontal
@@ -76,14 +81,13 @@ class WordSearchViewController: UIViewController {
             subStack.alignment = .fill
         }
 
-        // Add row of twice the main word's length plus 1 labels in sub-stackviews -
-        // "(gameBoardMapStackView.arrangedSubViews[] as UIStackView).arrangedSubViews[] as UIStackView"
-        for y in 0...word.mainWord.count * 2 {
-            for _ in 0...word.mainWord.count * 2 {
+        // Add row of (the height of the letterMap + 2) labels in sub-stackviews with text " "
+        for y in 0..<mapRows + 2 {
+            for _ in 0..<mapCols + 2 {
                 let label = UILabel(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
                 label.translatesAutoresizingMaskIntoConstraints = false
                 label.textAlignment = .center
-                label.text = "-"
+                label.text = " "
                 (gameBoardMapStackView.arrangedSubviews[y] as! UIStackView).addArrangedSubview(label)
             }
         }
@@ -92,14 +96,16 @@ class WordSearchViewController: UIViewController {
 
     /// Populates Game Board Map with values from wordMap
     private func populateGameBoardMap() {
-//        guard let wordMap = wordMap else { return }
-        for y in 0..<gameBoardMapStackView.arrangedSubviews.count {
-            guard let stack = gameBoardMapStackView.arrangedSubviews[y] as? UIStackView else { continue }
-            for x in 0..<stack.arrangedSubviews.count {
-                // TODO: - calculate position in 2d array based on position in wordMap
-                guard let label = stack.arrangedSubviews[x] as? UILabel else { continue }
-//                let char: String = String(wordMap.getValue(coordinate: Coordinate(x: 0, y: 0)))
-//                label.text = char
+        guard let letterMap = letterMap else { return }
+        let mapRows = 1 + letterMap.coordinateRange.high.y - letterMap.coordinateRange.low.y
+
+        for (char, value) in letterMap.values {
+            for (_, coord) in value {
+                let xCoord = coord.x - letterMap.coordinateRange.low.x
+                let yCoord = mapRows - (coord.y - letterMap.coordinateRange.low.y)
+                guard let stack = gameBoardMapStackView.arrangedSubviews[yCoord] as? UIStackView,
+                    let label = stack.arrangedSubviews[xCoord] as? UILabel else { continue }
+                label.text = String(char)
             }
         }
     }
