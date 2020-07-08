@@ -28,7 +28,6 @@ class GameBoardControllerTest {
         wordMap = setFirstWordInWordMap(mainWord: gameBoard.word.mainWord)
         addSearchWord(searchWord: gameBoard.word.mainWord)
 
-        // If needed this is where I would add a for loop to check all words several times
         let searchWords: [[Character]] = createSearchWordsArray(searchWords: gameBoard.word.bonusWords)
         // Check each word in searchWords
         addWordsToMapIfFit(searchWords: searchWords, wordMap: wordMap, mainWordSize: gameBoard.word.mainWord.count)
@@ -107,7 +106,6 @@ class GameBoardControllerTest {
     }
 
     func addWordsToMapIfFit(searchWords: [[Character]], wordMap: LetterMap, mainWordSize size: Int) {
-        //var wordMap = wordMap
         var searchWordsVar = searchWords
         var searchWordsCount = 1
         for i in 1...(size - 3) {

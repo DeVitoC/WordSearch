@@ -22,12 +22,6 @@ class WordSearchViewController: UIViewController {
     }()
     private var wordInProgress: String = ""
     private var gameBoard: GameBoard?
-
-//    private var wordMap: [[Character?]] = [] {
-//        didSet {
-//            updateViews()
-//        }
-//    }
     private var letterMap: LetterMap?
     lazy var gameBoardMapStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     lazy var buttonsStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))

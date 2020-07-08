@@ -101,18 +101,9 @@ class GameBoardControllerTestTests: XCTestCase {
 
             gameBoardController?.addWordsToMapIfFit(searchWords: searchWords, wordMap: wordMap, mainWordSize: gameBoard.word.mainWord.count)
             NSLog("WordMap size: \(wordMap.size)")
-//            for (key, value) in wordMap.values {
-//                for (_, coord) in value {
-//                    NSLog("\(key): \(coord)")
-//                }
-//            }
             let numWords = wordMap.numWords
             NSLog("\(numWords)")
-            XCTAssert(wordMap.values["f"]!.count <= 8)
-            XCTAssert(wordMap.values["a"]!.count <= 9)
-            XCTAssert(wordMap.values["l"]!.count <= 17)
-            XCTAssert(wordMap.values["o"]!.count <= 8)
-            XCTAssert(wordMap.values["w"]!.count <= 10)
+            XCTAssert(wordMap.values.count >= 20)
         }
     }
 

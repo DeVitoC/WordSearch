@@ -21,15 +21,10 @@ class LetterMapTests: XCTestCase {
             let letterMap = LetterMap(word: mainWord, direction: .after)
             XCTAssert(letterMap.coordinateRange.high == Coordinate(x: 5, y: 0))
             XCTAssert(letterMap.coordinateRange.low == Coordinate(x: 0, y: 0))
-            XCTAssert(letterMap.lastNodeAdded.value == "e")
+            XCTAssert(letterMap.values[letterMap.lastNodeAdded]?.value == "e")
             XCTAssert(letterMap.head.value == "m")
             XCTAssert(letterMap.size == 6)
-            XCTAssert(letterMap.values["m"]?.count == 1)
-            XCTAssert(letterMap.values["o"]?.count == 1)
-            XCTAssert(letterMap.values["t"]?.count == 1)
-            XCTAssert(letterMap.values["i"]?.count == 1)
-            XCTAssert(letterMap.values["v"]?.count == 1)
-            XCTAssert(letterMap.values["e"]?.count == 1)
+            XCTAssert(letterMap.values.count == 6)
         }
 
     }
@@ -39,18 +34,13 @@ class LetterMapTests: XCTestCase {
             let mainWord: [Character] = ["m", "o", "t", "i", "v", "e"]
             let letterMap = LetterMap(word: mainWord, direction: .after)
             letterMap.add(value: "o", direction: .above, relativeTo: letterMap.lastNodeAdded)
-            letterMap.add(value: "t", direction: .above, relativeTo: letterMap.lastNodeAdded)
+            letterMap.add(value: "t", direction: .above, relativeTo: letterMap.lastNodeAdded.above)
             XCTAssert(letterMap.coordinateRange.high == Coordinate(x: 5, y: 2))
             XCTAssert(letterMap.coordinateRange.low == Coordinate(x: 0, y: 0))
-            XCTAssert(letterMap.lastNodeAdded.value == "t")
+            XCTAssert(letterMap.values[letterMap.lastNodeAdded.above.above]?.value == "t")
             XCTAssert(letterMap.size == 8)
-            XCTAssert(letterMap.lastNodeAdded.coord == Coordinate(x: 5, y: 2))
-            XCTAssert(letterMap.values["m"]?.count == 1)
-            XCTAssert(letterMap.values["o"]?.count == 2)
-            XCTAssert(letterMap.values["t"]?.count == 2)
-            XCTAssert(letterMap.values["i"]?.count == 1)
-            XCTAssert(letterMap.values["v"]?.count == 1)
-            XCTAssert(letterMap.values["e"]?.count == 1)
+            XCTAssert(letterMap.lastNodeAdded.above.above == Coordinate(x: 5, y: 2))
+            XCTAssert(letterMap.values.count == 8)
         }
     }
 
@@ -59,7 +49,7 @@ class LetterMapTests: XCTestCase {
             let mainWord: [Character] = ["m", "o", "t", "i", "v", "e"]
             let letterMap = LetterMap(word: mainWord, direction: .after)
             letterMap.add(value: "o", direction: .above, relativeTo: letterMap.lastNodeAdded)
-            letterMap.add(value: "t", direction: .above, relativeTo: letterMap.lastNodeAdded)
+            letterMap.add(value: "t", direction: .above, relativeTo: letterMap.lastNodeAdded.above)
             XCTAssert(letterMap.getValue(coordinate: Coordinate(x: 0, y: 0)) == "m")
             XCTAssert(letterMap.getValue(coordinate: Coordinate(x: 1, y: 0)) == "o")
             XCTAssert(letterMap.getValue(coordinate: Coordinate(x: 2, y: 0)) == "t")
@@ -69,12 +59,7 @@ class LetterMapTests: XCTestCase {
             XCTAssert(letterMap.getValue(coordinate: Coordinate(x: 5, y: 1)) == "o")
             XCTAssert(letterMap.getValue(coordinate: Coordinate(x: 5, y: 2)) == "t")
             XCTAssert(letterMap.getValue(coordinate: Coordinate(x: 3, y: 3)) == "0")
-            XCTAssert(letterMap.values["m"]?.count == 1)
-            XCTAssert(letterMap.values["o"]?.count == 2)
-            XCTAssert(letterMap.values["t"]?.count == 2)
-            XCTAssert(letterMap.values["i"]?.count == 1)
-            XCTAssert(letterMap.values["v"]?.count == 1)
-            XCTAssert(letterMap.values["e"]?.count == 1)
+            XCTAssert(letterMap.values.count == 8)
         }
     }
 
@@ -94,44 +79,26 @@ class LetterMapTests: XCTestCase {
     }
 
     func testAddWordIfFits() {
-        for _ in 0...10 {
+        for _ in 0...1000 {
             let mainWord: [Character] = ["m", "o", "t", "i", "v", "e"]
             let letterMap = LetterMap(word: mainWord, direction: .after)
             letterMap.add(value: "o", direction: .above, relativeTo: letterMap.lastNodeAdded)
-            letterMap.add(value: "m", direction: .above, relativeTo: letterMap.lastNodeAdded)
+            letterMap.add(value: "m", direction: .above, relativeTo: letterMap.lastNodeAdded.above)
             let word: [Character] = ["m", "o", "t", "e"]
             let word2: [Character] = ["m", "i", "t", "e"]
             let word3: [Character] = ["v", "o", "t", "e"]
             let shouldAddWord = letterMap.addWordIfFits(word: word)
             XCTAssert(shouldAddWord)
-            XCTAssert(letterMap.values["m"]?.count == 2)
-            XCTAssert(letterMap.values["o"]?.count == 3)
-            XCTAssert(letterMap.values["t"]?.count == 2)
-            XCTAssert(letterMap.values["i"]?.count == 1)
-            XCTAssert(letterMap.values["v"]?.count == 1)
-            XCTAssert(letterMap.values["e"]?.count == 2)
             XCTAssert(letterMap.size == 11)
             let shouldAddWord2 = letterMap.addWordIfFits(word: word2)
             XCTAssert(shouldAddWord2)
-            XCTAssert(letterMap.values["m"]?.count == 2)
-            XCTAssert(letterMap.values["o"]?.count == 3)
-            XCTAssert(letterMap.values["t"]?.count == 3)
-            XCTAssert(letterMap.values["i"]?.count == 2)
-            XCTAssert(letterMap.values["v"]?.count == 1)
-            XCTAssert(letterMap.values["e"]?.count == 3)
             XCTAssert(letterMap.size == 14)
             let shouldAddWord3 = letterMap.addWordIfFits(word: word3)
             XCTAssert(shouldAddWord3)
-            XCTAssert(letterMap.values["m"]?.count == 2)
-            XCTAssert(letterMap.values["o"]?.count == 4)
-            XCTAssert(letterMap.values["t"]?.count == 4)
-//            NSLog("\(letterMap.values["t"]?.count)")
-            XCTAssert(letterMap.values["i"]?.count == 2)
-//            NSLog("\(letterMap.values["t"]?.count)")
-            XCTAssert(letterMap.values["v"]?.count == 1)
-            XCTAssert(letterMap.values["e"]?.count == 4)
-            NSLog("\(letterMap.size)")
             XCTAssert(letterMap.size == 17)
+
+            NSLog("\(letterMap.size)")
+
         }
     }
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Node: Hashable {
+class Node: Hashable, CustomStringConvertible, NSCopying {
     var value: Character
     var connections: [Direction : Node] = [ : ]
     let coord: Coordinate
@@ -16,6 +16,16 @@ class Node: Hashable {
     init(value: Character = "0", coord: Coordinate) {
         self.value = value
         self.coord = coord
+    }
+
+    var description: String {
+        var description = ""
+        description += "Value: \(value)\n"
+        description += "Coordinate: \(coord)\n"
+        for connection in connections {
+            description += "Connection: \(connection.key), Value: \(connection.value.value)\n"
+        }
+        return description
     }
 
     static func == (lhs: Node, rhs: Node) -> Bool {
@@ -26,6 +36,12 @@ class Node: Hashable {
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(ObjectIdentifier(self).hashValue)
+    }
+
+    func copy(with zone: NSZone? = nil) -> Any {
+        let copy = Node(value: value, coord: coord)
+        copy.connections = connections
+        return copy
     }
 
     func checkConnections() -> Axis {
