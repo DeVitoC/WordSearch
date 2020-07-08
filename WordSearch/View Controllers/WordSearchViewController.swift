@@ -99,14 +99,12 @@ class WordSearchViewController: UIViewController {
         guard let letterMap = letterMap else { return }
         let mapRows = 1 + letterMap.coordinateRange.high.y - letterMap.coordinateRange.low.y
 
-        for (char, value) in letterMap.values {
-            for (_, coord) in value {
-                let xCoord = coord.x - letterMap.coordinateRange.low.x
-                let yCoord = mapRows - (coord.y - letterMap.coordinateRange.low.y)
-                guard let stack = gameBoardMapStackView.arrangedSubviews[yCoord] as? UIStackView,
-                    let label = stack.arrangedSubviews[xCoord] as? UILabel else { continue }
-                label.text = String(char)
-            }
+        for (coord, node) in letterMap.values {
+            let xCoord = coord.x - letterMap.coordinateRange.low.x
+            let yCoord = mapRows - (coord.y - letterMap.coordinateRange.low.y)
+            guard let stack = gameBoardMapStackView.arrangedSubviews[yCoord] as? UIStackView,
+                let label = stack.arrangedSubviews[xCoord] as? UILabel else { continue }
+            label.text = String(node.value)
         }
     }
 

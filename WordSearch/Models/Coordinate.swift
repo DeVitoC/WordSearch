@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Coordinate {
+struct Coordinate: Hashable {
     var x: Int
     var y: Int
     static let zero = Coordinate(x: 0, y: 0)
