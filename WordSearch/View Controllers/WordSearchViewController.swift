@@ -149,8 +149,9 @@ class WordSearchViewController: UIViewController {
         activeAreaStackView.addArrangedSubview(controlButtonsStackView)
 
         // add reset and check word UIButtons to controlButtonsStackView
-        controlButtonsStackView.addArrangedSubview(generateResetButton())
-        controlButtonsStackView.addArrangedSubview(generateCheckWordButton())
+        controlButtonsStackView.addArrangedSubview(generateSingleButton(backgroundColor: .systemBlue, titleText: "Reset Word", action: #selector(resetWord(_:))))
+        controlButtonsStackView.addArrangedSubview(generateSingleButton(backgroundColor: .systemTeal, titleText: "Check Word", action: #selector(checkWord(_:))))
+        controlButtonsStackView.addArrangedSubview(generateSingleButton(backgroundColor: .systemIndigo, titleText: "New Board", action: #selector(resetBoard(_:))))
     }
 
     /// Generates a circle CollectionView of UIButtons to display the characters in use for game play
@@ -167,26 +168,15 @@ class WordSearchViewController: UIViewController {
         ])
     }
 
-    /// Generates a reset UIButton to set the in progress word to an emptry string
-    private func generateResetButton() -> UIButton {
-        let resetButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
-        resetButton.translatesAutoresizingMaskIntoConstraints = false
-        resetButton.backgroundColor = .systemBlue
-        resetButton.setTitleColor(.black, for: .normal)
-        resetButton.setTitle("Reset Word", for: .normal)
-        resetButton.addTarget(self, action: #selector(resetWord(_:)), for: .touchUpInside)
-        return resetButton
-    }
-
-    /// Generates a check word UIButton to check the word against the list of acceptable words
-    private func generateCheckWordButton() -> UIButton {
-        let checkButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
-        checkButton.translatesAutoresizingMaskIntoConstraints = false
-        checkButton.backgroundColor = .systemTeal
-        checkButton.setTitleColor(.black, for: .normal)
-        checkButton.setTitle("Check Word", for: .normal)
-        checkButton.addTarget(self, action: #selector(checkWord(_:)), for: .touchUpInside)
-        return checkButton
+    /// Generates and returns a UIButton to with the passed background color, title text, and selector
+    private func generateSingleButton(backgroundColor color: UIColor, titleText: String, action selector: Selector) -> UIButton {
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = color
+        button.setTitleColor(.black, for: .normal)
+        button.setTitle(titleText, for: .normal)
+        button.addTarget(self, action: selector, for: .touchUpInside)
+        return button
     }
 
     // MARK: - Action Methods
@@ -223,17 +213,23 @@ class WordSearchViewController: UIViewController {
 
     /// Defines the action taken when the check word button is tapped
     @objc func checkWord(_ sender: UIButton) {
+        guard wordInProgress != "" else {
+            resultsLabel.text = "You need to enter a word!"
+            return
+        }
         if word.searchWords.contains(wordInProgress.lowercased()) {
             resultsLabel.text = "Success: \(wordInProgress) is in search words"
-            print("Success: \(wordInProgress) is in search words")
         } else if word.bonusWords.contains(wordInProgress.lowercased()) {
             resultsLabel.text = "Success: \(wordInProgress) is in bonus words"
-            print("Success: \(wordInProgress) is in bonus words")
         } else {
             resultsLabel.text = "Try again: \(wordInProgress) is not a word"
-            print("Try again: \(wordInProgress) is not a word")
         }
         resetWord(sender)
+    }
+
+    /// Defines the action taken when the reset board button is tapped
+    @objc func resetBoard(_ sender: UIButton) {
+        print("New Board here")
     }
 }
 
