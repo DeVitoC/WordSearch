@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E219BD3624ADC128007E8F2C /* GameBoardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219BD3524ADC128007E8F2C /* GameBoardController.swift */; };
+		E219BD3824ADC635007E8F2C /* LetterMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219BD3724ADC635007E8F2C /* LetterMap.swift */; };
 		E22F5779247EDB8700F1C0A5 /* LetterButtonsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F5778247EDB8700F1C0A5 /* LetterButtonsLayout.swift */; };
 		E22F577B247F64BE00F1C0A5 /* setBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F577A247F64BE00F1C0A5 /* setBackground.swift */; };
 		E22F577D247F655800F1C0A5 /* dave-sBga13mu80c-unsplash.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E22F577C247F655800F1C0A5 /* dave-sBga13mu80c-unsplash.jpg */; };
@@ -17,6 +19,12 @@
 		E25B8490246C712A00FA3C49 /* WordControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25B848F246C712A00FA3C49 /* WordControllerTest.swift */; };
 		E27B757C2471D8910054BEBB /* fiveLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E27B757B2471D8910054BEBB /* fiveLetterWords.json */; };
 		E280F7A024691A97000CBEA4 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280F79F24691A97000CBEA4 /* MockData.swift */; };
+		E2961B1E24B0946100075C19 /* GameBoardControllerTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2961B1D24B0946100075C19 /* GameBoardControllerTestTests.swift */; };
+		E2961B2024B0947100075C19 /* LetterMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2961B1F24B0947100075C19 /* LetterMapTests.swift */; };
+		E2961B2224B0C52C00075C19 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2961B2124B0C52C00075C19 /* Node.swift */; };
+		E2961B2424B0C5FA00075C19 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2961B2324B0C5FA00075C19 /* Coordinate.swift */; };
+		E2961B2624B0C61D00075C19 /* CoordinateRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2961B2524B0C61C00075C19 /* CoordinateRange.swift */; };
+		E2961B2824B0C63700075C19 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2961B2724B0C63700075C19 /* Enums.swift */; };
 		E2AD5CBE247233B800937D3D /* threeLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CBD247233B700937D3D /* threeLetterWords.json */; };
 		E2AD5CC02472340200937D3D /* fourLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CBF2472340200937D3D /* fourLetterWords.json */; };
 		E2AD5CC22472341C00937D3D /* sixLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CC12472341C00937D3D /* sixLetterWords.json */; };
@@ -33,6 +41,9 @@
 		E2AD5CE12472343200937D3D /* fifteenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CD02472343200937D3D /* fifteenLetterWords.json */; };
 		E2AD5CE22472343200937D3D /* fourteenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CD12472343200937D3D /* fourteenLetterWords.json */; };
 		E2AD5CE42472343200937D3D /* eighteenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CD32472343200937D3D /* eighteenLetterWords.json */; };
+		E2B5977A24B0CC1000E4CC71 /* NodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B5977924B0CC1000E4CC71 /* NodeTests.swift */; };
+		E2B5977C24B0CC2100E4CC71 /* CoordinateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B5977B24B0CC2100E4CC71 /* CoordinateTests.swift */; };
+		E2B5977E24B0CC4200E4CC71 /* CoordinateRangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B5977D24B0CC4200E4CC71 /* CoordinateRangeTests.swift */; };
 		E2DA2C022474F13B0042E695 /* CharacterSet+Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DA2C012474F13B0042E695 /* CharacterSet+Sequence.swift */; };
 		E2E3DF962467E98E0049235E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E3DF952467E98E0049235E /* AppDelegate.swift */; };
 		E2E3DF982467E98E0049235E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E3DF972467E98E0049235E /* SceneDelegate.swift */; };
@@ -41,7 +52,6 @@
 		E2E3DFA22467E9900049235E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2E3DFA02467E9900049235E /* LaunchScreen.storyboard */; };
 		E2E3DFAF2467EA590049235E /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E3DFAE2467EA590049235E /* Word.swift */; };
 		E2E3DFB12467ED8D0049235E /* WordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E3DFB02467ED8D0049235E /* WordController.swift */; };
-		E2EE235624739288009FFEC3 /* GameBoardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EE235524739288009FFEC3 /* GameBoardController.swift */; };
 		E2EE23582473944F009FFEC3 /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EE23572473944F009FFEC3 /* GameBoard.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +66,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E219BD3524ADC128007E8F2C /* GameBoardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardController.swift; sourceTree = "<group>"; };
+		E219BD3724ADC635007E8F2C /* LetterMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterMap.swift; sourceTree = "<group>"; };
 		E22F5778247EDB8700F1C0A5 /* LetterButtonsLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterButtonsLayout.swift; sourceTree = "<group>"; };
 		E22F577A247F64BE00F1C0A5 /* setBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setBackground.swift; sourceTree = "<group>"; };
 		E22F577C247F655800F1C0A5 /* dave-sBga13mu80c-unsplash.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "dave-sBga13mu80c-unsplash.jpg"; sourceTree = "<group>"; };
@@ -68,6 +80,12 @@
 		E25B848F246C712A00FA3C49 /* WordControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordControllerTest.swift; sourceTree = "<group>"; };
 		E27B757B2471D8910054BEBB /* fiveLetterWords.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = fiveLetterWords.json; sourceTree = "<group>"; };
 		E280F79F24691A97000CBEA4 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
+		E2961B1D24B0946100075C19 /* GameBoardControllerTestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardControllerTestTests.swift; sourceTree = "<group>"; };
+		E2961B1F24B0947100075C19 /* LetterMapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterMapTests.swift; sourceTree = "<group>"; };
+		E2961B2124B0C52C00075C19 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		E2961B2324B0C5FA00075C19 /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
+		E2961B2524B0C61C00075C19 /* CoordinateRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateRange.swift; sourceTree = "<group>"; };
+		E2961B2724B0C63700075C19 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		E2AD5CBD247233B700937D3D /* threeLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = threeLetterWords.json; sourceTree = "<group>"; };
 		E2AD5CBF2472340200937D3D /* fourLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fourLetterWords.json; sourceTree = "<group>"; };
 		E2AD5CC12472341C00937D3D /* sixLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sixLetterWords.json; sourceTree = "<group>"; };
@@ -84,6 +102,9 @@
 		E2AD5CD02472343200937D3D /* fifteenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fifteenLetterWords.json; sourceTree = "<group>"; };
 		E2AD5CD12472343200937D3D /* fourteenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fourteenLetterWords.json; sourceTree = "<group>"; };
 		E2AD5CD32472343200937D3D /* eighteenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = eighteenLetterWords.json; sourceTree = "<group>"; };
+		E2B5977924B0CC1000E4CC71 /* NodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeTests.swift; sourceTree = "<group>"; };
+		E2B5977B24B0CC2100E4CC71 /* CoordinateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateTests.swift; sourceTree = "<group>"; };
+		E2B5977D24B0CC4200E4CC71 /* CoordinateRangeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateRangeTests.swift; sourceTree = "<group>"; };
 		E2DA2C012474F13B0042E695 /* CharacterSet+Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterSet+Sequence.swift"; sourceTree = "<group>"; };
 		E2E3DF922467E98E0049235E /* WordSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2E3DF952467E98E0049235E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -94,7 +115,6 @@
 		E2E3DFA32467E9900049235E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2E3DFAE2467EA590049235E /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		E2E3DFB02467ED8D0049235E /* WordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordController.swift; sourceTree = "<group>"; };
-		E2EE235524739288009FFEC3 /* GameBoardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardController.swift; sourceTree = "<group>"; };
 		E2EE23572473944F009FFEC3 /* GameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,6 +143,11 @@
 				E25B8489246C70E500FA3C49 /* Info.plist */,
 				E25B848F246C712A00FA3C49 /* WordControllerTest.swift */,
 				E22F577E2480487800F1C0A5 /* GameBoardControllerTests.swift */,
+				E2961B1D24B0946100075C19 /* GameBoardControllerTestTests.swift */,
+				E2961B1F24B0947100075C19 /* LetterMapTests.swift */,
+				E2B5977924B0CC1000E4CC71 /* NodeTests.swift */,
+				E2B5977B24B0CC2100E4CC71 /* CoordinateTests.swift */,
+				E2B5977D24B0CC4200E4CC71 /* CoordinateRangeTests.swift */,
 			);
 			path = WordSearchTests;
 			sourceTree = "<group>";
@@ -192,6 +217,7 @@
 				E2E3DFA32467E9900049235E /* Info.plist */,
 				E2AD5CE62472345400937D3D /* JSON Files */,
 				E2DA2C012474F13B0042E695 /* CharacterSet+Sequence.swift */,
+				E2961B2724B0C63700075C19 /* Enums.swift */,
 				E22F577C247F655800F1C0A5 /* dave-sBga13mu80c-unsplash.jpg */,
 				E22F577A247F64BE00F1C0A5 /* setBackground.swift */,
 			);
@@ -212,7 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				E2E3DFB02467ED8D0049235E /* WordController.swift */,
-				E2EE235524739288009FFEC3 /* GameBoardController.swift */,
+				E219BD3524ADC128007E8F2C /* GameBoardController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -230,6 +256,10 @@
 			children = (
 				E2E3DFAE2467EA590049235E /* Word.swift */,
 				E2EE23572473944F009FFEC3 /* GameBoard.swift */,
+				E219BD3724ADC635007E8F2C /* LetterMap.swift */,
+				E2961B2124B0C52C00075C19 /* Node.swift */,
+				E2961B2324B0C5FA00075C19 /* Coordinate.swift */,
+				E2961B2524B0C61C00075C19 /* CoordinateRange.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -355,8 +385,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				E22F577F2480487800F1C0A5 /* GameBoardControllerTests.swift in Sources */,
+				E2B5977A24B0CC1000E4CC71 /* NodeTests.swift in Sources */,
 				E25B8488246C70E500FA3C49 /* WordSearchTests.swift in Sources */,
+				E2961B2024B0947100075C19 /* LetterMapTests.swift in Sources */,
+				E2961B1E24B0946100075C19 /* GameBoardControllerTestTests.swift in Sources */,
+				E2B5977E24B0CC4200E4CC71 /* CoordinateRangeTests.swift in Sources */,
 				E25B8490246C712A00FA3C49 /* WordControllerTest.swift in Sources */,
+				E2B5977C24B0CC2100E4CC71 /* CoordinateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,16 +400,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2E3DF962467E98E0049235E /* AppDelegate.swift in Sources */,
+				E219BD3824ADC635007E8F2C /* LetterMap.swift in Sources */,
 				E2E3DF982467E98E0049235E /* SceneDelegate.swift in Sources */,
 				E2E3DFAF2467EA590049235E /* Word.swift in Sources */,
 				E2E3DFB12467ED8D0049235E /* WordController.swift in Sources */,
+				E2961B2824B0C63700075C19 /* Enums.swift in Sources */,
+				E2961B2624B0C61D00075C19 /* CoordinateRange.swift in Sources */,
 				E2EE23582473944F009FFEC3 /* GameBoard.swift in Sources */,
 				E25B847B246C5D8600FA3C49 /* WordSearchViewController.swift in Sources */,
+				E219BD3624ADC128007E8F2C /* GameBoardController.swift in Sources */,
 				E280F7A024691A97000CBEA4 /* MockData.swift in Sources */,
 				E22F5779247EDB8700F1C0A5 /* LetterButtonsLayout.swift in Sources */,
-				E2EE235624739288009FFEC3 /* GameBoardController.swift in Sources */,
 				E2DA2C022474F13B0042E695 /* CharacterSet+Sequence.swift in Sources */,
 				E22F577B247F64BE00F1C0A5 /* setBackground.swift in Sources */,
+				E2961B2224B0C52C00075C19 /* Node.swift in Sources */,
+				E2961B2424B0C5FA00075C19 /* Coordinate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
