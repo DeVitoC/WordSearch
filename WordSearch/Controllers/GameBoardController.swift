@@ -123,9 +123,9 @@ class GameBoardController {
                     addSearchWord(searchWord: String(currentWord))
                     searchWordsCount += 1
                 }
+                if searchWordsCount > (i * 3) {
+                    break
             }
-            if searchWordsCount > (size * 2) {
-                return
             }
         }
     }
