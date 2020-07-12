@@ -11,12 +11,12 @@ import XCTest
 
 class GameBoardControllerTestTests: XCTestCase {
 
-    var gameBoardController: GameBoardControllerTest?
+    var gameBoardController: GameBoardController?
     var gameBoard: GameBoard?
 
     override func setUp() {
         super.setUp()
-        gameBoardController = GameBoardControllerTest()
+        gameBoardController = GameBoardController()
         gameBoard = gameBoardController?.createGameBoard(level: 201)
     }
 
@@ -33,10 +33,10 @@ class GameBoardControllerTestTests: XCTestCase {
         }
     }
 
-    func testCreateWordMap() {
+    func testCreateLetterMap() {
         for _ in 0...10 {
             gameBoard = gameBoardController?.createGameBoard(level: 201)
-            let letterMap = gameBoardController?.createWordMap(gameBoard: gameBoard!)
+            let letterMap = gameBoardController?.createLetterMap(gameBoard: gameBoard!)
             guard let size = letterMap?.size, let numWords = letterMap?.numWords else { return }
             NSLog("\(size)")
             NSLog("\(numWords)")
@@ -92,18 +92,18 @@ class GameBoardControllerTestTests: XCTestCase {
     func testAddWordsToMapIfFit() {
         for _ in 0...10 {
             let gameBoard = GameBoard(word: Word(mainWord: "fallow", anagrams: ["loaf", "allow", "foal", "fall", "wall", "wolf", "flow", "flaw", "awl", "low", "law", "fowl", ], searchWords: [], bonusWords: ["fowl", "loaf", "allow", "foal", "fall", "wall", "wolf", "flow", "flaw", "awl", "low", "law"]))
-            let wordMap = LetterMap(word: ["f", "a", "l", "l", "o", "w"], direction: .after)
+            let letterMap = LetterMap(word: ["f", "a", "l", "l", "o", "w"], direction: .after)
             var searchWords: [[Character]] = []
             for word in gameBoard.word.bonusWords {
                 let searchWord: [Character] = Array(word)
                 searchWords.append(searchWord)
             }
 
-            gameBoardController?.addWordsToMapIfFit(searchWords: searchWords, wordMap: wordMap, mainWordSize: gameBoard.word.mainWord.count)
-            NSLog("WordMap size: \(wordMap.size)")
-            let numWords = wordMap.numWords
+            gameBoardController?.addWordsToMapIfFit(searchWords: searchWords, letterMap: letterMap, mainWordSize: gameBoard.word.mainWord.count)
+            NSLog("LetterMap size: \(letterMap.size)")
+            let numWords = letterMap.numWords
             NSLog("\(numWords)")
-            XCTAssert(wordMap.values.count >= 20)
+            XCTAssert(letterMap.values.count >= 20)
         }
     }
 

@@ -48,21 +48,21 @@ class GameBoardControllerTests: XCTestCase {
         XCTAssertEqual(levelSize, 19)
     }
 
-    func testGenerateWordmap() {
+    func testGenerateLetterMap() {
         for _ in 0...10 {
             let gameBoard = GameBoard(word: Word(mainWord: "fallow", anagrams: ["loaf", "allow", "foal", "fall", "wall", "wolf", "flow", "flaw", "awl", "low", "law", "fowl", ], searchWords: [], bonusWords: ["fowl", "loaf", "allow", "foal", "fall", "wall", "wolf", "flow", "flaw", "awl", "low", "law"]))
-            let wordMap = gameBoardController.createWordMap(gameBoard: gameBoard)
-            var numberOfLettersInWordMap: Int = 0
-            let widthOfWordMap = gameBoard.word.mainWord.count * 2 + 1
-            let numberOfSpacesInWordMap = widthOfWordMap * widthOfWordMap
-            for y in 0..<widthOfWordMap {
-                for x in 0..<widthOfWordMap {
-                    if wordMap[y][x] != nil {
-                        numberOfLettersInWordMap += 1
+            let letterMap = gameBoardController.createLetterMap(gameBoard: gameBoard)
+            var numberOfLettersInLetterMap: Int = 0
+            let widthOfLetterMap = gameBoard.word.mainWord.count * 2 + 1
+            let numberOfSpacesInLetterMap = widthOfLetterMap * widthOfLetterMap
+            for y in 0..<widthOfLetterMap {
+                for x in 0..<widthOfLetterMap {
+                    if letterMap[y][x] != nil {
+                        numberOfLettersInLetterMap += 1
                     }
                 }
             }
-            XCTAssert(numberOfLettersInWordMap > numberOfSpacesInWordMap/3)
+            XCTAssert(numberOfLettersInLetterMap > numberOfSpacesInLetterMap/3)
         }
     }
 

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E219BD3624ADC128007E8F2C /* GameBoardControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219BD3524ADC128007E8F2C /* GameBoardControllerTest.swift */; };
+		E219BD3624ADC128007E8F2C /* GameBoardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219BD3524ADC128007E8F2C /* GameBoardController.swift */; };
 		E219BD3824ADC635007E8F2C /* LetterMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219BD3724ADC635007E8F2C /* LetterMap.swift */; };
 		E22F5779247EDB8700F1C0A5 /* LetterButtonsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F5778247EDB8700F1C0A5 /* LetterButtonsLayout.swift */; };
 		E22F577B247F64BE00F1C0A5 /* setBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F577A247F64BE00F1C0A5 /* setBackground.swift */; };
@@ -52,7 +52,6 @@
 		E2E3DFA22467E9900049235E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2E3DFA02467E9900049235E /* LaunchScreen.storyboard */; };
 		E2E3DFAF2467EA590049235E /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E3DFAE2467EA590049235E /* Word.swift */; };
 		E2E3DFB12467ED8D0049235E /* WordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E3DFB02467ED8D0049235E /* WordController.swift */; };
-		E2EE235624739288009FFEC3 /* GameBoardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EE235524739288009FFEC3 /* GameBoardController.swift */; };
 		E2EE23582473944F009FFEC3 /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EE23572473944F009FFEC3 /* GameBoard.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,7 +66,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E219BD3524ADC128007E8F2C /* GameBoardControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardControllerTest.swift; sourceTree = "<group>"; };
+		E219BD3524ADC128007E8F2C /* GameBoardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardController.swift; sourceTree = "<group>"; };
 		E219BD3724ADC635007E8F2C /* LetterMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterMap.swift; sourceTree = "<group>"; };
 		E22F5778247EDB8700F1C0A5 /* LetterButtonsLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterButtonsLayout.swift; sourceTree = "<group>"; };
 		E22F577A247F64BE00F1C0A5 /* setBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setBackground.swift; sourceTree = "<group>"; };
@@ -116,7 +115,6 @@
 		E2E3DFA32467E9900049235E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2E3DFAE2467EA590049235E /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		E2E3DFB02467ED8D0049235E /* WordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordController.swift; sourceTree = "<group>"; };
-		E2EE235524739288009FFEC3 /* GameBoardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardController.swift; sourceTree = "<group>"; };
 		E2EE23572473944F009FFEC3 /* GameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -240,8 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				E2E3DFB02467ED8D0049235E /* WordController.swift */,
-				E2EE235524739288009FFEC3 /* GameBoardController.swift */,
-				E219BD3524ADC128007E8F2C /* GameBoardControllerTest.swift */,
+				E219BD3524ADC128007E8F2C /* GameBoardController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -411,10 +408,9 @@
 				E2961B2624B0C61D00075C19 /* CoordinateRange.swift in Sources */,
 				E2EE23582473944F009FFEC3 /* GameBoard.swift in Sources */,
 				E25B847B246C5D8600FA3C49 /* WordSearchViewController.swift in Sources */,
-				E219BD3624ADC128007E8F2C /* GameBoardControllerTest.swift in Sources */,
+				E219BD3624ADC128007E8F2C /* GameBoardController.swift in Sources */,
 				E280F7A024691A97000CBEA4 /* MockData.swift in Sources */,
 				E22F5779247EDB8700F1C0A5 /* LetterButtonsLayout.swift in Sources */,
-				E2EE235624739288009FFEC3 /* GameBoardController.swift in Sources */,
 				E2DA2C022474F13B0042E695 /* CharacterSet+Sequence.swift in Sources */,
 				E22F577B247F64BE00F1C0A5 /* setBackground.swift in Sources */,
 				E2961B2224B0C52C00075C19 /* Node.swift in Sources */,

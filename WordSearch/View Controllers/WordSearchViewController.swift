@@ -12,7 +12,7 @@ class WordSearchViewController: UIViewController {
     
     // MARK: - Properties
 //    let gameBoardController = GameBoardController()
-    let gameBoardControllerTest = GameBoardControllerTest()
+    let gameBoardControllerTest = GameBoardController()
     private var word: Word {
         guard let word = gameBoardControllerTest.word else { fatalError() }
         return word
@@ -36,7 +36,7 @@ class WordSearchViewController: UIViewController {
         buttonsCollectionView.delegate = self
         gameBoard = gameBoardControllerTest.createGameBoard(level: 201)
         if let gameBoard = gameBoard {
-            letterMap = gameBoardControllerTest.createWordMap(gameBoard: gameBoard)
+            letterMap = gameBoardControllerTest.createLetterMap(gameBoard: gameBoard)
         }
         updateViews()
         print("mainword: \(word.mainWord), searchwords: \(word.searchWords.count), bonuswords: \(word.bonusWords.count)")
@@ -88,7 +88,7 @@ class WordSearchViewController: UIViewController {
         populateGameBoardMap()
     }
 
-    /// Populates Game Board Map with values from wordMap
+    /// Populates Game Board Map with values from letterMap
     private func populateGameBoardMap() {
         guard let letterMap = letterMap else { return }
         let mapRows = 1 + letterMap.coordinateRange.high.y - letterMap.coordinateRange.low.y
