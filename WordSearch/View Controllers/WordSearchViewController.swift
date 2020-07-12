@@ -12,9 +12,9 @@ class WordSearchViewController: UIViewController {
     
     // MARK: - Properties
 //    let gameBoardController = GameBoardController()
-    let gameBoardControllerTest = GameBoardController()
+    let gameBoardController = GameBoardController()
     private var word: Word {
-        guard let word = gameBoardControllerTest.word else { fatalError() }
+        guard let word = gameBoardController.word else { fatalError() }
         return word
     }
     lazy var mainWord: [Character] = {
@@ -28,15 +28,16 @@ class WordSearchViewController: UIViewController {
     lazy var buttonsCollectionView = UICollectionView(frame: CGRect(center: .zero, size: CGSize(width: view.frame.width * 0.6, height: view.frame.width * 0.6)), collectionViewLayout: LetterButtonsLayout())
     lazy var activeAreaStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     var inProgressLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    var resultsLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.setBackground()
         buttonsCollectionView.dataSource = self
         buttonsCollectionView.delegate = self
-        gameBoard = gameBoardControllerTest.createGameBoard(level: 201)
+        gameBoard = gameBoardController.createGameBoard(level: 201)
         if let gameBoard = gameBoard {
-            letterMap = gameBoardControllerTest.createLetterMap(gameBoard: gameBoard)
+            letterMap = gameBoardController.createLetterMap(gameBoard: gameBoard)
         }
         updateViews()
         print("mainword: \(word.mainWord), searchwords: \(word.searchWords.count), bonuswords: \(word.bonusWords.count)")
@@ -51,8 +52,9 @@ class WordSearchViewController: UIViewController {
     /// Generates a grid of UILabels inside stacked UIStackViews for a map of the height and width of the letterMap plus 2
     private func generateGameBoardMap() {
         guard let letterMap = letterMap else { fatalError() }
+        // mapRows and mapCols to define the width and heigh of the game board
         let mapRows = 1 + letterMap.coordinateRange.high.y - letterMap.coordinateRange.low.y
-        let mapCols = 1 + letterMap.coordinateRange.high.x - letterMap.coordinateRange.low.y
+        let mapCols = 1 + letterMap.coordinateRange.high.x - letterMap.coordinateRange.low.x
         // Set up main UIStackView - "gameBoardMapStackView"
         self.view.addSubview(gameBoardMapStackView)
         gameBoardMapStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -98,7 +100,7 @@ class WordSearchViewController: UIViewController {
             let yCoord = mapRows - (coord.y - letterMap.coordinateRange.low.y)
             guard let stack = gameBoardMapStackView.arrangedSubviews[yCoord] as? UIStackView,
                 let label = stack.arrangedSubviews[xCoord] as? UILabel else { continue }
-            label.text = String(node.value)
+            label.text = String(node.value.uppercased())
         }
     }
 
@@ -110,7 +112,7 @@ class WordSearchViewController: UIViewController {
         activeAreaStackView.axis = .vertical
         activeAreaStackView.alignment = .fill
         activeAreaStackView.distribution = .fillEqually
-        activeAreaStackView.spacing = 10
+        activeAreaStackView.spacing = 0
         NSLayoutConstraint.activate([
             activeAreaStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40),
             activeAreaStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -124,10 +126,18 @@ class WordSearchViewController: UIViewController {
         // modify and add in progress word UILabel
         inProgressLabel.translatesAutoresizingMaskIntoConstraints = false
         inProgressLabel.textAlignment = .center
-        inProgressLabel.font = .boldSystemFont(ofSize: 24)
+        inProgressLabel.font = .boldSystemFont(ofSize: 20)
         inProgressLabel.text = ""
         inProgressLabel.textColor = .systemBlue
         activeAreaStackView.addArrangedSubview(inProgressLabel)
+
+        // modify and add results UILabel
+        resultsLabel.translatesAutoresizingMaskIntoConstraints = false
+        resultsLabel.textAlignment = .center
+        resultsLabel.font = .boldSystemFont(ofSize: 20)
+        resultsLabel.text = "Results Label"
+        resultsLabel.textColor = .systemBlue
+        activeAreaStackView.addArrangedSubview(resultsLabel)
 
         // create and add UIStackView for reset and check word UIButtons
         let controlButtonsStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
@@ -203,7 +213,8 @@ class WordSearchViewController: UIViewController {
     @objc func resetWord(_ sender: UIButton) {
         wordInProgress = ""
         inProgressLabel.text = ""
-        for num in 0...5 {
+
+        for num in 0...buttonsCollectionView.numberOfItems(inSection: 0) {
             if let button = buttonsCollectionView.cellForItem(at: IndexPath(item: num, section: 0))?.subviews[1] as? UIButton {
                 button.isSelected = false
             }
@@ -213,10 +224,13 @@ class WordSearchViewController: UIViewController {
     /// Defines the action taken when the check word button is tapped
     @objc func checkWord(_ sender: UIButton) {
         if word.searchWords.contains(wordInProgress.lowercased()) {
+            resultsLabel.text = "Success: \(wordInProgress) is in search words"
             print("Success: \(wordInProgress) is in search words")
         } else if word.bonusWords.contains(wordInProgress.lowercased()) {
+            resultsLabel.text = "Success: \(wordInProgress) is in bonus words"
             print("Success: \(wordInProgress) is in bonus words")
         } else {
+            resultsLabel.text = "Try again: \(wordInProgress) is not a word"
             print("Try again: \(wordInProgress) is not a word")
         }
         resetWord(sender)
