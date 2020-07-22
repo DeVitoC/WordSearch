@@ -38,6 +38,7 @@ class WordSearchViewController: UIViewController {
         let mapCols = 1 + letterMap.coordinateRange.high.x - letterMap.coordinateRange.low.x
         return mapCols
     }
+    var wordCoords: [String : (Coordinate, Coordinate)] = [:]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +69,7 @@ class WordSearchViewController: UIViewController {
         gameBoardMapStackView.axis = .vertical
         gameBoardMapStackView.distribution = .fillEqually
         gameBoardMapStackView.alignment = .fill
+        gameBoardMapStackView.spacing = 2
         NSLayoutConstraint.activate([
             gameBoardMapStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             gameBoardMapStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -82,6 +84,7 @@ class WordSearchViewController: UIViewController {
             subStack.axis = .horizontal
             subStack.distribution = .fillEqually
             subStack.alignment = .fill
+            subStack.spacing = 2
         }
 
         // Add row of (the height of the letterMap + 2) labels in sub-stackviews with text " "
@@ -90,11 +93,15 @@ class WordSearchViewController: UIViewController {
                 let label = UILabel(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
                 label.translatesAutoresizingMaskIntoConstraints = false
                 label.textAlignment = .center
+                NSLayoutConstraint.activate([
+                    label.widthAnchor.constraint(equalToConstant: label.frame.height)
+                ])
                 label.text = " "
                 (gameBoardMapStackView.arrangedSubviews[y] as! UIStackView).addArrangedSubview(label)
             }
         }
         populateGameBoardMap()
+        convertwordCoords()
     }
 
     /// Populates Game Board Map with values from letterMap
@@ -106,8 +113,24 @@ class WordSearchViewController: UIViewController {
             let yCoord = mapRows - (coord.y - letterMap.coordinateRange.low.y)
             guard let stack = gameBoardMapStackView.arrangedSubviews[yCoord] as? UIStackView,
                 let label = stack.arrangedSubviews[xCoord] as? UILabel else { continue }
-            label.text = String(node.value.uppercased())
+//            wordCoords[Coordinate(x: xCoord, y: yCoord)] = String(node.value.uppercased())
+//            label.text = String(node.value.uppercased())
+            label.backgroundColor = .white
         }
+    }
+
+    /// Convert letterMap.wordCoords coordinates to 2D array coordinates
+    private func convertwordCoords() {
+        guard let letterMap = letterMap else { return }
+
+        for (currentWord, tuple) in letterMap.wordCoords {
+            let xCoordStart = tuple.0.x - letterMap.coordinateRange.low.x
+            let xCoordEnd = tuple.1.x - letterMap.coordinateRange.low.x
+            let yCoordStart = mapRows - (tuple.0.y - letterMap.coordinateRange.low.y)
+            let yCoordEnd = mapRows - (tuple.1.y - letterMap.coordinateRange.low.y)
+            wordCoords[currentWord] = (Coordinate(x: xCoordStart, y: yCoordStart), Coordinate(x: xCoordEnd, y: yCoordEnd))
+        }
+        print(wordCoords)
     }
 
     /// Generates the Active Play area with the letter, reset, and check word UIButtons
@@ -225,12 +248,31 @@ class WordSearchViewController: UIViewController {
         }
         if word.searchWords.contains(wordInProgress.lowercased()) {
             resultsLabel.text = "Success: \(wordInProgress) is in search words"
+            revealWord(searchWord: wordInProgress.lowercased())
         } else if word.bonusWords.contains(wordInProgress.lowercased()) {
             resultsLabel.text = "Success: \(wordInProgress) is in bonus words"
         } else {
             resultsLabel.text = "Try again: \(wordInProgress) is not a word"
         }
         resetWord(sender)
+    }
+
+    func revealWord(searchWord: String) {
+        guard let coordTuple = wordCoords[searchWord] else { return }
+        // axis - True = vertical, False = horizontal
+        let axis = coordTuple.0.x == coordTuple.1.x
+        for i in 0..<searchWord.count {
+            let letter = searchWord[i]
+            if axis {
+                guard let stack = gameBoardMapStackView.arrangedSubviews[coordTuple.0.y + i] as? UIStackView,
+                    let label = stack.arrangedSubviews[coordTuple.0.x] as? UILabel else { return }
+                label.text = letter.uppercased()
+            } else {
+                guard let stack = gameBoardMapStackView.arrangedSubviews[coordTuple.0.y] as? UIStackView,
+                    let label = stack.arrangedSubviews[coordTuple.0.x + i] as? UILabel else { return }
+                label.text = letter.uppercased()
+            }
+        }
     }
 
     /// Defines the action taken when the reset board button is tapped
@@ -254,7 +296,7 @@ class WordSearchViewController: UIViewController {
         if let gameBoard = gameBoard {
             letterMap = gameBoardController.createLetterMap(gameBoard: gameBoard)
         }
-        
+
         updateViews()
     }
 }
@@ -281,5 +323,12 @@ extension WordSearchViewController: UICollectionViewDelegate, UICollectionViewDa
         button.addTarget(self, action: #selector(letterButtonTapped(_:)), for: .touchUpInside)
         cell.addSubview(button)
         return cell
+    }
+
+}
+
+extension StringProtocol {
+    subscript(offset: Int) -> Character {
+        self[index(startIndex, offsetBy: offset)]
     }
 }
