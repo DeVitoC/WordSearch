@@ -11,15 +11,14 @@ import UIKit
 class WordSearchViewController: UIViewController {
     
     // MARK: - Properties
-//    let gameBoardController = GameBoardController()
-    let gameBoardController = GameBoardController()
+    var gameBoardController = GameBoardController()
     private var word: Word {
         guard let word = gameBoardController.word else { fatalError() }
         return word
     }
-    lazy var mainWord: [Character] = {
+    private var mainWord: [Character] {
         return Array(word.mainWord)
-    }()
+    }
     private var wordInProgress: String = ""
     private var gameBoard: GameBoard?
     private var letterMap: LetterMap?
@@ -29,32 +28,40 @@ class WordSearchViewController: UIViewController {
     lazy var activeAreaStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     var inProgressLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     var resultsLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    private var mapRows: Int {
+        guard let letterMap = letterMap else { return 15 }
+        let mapRows = 1 + letterMap.coordinateRange.high.y - letterMap.coordinateRange.low.y
+        return mapRows
+    }
+    private var mapCols: Int {
+        guard let letterMap = letterMap else { return 15 }
+        let mapCols = 1 + letterMap.coordinateRange.high.x - letterMap.coordinateRange.low.x
+        return mapCols
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.setBackground()
-        buttonsCollectionView.dataSource = self
-        buttonsCollectionView.delegate = self
         gameBoard = gameBoardController.createGameBoard(level: 201)
         if let gameBoard = gameBoard {
             letterMap = gameBoardController.createLetterMap(gameBoard: gameBoard)
         }
         updateViews()
-        print("mainword: \(word.mainWord), searchwords: \(word.searchWords.count), bonuswords: \(word.bonusWords.count)")
     }
 
     private func updateViews() {
+        buttonsCollectionView.dataSource = self
+        buttonsCollectionView.delegate = self
+
+        print("mainword: \(word.mainWord), searchwords: \(word.searchWords.count), bonuswords: \(word.bonusWords.count)")
         generateGameBoardMap()
         generateActivePlayButtons()
+        buttonsCollectionView.reloadData()
     }
 
     // MARK: - Set Up Methods
     /// Generates a grid of UILabels inside stacked UIStackViews for a map of the height and width of the letterMap plus 2
     private func generateGameBoardMap() {
-        guard let letterMap = letterMap else { fatalError() }
-        // mapRows and mapCols to define the width and heigh of the game board
-        let mapRows = 1 + letterMap.coordinateRange.high.y - letterMap.coordinateRange.low.y
-        let mapCols = 1 + letterMap.coordinateRange.high.x - letterMap.coordinateRange.low.x
         // Set up main UIStackView - "gameBoardMapStackView"
         self.view.addSubview(gameBoardMapStackView)
         gameBoardMapStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -93,7 +100,6 @@ class WordSearchViewController: UIViewController {
     /// Populates Game Board Map with values from letterMap
     private func populateGameBoardMap() {
         guard let letterMap = letterMap else { return }
-        let mapRows = 1 + letterMap.coordinateRange.high.y - letterMap.coordinateRange.low.y
 
         for (coord, node) in letterMap.values {
             let xCoord = coord.x - letterMap.coordinateRange.low.x
@@ -135,7 +141,7 @@ class WordSearchViewController: UIViewController {
         resultsLabel.translatesAutoresizingMaskIntoConstraints = false
         resultsLabel.textAlignment = .center
         resultsLabel.font = .boldSystemFont(ofSize: 20)
-        resultsLabel.text = "Results Label"
+        resultsLabel.text = " "
         resultsLabel.textColor = .systemBlue
         activeAreaStackView.addArrangedSubview(resultsLabel)
 
@@ -200,7 +206,7 @@ class WordSearchViewController: UIViewController {
     }
 
     /// Defines the action taken when the reset button is tapped
-    @objc func resetWord(_ sender: UIButton) {
+    @objc func resetWord(_ sender: Any) {
         wordInProgress = ""
         inProgressLabel.text = ""
 
@@ -229,7 +235,27 @@ class WordSearchViewController: UIViewController {
 
     /// Defines the action taken when the reset board button is tapped
     @objc func resetBoard(_ sender: UIButton) {
-        print("New Board here")
+        wordInProgress = ""
+        gameBoardMapStackView.removeFromSuperview()
+        buttonsStackView.removeFromSuperview()
+        buttonsCollectionView.removeFromSuperview()
+        activeAreaStackView.removeFromSuperview()
+        inProgressLabel.removeFromSuperview()
+        resultsLabel.removeFromSuperview()
+        gameBoardMapStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        buttonsStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        buttonsCollectionView = UICollectionView(frame: CGRect(center: .zero, size: CGSize(width: view.frame.width * 0.6, height: view.frame.width * 0.6)), collectionViewLayout: LetterButtonsLayout())
+        activeAreaStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        inProgressLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        resultsLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+
+        gameBoardController = GameBoardController()
+        gameBoard = gameBoardController.createGameBoard(level: 201)
+        if let gameBoard = gameBoard {
+            letterMap = gameBoardController.createLetterMap(gameBoard: gameBoard)
+        }
+        
+        updateViews()
     }
 }
 
