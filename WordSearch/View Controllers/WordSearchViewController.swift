@@ -108,7 +108,7 @@ class WordSearchViewController: UIViewController {
     private func populateGameBoardMap() {
         guard let letterMap = letterMap else { return }
 
-        for (coord, node) in letterMap.values {
+        for (coord, _) in letterMap.values {
             let xCoord = coord.x - letterMap.coordinateRange.low.x
             let yCoord = mapRows - (coord.y - letterMap.coordinateRange.low.y)
             guard let stack = gameBoardMapStackView.arrangedSubviews[yCoord] as? UIStackView,
