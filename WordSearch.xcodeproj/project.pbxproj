@@ -55,6 +55,7 @@
 		E2EE23582473944F009FFEC3 /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EE23572473944F009FFEC3 /* GameBoard.swift */; };
 		E2FEA15C24D33770009025F0 /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FEA15B24D33770009025F0 /* MainScreenViewController.swift */; };
 		E2FEA15E24D337AC009025F0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FEA15D24D337AC009025F0 /* SettingsViewController.swift */; };
+		E2FEA16024D3E580009025F0 /* OptionalDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FEA15F24D3E580009025F0 /* OptionalDefaults.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +121,7 @@
 		E2EE23572473944F009FFEC3 /* GameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
 		E2FEA15B24D33770009025F0 /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
 		E2FEA15D24D337AC009025F0 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		E2FEA15F24D3E580009025F0 /* OptionalDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalDefaults.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +226,7 @@
 				E2961B2724B0C63700075C19 /* Enums.swift */,
 				E22F577C247F655800F1C0A5 /* dave-sBga13mu80c-unsplash.jpg */,
 				E22F577A247F64BE00F1C0A5 /* setBackground.swift */,
+				E2FEA15F24D3E580009025F0 /* OptionalDefaults.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -411,6 +414,7 @@
 				E2E3DF982467E98E0049235E /* SceneDelegate.swift in Sources */,
 				E2E3DFAF2467EA590049235E /* Word.swift in Sources */,
 				E2E3DFB12467ED8D0049235E /* WordController.swift in Sources */,
+				E2FEA16024D3E580009025F0 /* OptionalDefaults.swift in Sources */,
 				E2961B2824B0C63700075C19 /* Enums.swift in Sources */,
 				E2961B2624B0C61D00075C19 /* CoordinateRange.swift in Sources */,
 				E2EE23582473944F009FFEC3 /* GameBoard.swift in Sources */,

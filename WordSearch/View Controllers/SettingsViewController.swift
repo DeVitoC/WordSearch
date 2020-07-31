@@ -14,13 +14,22 @@ enum UserSettings: String {
     case off = "OFF"
 }
 
+enum DefaultKeys: String {
+    case music
+    case sound
+    case notifications
+    case language
+}
+
 class SettingsViewController: UIViewController {
 
     // MARK: - Properties
     var mainStack = UIStackView()
     var titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 60))
     let defaults = UserDefaults.standard
+    let languages = ["English", "Spanish", "German"]
 
+    // MARK: - Setup
     override func viewDidLoad() {
         super.viewDidLoad()
         view.setBackground()
@@ -41,11 +50,11 @@ class SettingsViewController: UIViewController {
         let soundSectionLabel = createLabel("SOUND SETTINGS", frame: sectionLabelSize, alignment: .center)
         let soundLabel = createLabel("Sound", frame: itemLabelSize, alignment: .left)
         let musicLabel = createLabel("Music", frame: itemLabelSize, alignment: .left)
-        let otherSectionLabel = createLabel("OTHER", frame: sectionLabelSize, alignment: .center)
         let notificationsLabel = createLabel("Notifications", frame: itemLabelSize, alignment: .left)
-        let soundSC = createSegmentedControl(segmentNames: segmentedItems)
-        let musicSC = createSegmentedControl(segmentNames: segmentedItems)
-        let notificationsSC = createSegmentedControl(segmentNames: segmentedItems)
+        let soundSC = createSegmentedControl(segmentNames: segmentedItems, defaultKey: DefaultKeys.sound.rawValue, tag: 1)
+        let musicSC = createSegmentedControl(segmentNames: segmentedItems, defaultKey: DefaultKeys.music.rawValue, tag: 0)
+        let otherSectionLabel = createLabel("OTHER", frame: sectionLabelSize, alignment: .center)
+        let notificationsSC = createSegmentedControl(segmentNames: segmentedItems, defaultKey: DefaultKeys.notifications.rawValue, tag: 2)
         let languagePicker = createLanguagePicker()
         let soundStack = createElementStackView()
         let musicStack = createElementStackView()
@@ -80,8 +89,6 @@ class SettingsViewController: UIViewController {
         notificationStack.addArrangedSubview(notificationsLabel)
         notificationStack.addArrangedSubview(notificationsSC)
 
-        // Set tamic to falce
-
         // Set constraints
         NSLayoutConstraint.activate([
             mainStack.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
@@ -93,6 +100,7 @@ class SettingsViewController: UIViewController {
         ])
     }
 
+    // MARK: - Setup Helper Methods
     func createLabel(_ title: String, frame: CGRect, alignment: NSTextAlignment) -> UILabel {
         let label = UILabel(frame: frame)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -124,10 +132,13 @@ class SettingsViewController: UIViewController {
         return imageView
     }
 
-    func createSegmentedControl(segmentNames: [String]) -> UISegmentedControl {
+    func createSegmentedControl(segmentNames: [String], defaultKey: DefaultKeys.RawValue, tag: Int) -> UISegmentedControl {
         let segmentedControl = UISegmentedControl(items: segmentNames)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        segmentedControl.selectedSegmentIndex = 0
+        let value = defaults.optionalBool(forKey: defaultKey) ?? true
+        segmentedControl.selectedSegmentIndex = value ? 0 : 1
+        segmentedControl.tag = tag
+        segmentedControl.addTarget(self, action: #selector(scValueChanged(_:)), for: .valueChanged)
 
         return segmentedControl
     }
@@ -137,10 +148,30 @@ class SettingsViewController: UIViewController {
         picker.translatesAutoresizingMaskIntoConstraints = false
         picker.delegate = self
         picker.dataSource = self
+        let defaultValue = defaults.string(forKey: DefaultKeys.language.rawValue) ?? languages[0]
+        let value = languages.firstIndex(of: defaultValue) ?? 0
+        picker.selectRow(value, inComponent: 1, animated: false)
 
         return picker
     }
-    
+
+    @objc func scValueChanged(_ segmentedControl: UISegmentedControl) {
+        var key: String
+        if segmentedControl.tag == 0 {
+            key = DefaultKeys.music.rawValue
+        } else if segmentedControl.tag == 1 {
+            key = DefaultKeys.sound.rawValue
+        } else {
+            key = DefaultKeys.notifications.rawValue
+        }
+
+        if var value = defaults.optionalBool(forKey: key) {
+            value.toggle()
+            defaults.setOptionalBool(value: value, forKey: key)
+        } else {
+            defaults.setOptionalBool(value: false, forKey: key)
+        }
+    }
 
     /*
     // MARK: - Navigation
@@ -163,7 +194,7 @@ extension SettingsViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         if component == 0 {
             return 1
         } else {
-            return 1
+            return languages.count
         }
     }
 
@@ -171,7 +202,13 @@ extension SettingsViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         if component == 0 {
             return "Language"
         } else {
-            return "English"
+            return languages[row]
+        }
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if component == 1 {
+            defaults.set(languages[row], forKey: DefaultKeys.language.rawValue)
         }
     }
 }
