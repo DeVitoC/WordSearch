@@ -53,6 +53,8 @@
 		E2E3DFAF2467EA590049235E /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E3DFAE2467EA590049235E /* Word.swift */; };
 		E2E3DFB12467ED8D0049235E /* WordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E3DFB02467ED8D0049235E /* WordController.swift */; };
 		E2EE23582473944F009FFEC3 /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EE23572473944F009FFEC3 /* GameBoard.swift */; };
+		E2FEA15C24D33770009025F0 /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FEA15B24D33770009025F0 /* MainScreenViewController.swift */; };
+		E2FEA15E24D337AC009025F0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FEA15D24D337AC009025F0 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +118,8 @@
 		E2E3DFAE2467EA590049235E /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		E2E3DFB02467ED8D0049235E /* WordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordController.swift; sourceTree = "<group>"; };
 		E2EE23572473944F009FFEC3 /* GameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
+		E2FEA15B24D33770009025F0 /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
+		E2FEA15D24D337AC009025F0 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,6 +251,8 @@
 			isa = PBXGroup;
 			children = (
 				E25B847A246C5D8600FA3C49 /* WordSearchViewController.swift */,
+				E2FEA15B24D33770009025F0 /* MainScreenViewController.swift */,
+				E2FEA15D24D337AC009025F0 /* SettingsViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -400,6 +406,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2E3DF962467E98E0049235E /* AppDelegate.swift in Sources */,
+				E2FEA15C24D33770009025F0 /* MainScreenViewController.swift in Sources */,
 				E219BD3824ADC635007E8F2C /* LetterMap.swift in Sources */,
 				E2E3DF982467E98E0049235E /* SceneDelegate.swift in Sources */,
 				E2E3DFAF2467EA590049235E /* Word.swift in Sources */,
@@ -415,6 +422,7 @@
 				E22F577B247F64BE00F1C0A5 /* setBackground.swift in Sources */,
 				E2961B2224B0C52C00075C19 /* Node.swift in Sources */,
 				E2961B2424B0C5FA00075C19 /* Coordinate.swift in Sources */,
+				E2FEA15E24D337AC009025F0 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
