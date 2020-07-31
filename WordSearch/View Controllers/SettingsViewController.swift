@@ -26,8 +26,9 @@ class SettingsViewController: UIViewController {
     // MARK: - Properties
     var mainStack = UIStackView()
     var titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 60))
+    let doneButton = UIButton(type: .roundedRect)
     let defaults = UserDefaults.standard
-    let languages = ["English", "Spanish", "German"]
+    let languages = ["English", "Spanish", "German", "Italian", "French", "Dutch", "Danish"]
 
     // MARK: - Setup
     override func viewDidLoad() {
@@ -63,16 +64,22 @@ class SettingsViewController: UIViewController {
         let musicImage = createImageView(systemImage: "music.note")
         let notificationImage = createImageView(systemImage: "envelope.fill")
 
+
         // Set class declared properties
         titleLabel = createLabel("SETTINGS", frame: CGRect(x: 0, y: 0, width: view.frame.width * 2/3, height: 75), alignment: .center)
         titleLabel.font = .systemFont(ofSize: 36)
         mainStack = createElementStackView()
         mainStack.axis = .vertical
         mainStack.alignment = .fill
+        doneButton.setTitle("DONE", for: .normal)
+        doneButton.translatesAutoresizingMaskIntoConstraints = false
+        doneButton.addTarget(self, action: #selector(doneTapped(_:)), for: .touchUpInside)
+
 
         // Add all elements to respective parent views
         view.addSubview(titleLabel)
         view.addSubview(mainStack)
+        view.addSubview(doneButton)
         mainStack.addArrangedSubview(soundSectionLabel)
         mainStack.addArrangedSubview(soundStack)
         mainStack.addArrangedSubview(musicStack)
@@ -97,6 +104,10 @@ class SettingsViewController: UIViewController {
             mainStack.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.6),
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            doneButton.topAnchor.constraint(equalTo: mainStack.bottomAnchor, constant: 20),
+            doneButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            doneButton.widthAnchor.constraint(equalToConstant: 100),
+            doneButton.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
 
@@ -155,6 +166,7 @@ class SettingsViewController: UIViewController {
         return picker
     }
 
+    // MARK: - Action Methods
     @objc func scValueChanged(_ segmentedControl: UISegmentedControl) {
         var key: String
         if segmentedControl.tag == 0 {
@@ -171,6 +183,10 @@ class SettingsViewController: UIViewController {
         } else {
             defaults.setOptionalBool(value: false, forKey: key)
         }
+    }
+
+    @objc func doneTapped(_ button: UIButton) {
+        navigationController?.popToRootViewController(animated: true)
     }
 }
 
