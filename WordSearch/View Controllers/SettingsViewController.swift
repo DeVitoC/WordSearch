@@ -8,12 +8,15 @@
 
 import UIKit
 
-/// UserSettings enum for UserDefaults and Segmented Controls
+/// Enum to describe the UserDefaults values and Segmented Controls items
 enum UserSettings: String {
+    /// Sets Segmented Control item to "ON" or UserDefaults to "ON"
     case on = "ON"
+    /// Sets Segmented Control item to "OFF" or UserDefaults to "OFF"
     case off = "OFF"
 }
 
+/// Enum to describe the UserDefault keys for various UI elements
 enum DefaultKeys: String {
     case music
     case sound
@@ -21,14 +24,28 @@ enum DefaultKeys: String {
     case language
 }
 
+/// View Controller for Settings page
 class SettingsViewController: UIViewController {
 
     // MARK: - Properties
+    /// The main UIStackView for the Settings page
     var mainStack = UIStackView()
+    /// The title UILabel for the Settings page
     var titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 60))
+    /// The "DONE" UIButton for the Settings page
     let doneButton = UIButton(type: .roundedRect)
+    /// The property to access the UserDefaults.standard
     let defaults = UserDefaults.standard
-    let languages = ["English", "Spanish", "German", "Italian", "French", "Dutch", "Danish"]
+    /// An instance of the SetupUIMethods to call on to set up the UI Elements
+    let setupMethods = SetupUIMethods()
+    /// The property that defines the settings items Label sizes
+    lazy var itemLabelSize: CGRect = {
+        CGRect(x: 0, y: 0, width: 150, height: 50)
+    }()
+    /// The property that defines the section Label sizes
+    lazy var sectionLabelSize: CGRect = {
+        CGRect(x: 0, y: 0, width: view.frame.width * 2/3, height: 50)
+    }()
 
     // MARK: - Setup
     override func viewDidLoad() {
@@ -37,44 +54,35 @@ class SettingsViewController: UIViewController {
         setupView()
     }
 
-    /// Updates view when settings are changed
-    func updateViews() {
-
-    }
-
     /// Generates the UI for the Settings View Controller, including all UI Elements
     func setupView() {
         // Declare all variables, constants, and UI elements
-        let itemLabelSize = CGRect(x: 0, y: 0, width: 150, height: 50)
-        let sectionLabelSize = CGRect(x: 0, y: 0, width: view.frame.width * 2/3, height: 50)
         let segmentedItems: [String] = [UserSettings.on.rawValue, UserSettings.off.rawValue]
-        let soundSectionLabel = createLabel("SOUND SETTINGS", frame: sectionLabelSize, alignment: .center)
-        let soundLabel = createLabel("Sound", frame: itemLabelSize, alignment: .left)
-        let musicLabel = createLabel("Music", frame: itemLabelSize, alignment: .left)
-        let notificationsLabel = createLabel("Notifications", frame: itemLabelSize, alignment: .left)
-        let soundSC = createSegmentedControl(segmentNames: segmentedItems, defaultKey: DefaultKeys.sound.rawValue, tag: 1)
-        let musicSC = createSegmentedControl(segmentNames: segmentedItems, defaultKey: DefaultKeys.music.rawValue, tag: 0)
-        let otherSectionLabel = createLabel("OTHER", frame: sectionLabelSize, alignment: .center)
-        let notificationsSC = createSegmentedControl(segmentNames: segmentedItems, defaultKey: DefaultKeys.notifications.rawValue, tag: 2)
-        let languagePicker = createLanguagePicker()
-        let soundStack = createElementStackView()
-        let musicStack = createElementStackView()
-        let notificationStack = createElementStackView()
-        let soundImage = createImageView(systemImage: "speaker.2.fill")
-        let musicImage = createImageView(systemImage: "music.note")
-        let notificationImage = createImageView(systemImage: "envelope.fill")
-
+        let soundSectionLabel = setupMethods.createLabel("SOUND SETTINGS", frame: sectionLabelSize, alignment: .center)
+        let soundLabel = setupMethods.createLabel("Sound", frame: itemLabelSize, alignment: .left)
+        let musicLabel = setupMethods.createLabel("Music", frame: itemLabelSize, alignment: .left)
+        let notificationsLabel = setupMethods.createLabel("Notifications", frame: itemLabelSize, alignment: .left)
+        let soundSC = setupMethods.createSegmentedControl(segmentNames: segmentedItems, defaultKey: DefaultKeys.sound.rawValue, tag: 1)
+        let musicSC = setupMethods.createSegmentedControl(segmentNames: segmentedItems, defaultKey: DefaultKeys.music.rawValue, tag: 0)
+        let otherSectionLabel = setupMethods.createLabel("OTHER", frame: sectionLabelSize, alignment: .center)
+        let notificationsSC = setupMethods.createSegmentedControl(segmentNames: segmentedItems, defaultKey: DefaultKeys.notifications.rawValue, tag: 2)
+        let languagePicker = setupMethods.createLanguagePicker()
+        let soundStack = setupMethods.createElementStackView()
+        let musicStack = setupMethods.createElementStackView()
+        let notificationStack = setupMethods.createElementStackView()
+        let soundImage = setupMethods.createImageView(systemImage: "speaker.2.fill")
+        let musicImage = setupMethods.createImageView(systemImage: "music.note")
+        let notificationImage = setupMethods.createImageView(systemImage: "envelope.fill")
 
         // Set class declared properties
-        titleLabel = createLabel("SETTINGS", frame: CGRect(x: 0, y: 0, width: view.frame.width * 2/3, height: 75), alignment: .center)
+        titleLabel = setupMethods.createLabel("SETTINGS", frame: CGRect(x: 0, y: 0, width: view.frame.width * 2/3, height: 75), alignment: .center)
         titleLabel.font = .systemFont(ofSize: 36)
-        mainStack = createElementStackView()
-        mainStack.axis = .vertical
-        mainStack.alignment = .fill
+        mainStack = setupMethods.createElementStackView(axis: .vertical, alignment: .fill)
         doneButton.setTitle("DONE", for: .normal)
         doneButton.translatesAutoresizingMaskIntoConstraints = false
+        doneButton.backgroundColor = .lightGray
+        doneButton.setTitleColor(.white, for: .normal)
         doneButton.addTarget(self, action: #selector(doneTapped(_:)), for: .touchUpInside)
-
 
         // Add all elements to respective parent views
         view.addSubview(titleLabel)
@@ -107,113 +115,32 @@ class SettingsViewController: UIViewController {
             doneButton.topAnchor.constraint(equalTo: mainStack.bottomAnchor, constant: 20),
             doneButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             doneButton.widthAnchor.constraint(equalToConstant: 100),
-            doneButton.heightAnchor.constraint(equalToConstant: 50),
+            doneButton.heightAnchor.constraint(equalToConstant: 30),
         ])
     }
 
-    // MARK: - Setup Helper Methods
-    func createLabel(_ title: String, frame: CGRect, alignment: NSTextAlignment) -> UILabel {
-        let label = UILabel(frame: frame)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = title
-        label.textAlignment = alignment
-        label.textColor = .white
-
-        return label
-    }
-
-    func createElementStackView() -> UIStackView {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.alignment = .center
-        stackView.distribution = .fillEqually
-        stackView.spacing = 5
-
-        return stackView
-    }
-
-    func createImageView(systemImage: String) -> UIImageView {
-        let imageView = UIImageView(image: UIImage(systemName: systemImage))
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        imageView.heightAnchor.constraint(equalToConstant: 25).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: 25).isActive = true
-
-        return imageView
-    }
-
-    func createSegmentedControl(segmentNames: [String], defaultKey: DefaultKeys.RawValue, tag: Int) -> UISegmentedControl {
-        let segmentedControl = UISegmentedControl(items: segmentNames)
-        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        let value = defaults.optionalBool(forKey: defaultKey) ?? true
-        segmentedControl.selectedSegmentIndex = value ? 0 : 1
-        segmentedControl.tag = tag
-        segmentedControl.addTarget(self, action: #selector(scValueChanged(_:)), for: .valueChanged)
-
-        return segmentedControl
-    }
-
-    func createLanguagePicker() -> UIPickerView {
-        let picker = UIPickerView()
-        picker.translatesAutoresizingMaskIntoConstraints = false
-        picker.delegate = self
-        picker.dataSource = self
-        let defaultValue = defaults.string(forKey: DefaultKeys.language.rawValue) ?? languages[0]
-        let value = languages.firstIndex(of: defaultValue) ?? 0
-        picker.selectRow(value, inComponent: 1, animated: false)
-
-        return picker
-    }
-
     // MARK: - Action Methods
-    @objc func scValueChanged(_ segmentedControl: UISegmentedControl) {
-        var key: String
-        if segmentedControl.tag == 0 {
-            key = DefaultKeys.music.rawValue
-        } else if segmentedControl.tag == 1 {
-            key = DefaultKeys.sound.rawValue
-        } else {
-            key = DefaultKeys.notifications.rawValue
-        }
+//    @objc func scValueChanged(_ segmentedControl: UISegmentedControl) {
+//        var key: String
+//        if segmentedControl.tag == 0 {
+//            key = DefaultKeys.music.rawValue
+//        } else if segmentedControl.tag == 1 {
+//            key = DefaultKeys.sound.rawValue
+//        } else {
+//            key = DefaultKeys.notifications.rawValue
+//        }
+//
+//        if var value = defaults.optionalBool(forKey: key) {
+//            value.toggle()
+//            defaults.setOptionalBool(value: value, forKey: key)
+//        } else {
+//            defaults.setOptionalBool(value: false, forKey: key)
+//        }
+//    }
 
-        if var value = defaults.optionalBool(forKey: key) {
-            value.toggle()
-            defaults.setOptionalBool(value: value, forKey: key)
-        } else {
-            defaults.setOptionalBool(value: false, forKey: key)
-        }
-    }
-
+    /// Action that describes what happens when "DONE" button is tapped
+    /// - Parameter button: The sending **UIButton**.
     @objc func doneTapped(_ button: UIButton) {
         navigationController?.popToRootViewController(animated: true)
-    }
-}
-
-extension SettingsViewController: UIPickerViewDataSource, UIPickerViewDelegate {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        2
-    }
-
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if component == 0 {
-            return 1
-        } else {
-            return languages.count
-        }
-    }
-
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if component == 0 {
-            return "Language"
-        } else {
-            return languages[row]
-        }
-    }
-
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if component == 1 {
-            defaults.set(languages[row], forKey: DefaultKeys.language.rawValue)
-        }
     }
 }
