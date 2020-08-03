@@ -16,7 +16,7 @@
 		E25B847B246C5D8600FA3C49 /* WordSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25B847A246C5D8600FA3C49 /* WordSearchViewController.swift */; };
 		E25B8488246C70E500FA3C49 /* WordSearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25B8487246C70E500FA3C49 /* WordSearchTests.swift */; };
 		E25B8490246C712A00FA3C49 /* WordControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25B848F246C712A00FA3C49 /* WordControllerTest.swift */; };
-		E27B757C2471D8910054BEBB /* fiveLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E27B757B2471D8910054BEBB /* fiveLetterWords.json */; };
+		E27B757C2471D8910054BEBB /* enFiveLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E27B757B2471D8910054BEBB /* enFiveLetterWords.json */; };
 		E280F7A024691A97000CBEA4 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280F79F24691A97000CBEA4 /* MockData.swift */; };
 		E2961B1E24B0946100075C19 /* GameBoardControllerTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2961B1D24B0946100075C19 /* GameBoardControllerTestTests.swift */; };
 		E2961B2024B0947100075C19 /* LetterMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2961B1F24B0947100075C19 /* LetterMapTests.swift */; };
@@ -24,22 +24,22 @@
 		E2961B2424B0C5FA00075C19 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2961B2324B0C5FA00075C19 /* Coordinate.swift */; };
 		E2961B2624B0C61D00075C19 /* CoordinateRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2961B2524B0C61C00075C19 /* CoordinateRange.swift */; };
 		E2961B2824B0C63700075C19 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2961B2724B0C63700075C19 /* Enums.swift */; };
-		E2AD5CBE247233B800937D3D /* threeLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CBD247233B700937D3D /* threeLetterWords.json */; };
-		E2AD5CC02472340200937D3D /* fourLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CBF2472340200937D3D /* fourLetterWords.json */; };
-		E2AD5CC22472341C00937D3D /* sixLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CC12472341C00937D3D /* sixLetterWords.json */; };
-		E2AD5CD52472343200937D3D /* twelveLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CC42472343100937D3D /* twelveLetterWords.json */; };
-		E2AD5CD62472343200937D3D /* sixteenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CC52472343100937D3D /* sixteenLetterWords.json */; };
-		E2AD5CD72472343200937D3D /* sevenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CC62472343100937D3D /* sevenLetterWords.json */; };
-		E2AD5CD82472343200937D3D /* tenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CC72472343100937D3D /* tenLetterWords.json */; };
-		E2AD5CDA2472343200937D3D /* seventeenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CC92472343100937D3D /* seventeenLetterWords.json */; };
-		E2AD5CDB2472343200937D3D /* eightLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CCA2472343100937D3D /* eightLetterWords.json */; };
-		E2AD5CDC2472343200937D3D /* elevenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CCB2472343100937D3D /* elevenLetterWords.json */; };
-		E2AD5CDD2472343200937D3D /* greaterThanEighteenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CCC2472343100937D3D /* greaterThanEighteenLetterWords.json */; };
-		E2AD5CDE2472343200937D3D /* nineLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CCD2472343100937D3D /* nineLetterWords.json */; };
-		E2AD5CE02472343200937D3D /* thirteenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CCF2472343200937D3D /* thirteenLetterWords.json */; };
-		E2AD5CE12472343200937D3D /* fifteenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CD02472343200937D3D /* fifteenLetterWords.json */; };
-		E2AD5CE22472343200937D3D /* fourteenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CD12472343200937D3D /* fourteenLetterWords.json */; };
-		E2AD5CE42472343200937D3D /* eighteenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CD32472343200937D3D /* eighteenLetterWords.json */; };
+		E2AD5CBE247233B800937D3D /* enThreeLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CBD247233B700937D3D /* enThreeLetterWords.json */; };
+		E2AD5CC02472340200937D3D /* enFourLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CBF2472340200937D3D /* enFourLetterWords.json */; };
+		E2AD5CC22472341C00937D3D /* enSixLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CC12472341C00937D3D /* enSixLetterWords.json */; };
+		E2AD5CD52472343200937D3D /* enTwelveLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CC42472343100937D3D /* enTwelveLetterWords.json */; };
+		E2AD5CD62472343200937D3D /* enSixteenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CC52472343100937D3D /* enSixteenLetterWords.json */; };
+		E2AD5CD72472343200937D3D /* enSevenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CC62472343100937D3D /* enSevenLetterWords.json */; };
+		E2AD5CD82472343200937D3D /* enTenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CC72472343100937D3D /* enTenLetterWords.json */; };
+		E2AD5CDA2472343200937D3D /* enSeventeenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CC92472343100937D3D /* enSeventeenLetterWords.json */; };
+		E2AD5CDB2472343200937D3D /* enEightLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CCA2472343100937D3D /* enEightLetterWords.json */; };
+		E2AD5CDC2472343200937D3D /* enElevenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CCB2472343100937D3D /* enElevenLetterWords.json */; };
+		E2AD5CDD2472343200937D3D /* enGreaterThanEighteenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CCC2472343100937D3D /* enGreaterThanEighteenLetterWords.json */; };
+		E2AD5CDE2472343200937D3D /* enNineLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CCD2472343100937D3D /* enNineLetterWords.json */; };
+		E2AD5CE02472343200937D3D /* enThirteenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CCF2472343200937D3D /* enThirteenLetterWords.json */; };
+		E2AD5CE12472343200937D3D /* enFifteenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CD02472343200937D3D /* enFifteenLetterWords.json */; };
+		E2AD5CE22472343200937D3D /* enFourteenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CD12472343200937D3D /* enFourteenLetterWords.json */; };
+		E2AD5CE42472343200937D3D /* enEighteenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CD32472343200937D3D /* enEighteenLetterWords.json */; };
 		E2B5977A24B0CC1000E4CC71 /* NodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B5977924B0CC1000E4CC71 /* NodeTests.swift */; };
 		E2B5977C24B0CC2100E4CC71 /* CoordinateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B5977B24B0CC2100E4CC71 /* CoordinateTests.swift */; };
 		E2B5977E24B0CC4200E4CC71 /* CoordinateRangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B5977D24B0CC4200E4CC71 /* CoordinateRangeTests.swift */; };
@@ -190,7 +190,7 @@
 		E25B8487246C70E500FA3C49 /* WordSearchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSearchTests.swift; sourceTree = "<group>"; };
 		E25B8489246C70E500FA3C49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E25B848F246C712A00FA3C49 /* WordControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordControllerTest.swift; sourceTree = "<group>"; };
-		E27B757B2471D8910054BEBB /* fiveLetterWords.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = fiveLetterWords.json; sourceTree = "<group>"; };
+		E27B757B2471D8910054BEBB /* enFiveLetterWords.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = enFiveLetterWords.json; sourceTree = "<group>"; };
 		E280F79F24691A97000CBEA4 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		E2961B1D24B0946100075C19 /* GameBoardControllerTestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardControllerTestTests.swift; sourceTree = "<group>"; };
 		E2961B1F24B0947100075C19 /* LetterMapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterMapTests.swift; sourceTree = "<group>"; };
@@ -198,22 +198,22 @@
 		E2961B2324B0C5FA00075C19 /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
 		E2961B2524B0C61C00075C19 /* CoordinateRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateRange.swift; sourceTree = "<group>"; };
 		E2961B2724B0C63700075C19 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
-		E2AD5CBD247233B700937D3D /* threeLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = threeLetterWords.json; sourceTree = "<group>"; };
-		E2AD5CBF2472340200937D3D /* fourLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fourLetterWords.json; sourceTree = "<group>"; };
-		E2AD5CC12472341C00937D3D /* sixLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sixLetterWords.json; sourceTree = "<group>"; };
-		E2AD5CC42472343100937D3D /* twelveLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = twelveLetterWords.json; sourceTree = "<group>"; };
-		E2AD5CC52472343100937D3D /* sixteenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sixteenLetterWords.json; sourceTree = "<group>"; };
-		E2AD5CC62472343100937D3D /* sevenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sevenLetterWords.json; sourceTree = "<group>"; };
-		E2AD5CC72472343100937D3D /* tenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tenLetterWords.json; sourceTree = "<group>"; };
-		E2AD5CC92472343100937D3D /* seventeenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = seventeenLetterWords.json; sourceTree = "<group>"; };
-		E2AD5CCA2472343100937D3D /* eightLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = eightLetterWords.json; sourceTree = "<group>"; };
-		E2AD5CCB2472343100937D3D /* elevenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = elevenLetterWords.json; sourceTree = "<group>"; };
-		E2AD5CCC2472343100937D3D /* greaterThanEighteenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = greaterThanEighteenLetterWords.json; sourceTree = "<group>"; };
-		E2AD5CCD2472343100937D3D /* nineLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nineLetterWords.json; sourceTree = "<group>"; };
-		E2AD5CCF2472343200937D3D /* thirteenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thirteenLetterWords.json; sourceTree = "<group>"; };
-		E2AD5CD02472343200937D3D /* fifteenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fifteenLetterWords.json; sourceTree = "<group>"; };
-		E2AD5CD12472343200937D3D /* fourteenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fourteenLetterWords.json; sourceTree = "<group>"; };
-		E2AD5CD32472343200937D3D /* eighteenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = eighteenLetterWords.json; sourceTree = "<group>"; };
+		E2AD5CBD247233B700937D3D /* enThreeLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = enThreeLetterWords.json; sourceTree = "<group>"; };
+		E2AD5CBF2472340200937D3D /* enFourLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = enFourLetterWords.json; sourceTree = "<group>"; };
+		E2AD5CC12472341C00937D3D /* enSixLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = enSixLetterWords.json; sourceTree = "<group>"; };
+		E2AD5CC42472343100937D3D /* enTwelveLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = enTwelveLetterWords.json; sourceTree = "<group>"; };
+		E2AD5CC52472343100937D3D /* enSixteenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = enSixteenLetterWords.json; sourceTree = "<group>"; };
+		E2AD5CC62472343100937D3D /* enSevenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = enSevenLetterWords.json; sourceTree = "<group>"; };
+		E2AD5CC72472343100937D3D /* enTenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = enTenLetterWords.json; sourceTree = "<group>"; };
+		E2AD5CC92472343100937D3D /* enSeventeenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = enSeventeenLetterWords.json; sourceTree = "<group>"; };
+		E2AD5CCA2472343100937D3D /* enEightLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = enEightLetterWords.json; sourceTree = "<group>"; };
+		E2AD5CCB2472343100937D3D /* enElevenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = enElevenLetterWords.json; sourceTree = "<group>"; };
+		E2AD5CCC2472343100937D3D /* enGreaterThanEighteenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = enGreaterThanEighteenLetterWords.json; sourceTree = "<group>"; };
+		E2AD5CCD2472343100937D3D /* enNineLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = enNineLetterWords.json; sourceTree = "<group>"; };
+		E2AD5CCF2472343200937D3D /* enThirteenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = enThirteenLetterWords.json; sourceTree = "<group>"; };
+		E2AD5CD02472343200937D3D /* enFifteenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = enFifteenLetterWords.json; sourceTree = "<group>"; };
+		E2AD5CD12472343200937D3D /* enFourteenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = enFourteenLetterWords.json; sourceTree = "<group>"; };
+		E2AD5CD32472343200937D3D /* enEighteenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = enEighteenLetterWords.json; sourceTree = "<group>"; };
 		E2B5977924B0CC1000E4CC71 /* NodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeTests.swift; sourceTree = "<group>"; };
 		E2B5977B24B0CC2100E4CC71 /* CoordinateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateTests.swift; sourceTree = "<group>"; };
 		E2B5977D24B0CC4200E4CC71 /* CoordinateRangeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateRangeTests.swift; sourceTree = "<group>"; };
@@ -490,23 +490,23 @@
 		E2FEA16124D3F51D009025F0 /* English */ = {
 			isa = PBXGroup;
 			children = (
-				E2AD5CBD247233B700937D3D /* threeLetterWords.json */,
-				E2AD5CBF2472340200937D3D /* fourLetterWords.json */,
-				E27B757B2471D8910054BEBB /* fiveLetterWords.json */,
-				E2AD5CC12472341C00937D3D /* sixLetterWords.json */,
-				E2AD5CD32472343200937D3D /* eighteenLetterWords.json */,
-				E2AD5CCA2472343100937D3D /* eightLetterWords.json */,
-				E2AD5CCB2472343100937D3D /* elevenLetterWords.json */,
-				E2AD5CD02472343200937D3D /* fifteenLetterWords.json */,
-				E2AD5CD12472343200937D3D /* fourteenLetterWords.json */,
-				E2AD5CCD2472343100937D3D /* nineLetterWords.json */,
-				E2AD5CCC2472343100937D3D /* greaterThanEighteenLetterWords.json */,
-				E2AD5CC62472343100937D3D /* sevenLetterWords.json */,
-				E2AD5CC92472343100937D3D /* seventeenLetterWords.json */,
-				E2AD5CC52472343100937D3D /* sixteenLetterWords.json */,
-				E2AD5CC72472343100937D3D /* tenLetterWords.json */,
-				E2AD5CCF2472343200937D3D /* thirteenLetterWords.json */,
-				E2AD5CC42472343100937D3D /* twelveLetterWords.json */,
+				E2AD5CBD247233B700937D3D /* enThreeLetterWords.json */,
+				E2AD5CBF2472340200937D3D /* enFourLetterWords.json */,
+				E27B757B2471D8910054BEBB /* enFiveLetterWords.json */,
+				E2AD5CC12472341C00937D3D /* enSixLetterWords.json */,
+				E2AD5CD32472343200937D3D /* enEighteenLetterWords.json */,
+				E2AD5CCA2472343100937D3D /* enEightLetterWords.json */,
+				E2AD5CCB2472343100937D3D /* enElevenLetterWords.json */,
+				E2AD5CD02472343200937D3D /* enFifteenLetterWords.json */,
+				E2AD5CD12472343200937D3D /* enFourteenLetterWords.json */,
+				E2AD5CCD2472343100937D3D /* enNineLetterWords.json */,
+				E2AD5CCC2472343100937D3D /* enGreaterThanEighteenLetterWords.json */,
+				E2AD5CC62472343100937D3D /* enSevenLetterWords.json */,
+				E2AD5CC92472343100937D3D /* enSeventeenLetterWords.json */,
+				E2AD5CC52472343100937D3D /* enSixteenLetterWords.json */,
+				E2AD5CC72472343100937D3D /* enTenLetterWords.json */,
+				E2AD5CCF2472343200937D3D /* enThirteenLetterWords.json */,
+				E2AD5CC42472343100937D3D /* enTwelveLetterWords.json */,
 			);
 			name = English;
 			sourceTree = "<group>";
@@ -790,7 +790,7 @@
 				E2FEA20B24D40ACD009025F0 /* frFifteenLetterWords.json in Resources */,
 				E2FEA1B524D40794009025F0 /* deFourteenLetterWords.json in Resources */,
 				E2FEA24D24D40CE9009025F0 /* daThreeLetterWords.json in Resources */,
-				E2AD5CDC2472343200937D3D /* elevenLetterWords.json in Resources */,
+				E2AD5CDC2472343200937D3D /* enElevenLetterWords.json in Resources */,
 				E2FEA18524D4060A009025F0 /* esFourLetterWords.json in Resources */,
 				E2FEA1B024D40794009025F0 /* deEightLetterWords.json in Resources */,
 				E2FEA25024D40CE9009025F0 /* daElevenLetterWords.json in Resources */,
@@ -809,19 +809,19 @@
 				E2FEA18A24D4060A009025F0 /* esTenLetterWords.json in Resources */,
 				E2FEA20724D40ACD009025F0 /* frTenLetterWords.json in Resources */,
 				E2FEA1B824D40794009025F0 /* deSixLetterWords.json in Resources */,
-				E2AD5CDA2472343200937D3D /* seventeenLetterWords.json in Resources */,
-				E2AD5CC02472340200937D3D /* fourLetterWords.json in Resources */,
+				E2AD5CDA2472343200937D3D /* enSeventeenLetterWords.json in Resources */,
+				E2AD5CC02472340200937D3D /* enFourLetterWords.json in Resources */,
 				E2FEA20524D40ACD009025F0 /* frSixteenLetterWords.json in Resources */,
 				E2FEA1E124D40982009025F0 /* itFifteenLetterWords.json in Resources */,
 				E2FEA22C24D40BE0009025F0 /* nlTwelveLetterWords.json in Resources */,
 				E22F577D247F655800F1C0A5 /* dave-sBga13mu80c-unsplash.jpg in Resources */,
 				E2FEA22B24D40BE0009025F0 /* nlSevenLetterWords.json in Resources */,
-				E2AD5CE12472343200937D3D /* fifteenLetterWords.json in Resources */,
+				E2AD5CE12472343200937D3D /* enFifteenLetterWords.json in Resources */,
 				E2FEA22124D40BE0009025F0 /* nlSixteenLetterWords.json in Resources */,
 				E2FEA1B224D40794009025F0 /* deGreaterThanEighteenLetterWords.json in Resources */,
-				E2AD5CE42472343200937D3D /* eighteenLetterWords.json in Resources */,
+				E2AD5CE42472343200937D3D /* enEighteenLetterWords.json in Resources */,
 				E2FEA1B424D40794009025F0 /* deElevenLetterWords.json in Resources */,
-				E2AD5CE22472343200937D3D /* fourteenLetterWords.json in Resources */,
+				E2AD5CE22472343200937D3D /* enFourteenLetterWords.json in Resources */,
 				E2FEA1BB24D40794009025F0 /* deFifteenLetterWords.json in Resources */,
 				E2FEA22424D40BE0009025F0 /* nlNineLetterWords.json in Resources */,
 				E2FEA18B24D4060A009025F0 /* esElevenLetterWords.json in Resources */,
@@ -829,8 +829,8 @@
 				E2FEA20624D40ACD009025F0 /* frSixLetterWords.json in Resources */,
 				E2FEA24524D40CE9009025F0 /* daSeventeenLetterWords.json in Resources */,
 				E2FEA1B724D40794009025F0 /* deTenLetterWords.json in Resources */,
-				E2AD5CE02472343200937D3D /* thirteenLetterWords.json in Resources */,
-				E2AD5CBE247233B800937D3D /* threeLetterWords.json in Resources */,
+				E2AD5CE02472343200937D3D /* enThirteenLetterWords.json in Resources */,
+				E2AD5CBE247233B800937D3D /* enThreeLetterWords.json in Resources */,
 				E2FEA1FA24D40ACD009025F0 /* frEightLetterWords.json in Resources */,
 				E2FEA20024D40ACD009025F0 /* frFourteenLetterWords.json in Resources */,
 				E2FEA18824D4060A009025F0 /* esEightLetterWords.json in Resources */,
@@ -838,12 +838,12 @@
 				E2FEA1F924D40ACD009025F0 /* frTwelveLetterWords.json in Resources */,
 				E2FEA19124D4060A009025F0 /* esNineLetterWords.json in Resources */,
 				E2FEA1E024D40982009025F0 /* itTwelveLetterWords.json in Resources */,
-				E2AD5CDE2472343200937D3D /* nineLetterWords.json in Resources */,
+				E2AD5CDE2472343200937D3D /* enNineLetterWords.json in Resources */,
 				E2FEA1D224D40982009025F0 /* itEighteenLetterWords.json in Resources */,
 				E2FEA1D424D40982009025F0 /* itNineLetterWords.json in Resources */,
 				E2FEA24724D40CE9009025F0 /* daFourLetterWords.json in Resources */,
 				E2FEA25724D40CE9009025F0 /* daEightLetterWords.json in Resources */,
-				E2AD5CD62472343200937D3D /* sixteenLetterWords.json in Resources */,
+				E2AD5CD62472343200937D3D /* enSixteenLetterWords.json in Resources */,
 				E2FEA25424D40CE9009025F0 /* daFiveLetterWords.json in Resources */,
 				E2FEA22724D40BE0009025F0 /* nlFiveLetterWords.json in Resources */,
 				E2FEA1D524D40982009025F0 /* itElevenLetterWords.json in Resources */,
@@ -854,7 +854,7 @@
 				E2E3DF9F2467E9900049235E /* Assets.xcassets in Resources */,
 				E2FEA24824D40CE9009025F0 /* daSevenLetterWords.json in Resources */,
 				E2FEA22924D40BE0009025F0 /* nlThreeLetterWords.json in Resources */,
-				E2AD5CD52472343200937D3D /* twelveLetterWords.json in Resources */,
+				E2AD5CD52472343200937D3D /* enTwelveLetterWords.json in Resources */,
 				E2FEA18F24D4060A009025F0 /* esTwelveLetterWords.json in Resources */,
 				E2FEA25624D40CE9009025F0 /* daTenLetterWords.json in Resources */,
 				E2FEA22524D40BE0009025F0 /* nlEighteenLetterWords.json in Resources */,
@@ -864,15 +864,15 @@
 				E2FEA1FB24D40ACD009025F0 /* frThreeLetterWords.json in Resources */,
 				E2FEA22224D40BE0009025F0 /* nlSixLetterWords.json in Resources */,
 				E2FEA22024D40BE0009025F0 /* nlFifteenLetterWords.json in Resources */,
-				E27B757C2471D8910054BEBB /* fiveLetterWords.json in Resources */,
-				E2AD5CD72472343200937D3D /* sevenLetterWords.json in Resources */,
+				E27B757C2471D8910054BEBB /* enFiveLetterWords.json in Resources */,
+				E2AD5CD72472343200937D3D /* enSevenLetterWords.json in Resources */,
 				E2FEA18724D4060A009025F0 /* esEighteenLetterWords.json in Resources */,
 				E2FEA24624D40CE9009025F0 /* daThirteenLetterWords.json in Resources */,
 				E2FEA19224D4060A009025F0 /* esSixLetterWords.json in Resources */,
-				E2AD5CDD2472343200937D3D /* greaterThanEighteenLetterWords.json in Resources */,
+				E2AD5CDD2472343200937D3D /* enGreaterThanEighteenLetterWords.json in Resources */,
 				E2FEA20924D40ACD009025F0 /* frSeventeenLetterWords.json in Resources */,
 				E2FEA24924D40CE9009025F0 /* daGreaterThanEighteenLetterWords.json in Resources */,
-				E2AD5CD82472343200937D3D /* tenLetterWords.json in Resources */,
+				E2AD5CD82472343200937D3D /* enTenLetterWords.json in Resources */,
 				E2FEA20824D40ACD009025F0 /* frNineLetterWords.json in Resources */,
 				E2FEA1DC24D40982009025F0 /* itGreaterThanEighteenLetterWords.json in Resources */,
 				E2FEA24F24D40CE9009025F0 /* daEighteenLetterWords.json in Resources */,
@@ -884,13 +884,13 @@
 				E2FEA1B124D40794009025F0 /* deEighteenLetterWords.json in Resources */,
 				E2FEA20324D40ACD009025F0 /* frGreaterThanEighteenLetterWords.json in Resources */,
 				E2FEA1FD24D40ACD009025F0 /* frThirteenLetterWords.json in Resources */,
-				E2AD5CDB2472343200937D3D /* eightLetterWords.json in Resources */,
+				E2AD5CDB2472343200937D3D /* enEightLetterWords.json in Resources */,
 				E2FEA18424D4060A009025F0 /* esGreaterThanEighteenLetterWords.json in Resources */,
 				E2FEA1DA24D40982009025F0 /* itThreeLetterWords.json in Resources */,
 				E2FEA19324D4060A009025F0 /* esSixteenLetterWords.json in Resources */,
 				E2FEA25124D40CE9009025F0 /* daSixLetterWords.json in Resources */,
 				E2FEA1A924D40794009025F0 /* deSevenLetterWords.json in Resources */,
-				E2AD5CC22472341C00937D3D /* sixLetterWords.json in Resources */,
+				E2AD5CC22472341C00937D3D /* enSixLetterWords.json in Resources */,
 				E2FEA22A24D40BE0009025F0 /* nlEightLetterWords.json in Resources */,
 				E2FEA25224D40CE9009025F0 /* daFourteenLetterWords.json in Resources */,
 				E2E3DF9D2467E98E0049235E /* Main.storyboard in Resources */,

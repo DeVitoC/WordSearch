@@ -22,12 +22,22 @@ class WordSearchViewController: UIViewController {
     private var wordInProgress: String = ""
     private var gameBoard: GameBoard?
     private var letterMap: LetterMap?
-    lazy var gameBoardMapStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-    lazy var buttonsStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-    lazy var buttonsCollectionView = UICollectionView(frame: CGRect(center: .zero, size: CGSize(width: view.frame.width * 0.6, height: view.frame.width * 0.6)), collectionViewLayout: LetterButtonsLayout())
-    lazy var activeAreaStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-    var inProgressLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-    var resultsLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    var setupMethods = SetupUIMethods()
+    lazy var gameBoardMapStackView = {
+        setupMethods.createElementStackView(axis: .vertical, alignment: .fill, distribution: .fillEqually, spacing: 2)
+    }()
+    lazy var buttonsCollectionView = {
+        UICollectionView(frame: CGRect(center: .zero, size: CGSize(width: view.frame.width * 0.6, height: view.frame.width * 0.6)), collectionViewLayout: LetterButtonsLayout())
+    }()
+    lazy var activeAreaStackView = {
+        setupMethods.createElementStackView(axis: .vertical, alignment: .fill, distribution: .fillEqually, spacing: 0)
+    }()
+    lazy var inProgressLabel: UILabel = {
+        setupMethods.createLabel("", frame: .zero, alignment: .center, textColor: .systemBlue)
+    }()
+    lazy var resultsLabel: UILabel = {
+        setupMethods.createLabel("", frame: .zero, alignment: .center, textColor: .systemBlue)
+    }()
     private var mapRows: Int {
         guard let letterMap = letterMap else { return 15 }
         let mapRows = 1 + letterMap.coordinateRange.high.y - letterMap.coordinateRange.low.y
@@ -65,11 +75,6 @@ class WordSearchViewController: UIViewController {
     private func generateGameBoardMap() {
         // Set up main UIStackView - "gameBoardMapStackView"
         self.view.addSubview(gameBoardMapStackView)
-        gameBoardMapStackView.translatesAutoresizingMaskIntoConstraints = false
-        gameBoardMapStackView.axis = .vertical
-        gameBoardMapStackView.distribution = .fillEqually
-        gameBoardMapStackView.alignment = .fill
-        gameBoardMapStackView.spacing = 2
         NSLayoutConstraint.activate([
             gameBoardMapStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             gameBoardMapStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -79,24 +84,17 @@ class WordSearchViewController: UIViewController {
 
         // Add stacks of UIStackViews - "gameBoardMapStackView.arrangedSubViews[] as UIStackView"
         for _ in 0..<mapRows + 2 {
-            let subStack = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 25))
+            let subStack = setupMethods.createElementStackView(axis: .horizontal, alignment: .fill, distribution: .fillEqually, spacing: 2)
             gameBoardMapStackView.addArrangedSubview(subStack)
-            subStack.axis = .horizontal
-            subStack.distribution = .fillEqually
-            subStack.alignment = .fill
-            subStack.spacing = 2
         }
 
         // Add row of (the height of the letterMap + 2) labels in sub-stackviews with text " "
         for y in 0..<mapRows + 2 {
             for _ in 0..<mapCols + 2 {
-                let label = UILabel(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
-                label.translatesAutoresizingMaskIntoConstraints = false
-                label.textAlignment = .center
+                let label = setupMethods.createLabel(" ", frame: CGRect(center: .zero, size: CGSize(width: 25, height: 25)), alignment: .center, textColor: .black)
                 NSLayoutConstraint.activate([
                     label.widthAnchor.constraint(equalToConstant: label.frame.height)
                 ])
-                label.text = " "
                 (gameBoardMapStackView.arrangedSubviews[y] as! UIStackView).addArrangedSubview(label)
             }
         }
@@ -113,8 +111,6 @@ class WordSearchViewController: UIViewController {
             let yCoord = mapRows - (coord.y - letterMap.coordinateRange.low.y)
             guard let stack = gameBoardMapStackView.arrangedSubviews[yCoord] as? UIStackView,
                 let label = stack.arrangedSubviews[xCoord] as? UILabel else { continue }
-//            wordCoords[Coordinate(x: xCoord, y: yCoord)] = String(node.value.uppercased())
-//            label.text = String(node.value.uppercased())
             label.backgroundColor = .white
         }
     }
@@ -135,13 +131,8 @@ class WordSearchViewController: UIViewController {
 
     /// Generates the Active Play area with the letter, reset, and check word UIButtons
     private func generateActivePlayButtons() {
-        // Create activeAreaStackView with constraints
+        // Add activeAreaStackView to view with constraints
         self.view.addSubview(activeAreaStackView)
-        activeAreaStackView.translatesAutoresizingMaskIntoConstraints = false
-        activeAreaStackView.axis = .vertical
-        activeAreaStackView.alignment = .fill
-        activeAreaStackView.distribution = .fillEqually
-        activeAreaStackView.spacing = 0
         NSLayoutConstraint.activate([
             activeAreaStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40),
             activeAreaStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -153,28 +144,15 @@ class WordSearchViewController: UIViewController {
         generateButtons()
 
         // modify and add in progress word UILabel
-        inProgressLabel.translatesAutoresizingMaskIntoConstraints = false
-        inProgressLabel.textAlignment = .center
         inProgressLabel.font = .boldSystemFont(ofSize: 20)
-        inProgressLabel.text = ""
-        inProgressLabel.textColor = .systemBlue
         activeAreaStackView.addArrangedSubview(inProgressLabel)
 
         // modify and add results UILabel
-        resultsLabel.translatesAutoresizingMaskIntoConstraints = false
-        resultsLabel.textAlignment = .center
         resultsLabel.font = .boldSystemFont(ofSize: 20)
-        resultsLabel.text = " "
-        resultsLabel.textColor = .systemBlue
         activeAreaStackView.addArrangedSubview(resultsLabel)
 
         // create and add UIStackView for reset and check word UIButtons
-        let controlButtonsStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        controlButtonsStackView.translatesAutoresizingMaskIntoConstraints = false
-        controlButtonsStackView.axis = .horizontal
-        controlButtonsStackView.alignment = .center
-        controlButtonsStackView.distribution = .fillEqually
-        controlButtonsStackView.spacing = 10
+        let controlButtonsStackView = setupMethods.createElementStackView(axis: .horizontal, alignment: .center, distribution: .fillEqually, spacing: 10)
         activeAreaStackView.addArrangedSubview(controlButtonsStackView)
 
         // add reset and check word UIButtons to controlButtonsStackView
@@ -279,17 +257,16 @@ class WordSearchViewController: UIViewController {
     @objc func resetBoard(_ sender: UIButton) {
         wordInProgress = ""
         gameBoardMapStackView.removeFromSuperview()
-        buttonsStackView.removeFromSuperview()
         buttonsCollectionView.removeFromSuperview()
         activeAreaStackView.removeFromSuperview()
         inProgressLabel.removeFromSuperview()
         resultsLabel.removeFromSuperview()
-        gameBoardMapStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        buttonsStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        gameBoardMapStackView = setupMethods.createElementStackView(axis: .vertical, alignment: .fill, distribution: .fillEqually, spacing: 2)
         buttonsCollectionView = UICollectionView(frame: CGRect(center: .zero, size: CGSize(width: view.frame.width * 0.6, height: view.frame.width * 0.6)), collectionViewLayout: LetterButtonsLayout())
-        activeAreaStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        inProgressLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        resultsLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        activeAreaStackView = setupMethods.createElementStackView(axis: .vertical, alignment: .fill, distribution: .fillEqually, spacing: 0)
+
+        inProgressLabel = setupMethods.createLabel("", frame: .zero, alignment: .center, textColor: .systemBlue)
+        resultsLabel = setupMethods.createLabel("", frame: .zero, alignment: .center, textColor: .systemBlue)
 
         gameBoardController = GameBoardController()
         gameBoard = gameBoardController.createGameBoard(level: 201)
