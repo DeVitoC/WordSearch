@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+class PlayerController {
+    let context = CoreDataStack.shared.mainContext
+
+    func fetchCourses() {
+        
+    }
+}

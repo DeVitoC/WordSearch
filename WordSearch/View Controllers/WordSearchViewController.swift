@@ -137,7 +137,7 @@ class WordSearchViewController: UIViewController {
             activeAreaStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40),
             activeAreaStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             activeAreaStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            activeAreaStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.08)
+//            activeAreaStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.08)
         ])
 
         // create and add letter buttons to Active Play area UIStackView

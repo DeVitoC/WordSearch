@@ -9,7 +9,8 @@
 import CoreData
 
 extension Player {
-    convenience init(firstName: String? = nil,
+    convenience init(identifier: UUID = UUID(),
+                     firstName: String? = nil,
                      lastName: String? = nil,
                      level: Int = 0,
                      coins: Int = 0,
@@ -17,7 +18,7 @@ extension Player {
                      dogs: Int = 0,
                      dolphins: Int = 0,
                      lastDailyGift: Date = Date(),
-                     context: NSManagedObjectContext) {
+                     context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
         self.init(context: context)
         self.firstName = firstName
         self.lastName = lastName

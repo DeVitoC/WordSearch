@@ -40,6 +40,10 @@
 		E2AD5CE12472343200937D3D /* enFifteenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CD02472343200937D3D /* enFifteenLetterWords.json */; };
 		E2AD5CE22472343200937D3D /* enFourteenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CD12472343200937D3D /* enFourteenLetterWords.json */; };
 		E2AD5CE42472343200937D3D /* enEighteenLetterWords.json in Resources */ = {isa = PBXBuildFile; fileRef = E2AD5CD32472343200937D3D /* enEighteenLetterWords.json */; };
+		E2B223EC24DFF92100A02D89 /* Player.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E2B223EA24DFF92100A02D89 /* Player.xcdatamodeld */; };
+		E2B223F024E003FB00A02D89 /* Player+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B223EF24E003FB00A02D89 /* Player+Convenience.swift */; };
+		E2B223F324E00A1E00A02D89 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B223F224E00A1E00A02D89 /* CoreDataStack.swift */; };
+		E2B223F624E00F1D00A02D89 /* PlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B223F524E00F1D00A02D89 /* PlayerController.swift */; };
 		E2B5977A24B0CC1000E4CC71 /* NodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B5977924B0CC1000E4CC71 /* NodeTests.swift */; };
 		E2B5977C24B0CC2100E4CC71 /* CoordinateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B5977B24B0CC2100E4CC71 /* CoordinateTests.swift */; };
 		E2B5977E24B0CC4200E4CC71 /* CoordinateRangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B5977D24B0CC4200E4CC71 /* CoordinateRangeTests.swift */; };
@@ -214,6 +218,10 @@
 		E2AD5CD02472343200937D3D /* enFifteenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = enFifteenLetterWords.json; sourceTree = "<group>"; };
 		E2AD5CD12472343200937D3D /* enFourteenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = enFourteenLetterWords.json; sourceTree = "<group>"; };
 		E2AD5CD32472343200937D3D /* enEighteenLetterWords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = enEighteenLetterWords.json; sourceTree = "<group>"; };
+		E2B223EB24DFF92100A02D89 /* Player.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Player.xcdatamodel; sourceTree = "<group>"; };
+		E2B223EF24E003FB00A02D89 /* Player+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+Convenience.swift"; sourceTree = "<group>"; };
+		E2B223F224E00A1E00A02D89 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		E2B223F524E00F1D00A02D89 /* PlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerController.swift; sourceTree = "<group>"; };
 		E2B5977924B0CC1000E4CC71 /* NodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeTests.swift; sourceTree = "<group>"; };
 		E2B5977B24B0CC2100E4CC71 /* CoordinateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateTests.swift; sourceTree = "<group>"; };
 		E2B5977D24B0CC4200E4CC71 /* CoordinateRangeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateRangeTests.swift; sourceTree = "<group>"; };
@@ -394,6 +402,16 @@
 			name = "JSON Files";
 			sourceTree = "<group>";
 		};
+		E2B223F424E00BCD00A02D89 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				E2B223EA24DFF92100A02D89 /* Player.xcdatamodeld */,
+				E2B223EF24E003FB00A02D89 /* Player+Convenience.swift */,
+				E2B223F224E00A1E00A02D89 /* CoreDataStack.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		E2E3DF892467E98E0049235E = {
 			isa = PBXGroup;
 			children = (
@@ -460,6 +478,7 @@
 				E2E3DFB02467ED8D0049235E /* WordController.swift */,
 				E219BD3524ADC128007E8F2C /* GameBoardController.swift */,
 				E2D717B424D662060009A667 /* SetupUIMethods.swift */,
+				E2B223F524E00F1D00A02D89 /* PlayerController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -477,6 +496,7 @@
 		E2E3DFAD2467EA2E0049235E /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E2B223F424E00BCD00A02D89 /* CoreData */,
 				E2E3DFAE2467EA590049235E /* Word.swift */,
 				E2EE23572473944F009FFEC3 /* GameBoard.swift */,
 				E219BD3724ADC635007E8F2C /* LetterMap.swift */,
@@ -932,17 +952,21 @@
 			files = (
 				E2E3DF962467E98E0049235E /* AppDelegate.swift in Sources */,
 				E2FEA15C24D33770009025F0 /* MainScreenViewController.swift in Sources */,
+				E2B223F624E00F1D00A02D89 /* PlayerController.swift in Sources */,
 				E219BD3824ADC635007E8F2C /* LetterMap.swift in Sources */,
 				E2E3DF982467E98E0049235E /* SceneDelegate.swift in Sources */,
 				E2E3DFAF2467EA590049235E /* Word.swift in Sources */,
 				E2E3DFB12467ED8D0049235E /* WordController.swift in Sources */,
 				E2FEA16024D3E580009025F0 /* OptionalDefaults.swift in Sources */,
+				E2B223F024E003FB00A02D89 /* Player+Convenience.swift in Sources */,
+				E2B223EC24DFF92100A02D89 /* Player.xcdatamodeld in Sources */,
 				E2961B2824B0C63700075C19 /* Enums.swift in Sources */,
 				E2961B2624B0C61D00075C19 /* CoordinateRange.swift in Sources */,
 				E2EE23582473944F009FFEC3 /* GameBoard.swift in Sources */,
 				E25B847B246C5D8600FA3C49 /* WordSearchViewController.swift in Sources */,
 				E219BD3624ADC128007E8F2C /* GameBoardController.swift in Sources */,
 				E280F7A024691A97000CBEA4 /* MockData.swift in Sources */,
+				E2B223F324E00A1E00A02D89 /* CoreDataStack.swift in Sources */,
 				E22F5779247EDB8700F1C0A5 /* LetterButtonsLayout.swift in Sources */,
 				E2DA2C022474F13B0042E695 /* CharacterSet+Sequence.swift in Sources */,
 				E22F577B247F64BE00F1C0A5 /* setBackground.swift in Sources */,
@@ -1270,6 +1294,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E2B223EA24DFF92100A02D89 /* Player.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E2B223EB24DFF92100A02D89 /* Player.xcdatamodel */,
+			);
+			currentVersion = E2B223EB24DFF92100A02D89 /* Player.xcdatamodel */;
+			path = Player.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = E2E3DF8A2467E98E0049235E /* Project object */;
 }

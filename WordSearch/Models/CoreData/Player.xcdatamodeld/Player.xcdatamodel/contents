@@ -6,11 +6,12 @@
         <attribute name="dogs" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="dolphins" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String"/>
+        <attribute name="identifier" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="lastDailyGift" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="lastName" optional="YES" attributeType="String"/>
         <attribute name="level" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="Player" positionX="-63" positionY="-18" width="128" height="28"/>
+        <element name="Player" positionX="-63" positionY="-18" width="128" height="178"/>
     </elements>
 </model>
