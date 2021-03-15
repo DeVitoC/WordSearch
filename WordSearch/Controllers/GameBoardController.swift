@@ -31,6 +31,10 @@ class GameBoardController {
         let searchWords: [[Character]] = createSearchWordsArray(searchWords: gameBoard.word.bonusWords)
         // Check each word in searchWords
         addWordsToMapIfFit(searchWords: searchWords, letterMap: letterMap, mainWordSize: gameBoard.word.mainWord.count)
+//        for entry in letterMap.wordCoords {
+//            print("\(entry.key): \(entry.value.0), \(entry.value.1)")
+//        }
+
         // Check if map is full
 
         return letterMap
@@ -123,9 +127,9 @@ class GameBoardController {
                     addSearchWord(searchWord: String(currentWord))
                     searchWordsCount += 1
                 }
+                if searchWordsCount > (i * 3) {
+                    break
             }
-            if searchWordsCount > (size * 2) {
-                return
             }
         }
     }

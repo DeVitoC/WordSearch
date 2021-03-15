@@ -52,16 +52,9 @@ class GameBoardControllerTests: XCTestCase {
         for _ in 0...10 {
             let gameBoard = GameBoard(word: Word(mainWord: "fallow", anagrams: ["loaf", "allow", "foal", "fall", "wall", "wolf", "flow", "flaw", "awl", "low", "law", "fowl", ], searchWords: [], bonusWords: ["fowl", "loaf", "allow", "foal", "fall", "wall", "wolf", "flow", "flaw", "awl", "low", "law"]))
             let letterMap = gameBoardController.createLetterMap(gameBoard: gameBoard)
-            var numberOfLettersInLetterMap: Int = 0
+            let numberOfLettersInLetterMap: Int = letterMap.size
             let widthOfLetterMap = gameBoard.word.mainWord.count * 2 + 1
             let numberOfSpacesInLetterMap = widthOfLetterMap * widthOfLetterMap
-            for y in 0..<widthOfLetterMap {
-                for x in 0..<widthOfLetterMap {
-                    if letterMap[y][x] != nil {
-                        numberOfLettersInLetterMap += 1
-                    }
-                }
-            }
             XCTAssert(numberOfLettersInLetterMap > numberOfSpacesInLetterMap/3)
         }
     }

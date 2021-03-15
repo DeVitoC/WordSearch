@@ -15,6 +15,8 @@ class LetterMap {
     var numWords: Int
     var values: [Coordinate : Node]
     var coordinateRange: CoordinateRange
+    var wordCoords: [String : (Coordinate, Coordinate)] = [:]
+
 
     init(word: [Character], direction: Direction) {
         let firstNode = Node(value: word[0], coord: .zero)
@@ -25,7 +27,7 @@ class LetterMap {
         self.numWords = 1
         self.values = [.zero : firstNode]
         self.coordinateRange = .zero
-        addFirstWord(word: Array(word[1..<word.count]), direction: direction)
+        addFirstWord(word: word, direction: direction)
     }
 
     @discardableResult func add(value: Character, direction: Direction, relativeTo coord: Coordinate) -> Node {
@@ -58,10 +60,14 @@ class LetterMap {
     }
 
     func addFirstWord(word: [Character], direction: Direction) {
-        for char in word {
+
+        let remainingWord = Array(word[1..<word.count])
+
+        for char in remainingWord {
             let newNode = add(value: char, direction: direction, relativeTo: lastNodeAdded)
             lastNodeAdded = newNode.coord
         }
+        wordCoords[String(word)] = (Coordinate(x: 0, y: 0), lastNodeAdded)
     }
 
     func addWordIfFits(word: [Character]) -> Bool {
@@ -76,6 +82,7 @@ class LetterMap {
                     continue
                 }
                 lastNodeAdded = coord
+                var startCoord: Coordinate
                 if axis == .horizontal {
                     for i in 0..<char {
                         guard values[lastNodeAdded.before] == nil else {
@@ -87,6 +94,7 @@ class LetterMap {
                                           relativeTo: lastNodeAdded)
                         lastNodeAdded = newNode.coord
                     }
+                    startCoord = lastNodeAdded
                     lastNodeAdded = coord
                     for i in 1..<(word.count - char) {
                         guard values[lastNodeAdded.after] == nil else {
@@ -107,6 +115,7 @@ class LetterMap {
                                           relativeTo: lastNodeAdded)
                         lastNodeAdded = newNode.coord
                     }
+                    startCoord = lastNodeAdded
                     lastNodeAdded = coord
                     for i in 1..<(word.count - char) {
                         guard values[lastNodeAdded.below] == nil else {
@@ -120,6 +129,7 @@ class LetterMap {
                     continue
                 }
                 numWords += 1
+                wordCoords[String(word)] = (startCoord, lastNodeAdded)
                 return true
 
             }
