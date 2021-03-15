@@ -211,10 +211,11 @@ class WordSearchViewController: UIViewController {
         wordInProgress = ""
         inProgressLabel.text = ""
 
-        for num in 0...buttonsCollectionView.numberOfItems(inSection: 0) {
-            if let button = buttonsCollectionView.cellForItem(at: IndexPath(item: num, section: 0))?.subviews[1] as? UIButton {
-                button.isSelected = false
-            }
+        for num in 0..<buttonsCollectionView.numberOfItems(inSection: 0) {
+            buttonsCollectionView.reloadItems(at: [IndexPath(item: num, section: 0)])
+//            if let button = buttonsCollectionView.cellForItem(at: IndexPath(item: num, section: 0))?.subviews[1] as? UIButton {
+//                button.isSelected = false
+//            }
         }
     }
 
